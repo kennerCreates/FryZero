@@ -1,10 +1,11 @@
 [gd_scene load_steps=16 format=3 uid="uid://dv0kwkd5jii6y"]
 
 [ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://assets/boards/prettyinpeach.png" id="1_tutxi"]
+[ext_resource type="PackedScene" uid="uid://caopo8f7auj6r" path="res://scenes/space.tscn" id="2_cmd4a"]
+[ext_resource type="PackedScene" uid="uid://behxkj7dobq83" path="res://scenes/piece.tscn" id="2_mlxh5"]
 [ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://assets/pieces/pirouetti/R.svg" id="2_wtu3g"]
 [ext_resource type="Texture2D" uid="uid://brb4losrtb2h3" path="res://assets/pieces/pirouetti/N.svg" id="3_mlxh5"]
 [ext_resource type="Texture2D" uid="uid://dpin12epjxvob" path="res://assets/pieces/pirouetti/B.svg" id="4_cmd4a"]
-[ext_resource type="Script" uid="uid://cg75wmnvm76mg" path="res://scripts/piece.gd" id="4_fxvyr"]
 [ext_resource type="Texture2D" uid="uid://bhcnllnv08hok" path="res://assets/pieces/pirouetti/Q.svg" id="5_fxvyr"]
 [ext_resource type="Texture2D" uid="uid://3gkx6n4fk274" path="res://assets/pieces/pirouetti/K.svg" id="6_llyvo"]
 [ext_resource type="Texture2D" uid="uid://8p26b2bt1acb" path="res://assets/pieces/pirouetti/P.svg" id="7_btb6x"]
@@ -14,28 +15,28 @@
 [ext_resource type="Texture2D" uid="uid://8bqv0y2wkrvd" path="res://assets/pieces/pirouetti/_Q.svg" id="11_iy3bi"]
 [ext_resource type="Texture2D" uid="uid://dgrcy3ke2oum5" path="res://assets/pieces/pirouetti/_K.svg" id="12_w6n8i"]
 [ext_resource type="Texture2D" uid="uid://ba6o42pky8q8" path="res://assets/pieces/pirouetti/_P.svg" id="13_a2ete"]
-[ext_resource type="Script" uid="uid://sb5kjtau5ogf" path="res://scripts/game_manager.gd" id="15_mlxh5"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="camera" type="Camera2D" parent="."]
 
 [node name="GameManager" type="Node2D" parent="."]
-position = Vector2(-280, 280)
-scale = Vector2(0.5, 0.5)
-script = ExtResource("15_mlxh5")
+
+[node name="board" type="Sprite2D" parent="GameManager"]
+texture = ExtResource("1_tutxi")
+
+[node name="space" parent="GameManager/board" instance=ExtResource("2_cmd4a")]
+position = Vector2(-40, 40)
+
+[node name="space2" parent="GameManager/board" instance=ExtResource("2_cmd4a")]
+position = Vector2(120, 40)
 
 [node name="pieces" type="Node2D" parent="GameManager"]
-position = Vector2(560, -560)
-scale = Vector2(2, 2)
 
 [node name="white" type="Node2D" parent="GameManager/pieces"]
 
-[node name="white_rook_a" type="Sprite2D" parent="GameManager/pieces/white"]
+[node name="area_w_rook_a" parent="GameManager/pieces/white" instance=ExtResource("2_mlxh5")]
 position = Vector2(-280, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_wtu3g")
-script = ExtResource("4_fxvyr")
 
 [node name="white_knight_b" type="Sprite2D" parent="GameManager/pieces/white"]
 position = Vector2(-200, 280)
@@ -208,7 +209,5 @@ position = Vector2(280, -200)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("13_a2ete")
 
-[node name="board" type="Sprite2D" parent="GameManager"]
-position = Vector2(560, -560)
-scale = Vector2(2, 2)
-texture = ExtResource("1_tutxi")
+[connection signal="mouse_entered" from="GameManager/pieces/white/area_w_rook_a" to="GameManager/pieces/white/area_w_rook_a" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GameManager/pieces/white/area_w_rook_a" to="GameManager/pieces/white/area_w_rook_a" method="_on_mouse_exited"]

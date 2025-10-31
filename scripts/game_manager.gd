@@ -1,16 +1,21 @@
 extends Node2D
 
+signal leftMouseClick 
+signal leftMouseRelease
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton: 
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				mousePressed()
+				emit_signal("leftMouseClick")
+				#mousePressed()
 			else:
-				mouseReleased()
+				emit_signal("leftMouseRelease")
+				#mouseReleased()
 
-func mousePressed ():
+func mousePressed():
 	print("mouse clicked")
 
 
-func mouseReleased ():
+func mouseReleased():
 	print("mouse released")

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://behxkj7dobq83"]
+
+[ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://assets/pieces/pirouetti/R.svg" id="1_gebih"]
+[ext_resource type="Script" uid="uid://cg75wmnvm76mg" path="res://scripts/piece.gd" id="1_s58gp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtu3g"]
+size = Vector2(80, 80)
+
+[node name="area_w_rook_a" type="Area2D"]
+script = ExtResource("1_s58gp")
+
+[node name="w_rook_a" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_gebih")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wtu3g")
