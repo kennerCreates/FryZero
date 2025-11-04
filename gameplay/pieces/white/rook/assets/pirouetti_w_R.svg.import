@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://38cprnrr7mcl"
-path="res://.godot/imported/R.svg-991df5de6b03b698f6d3d2ed34ff1f0e.ctex"
+path="res://.godot/imported/pirouetti_w_R.svg-b2cd088003fa9dc8f350a7bcf0da2f4d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pieces/pirouetti/R.svg"
-dest_files=["res://.godot/imported/R.svg-991df5de6b03b698f6d3d2ed34ff1f0e.ctex"]
+source_file="res://gameplay/pieces/white/rook/assets/pirouetti_w_R.svg"
+dest_files=["res://.godot/imported/pirouetti_w_R.svg-b2cd088003fa9dc8f350a7bcf0da2f4d.ctex"]
 
 [params]
 

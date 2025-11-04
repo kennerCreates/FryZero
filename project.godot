@@ -15,10 +15,15 @@ run/main_scene="uid://dv0kwkd5jii6y"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalRef="*res://gameplay/globalrefs.gd"
+
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=2560
+window/size/viewport_height=1440
+window/size/resizable=false
 window/stretch/scale=2.0
 
 [dotnet]

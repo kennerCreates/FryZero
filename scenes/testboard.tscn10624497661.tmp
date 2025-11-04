@@ -29,6 +29,10 @@ script = ExtResource("1_fxvyr")
 texture = ExtResource("1_tutxi")
 
 [node name="space" parent="GameManager/board" instance=ExtResource("2_cmd4a")]
+position = Vector2(-40, 40)
+
+[node name="space2" parent="GameManager/board" instance=ExtResource("2_cmd4a")]
+position = Vector2(120, 40)
 
 [node name="pieces" type="Node2D" parent="GameManager"]
 
