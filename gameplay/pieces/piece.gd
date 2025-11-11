@@ -20,6 +20,7 @@ func pickupPiece():
 		movingPiece.emit(true)
 		
 func dropPiece():
+	if isMouseEntered:
 		isDragging = false
 		movingPiece.emit(false)
 		get_tree().call_group("Space","grabPiece")

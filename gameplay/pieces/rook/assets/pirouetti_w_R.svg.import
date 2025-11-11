@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8p26b2bt1acb"
-path="res://.godot/imported/pirouetti_w_P.svg-858eee5f0ac00fb32641bf54c1e044d7.ctex"
+uid="uid://38cprnrr7mcl"
+path="res://.godot/imported/pirouetti_w_R.svg-60a643187f9ab47a58eefd9bd82f4fb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://gameplay/pieces/white/pawn/assets/pirouetti_w_P.svg"
-dest_files=["res://.godot/imported/pirouetti_w_P.svg-858eee5f0ac00fb32641bf54c1e044d7.ctex"]
+source_file="res://gameplay/pieces/rook/assets/pirouetti_w_R.svg"
+dest_files=["res://.godot/imported/pirouetti_w_R.svg-60a643187f9ab47a58eefd9bd82f4fb9.ctex"]
 
 [params]
 

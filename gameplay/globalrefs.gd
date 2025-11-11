@@ -1,14 +1,14 @@
 extends Node
 
 var squareSize = 80;
-var spaces = {}
+#var spaces = {};
 
 enum _file {
 	a, b, c, d, e, f, g, h
 }
 
-func _ready() -> void:
-	createSpaces()
+#func _ready() -> void:
+	#createSpaces()
 
 func getScreenX(File: _file) -> int:
 	var newFile = File + 1
@@ -17,18 +17,32 @@ func getScreenX(File: _file) -> int:
 	return screenX
 	
 func getScreenY(Rank: int) -> int:
-	var newRank = Rank + 1
+	var newRank = Rank
 	@warning_ignore("integer_division")
-	var screenY = (newRank * squareSize) - (squareSize * 4) - (squareSize/2)
-	return screenY
+	var screenY = (-1 * (newRank * squareSize) + (squareSize * 4) + (squareSize/2))
+	return screenY	
 	
-func getSpaceString(file: _file, rank: int):
+func getSpaceStringFromFileRank(file: _file, rank: int):
 	var fileName = _file.keys()[file]
 	var rankName = str(rank)
 	var spaceName = fileName + rankName
 	return spaceName
+	
+func getFile(screenX: int) -> _file:
+	@warning_ignore("integer_division")
+	var fileInt = (screenX - (squareSize * 4) - (squareSize/2))/squareSize
+	var fileEnum = _file.keys()[fileInt]
+	return fileEnum
 
-func createSpaces():
-	for i in range(8):
-		for fileIndex in _file.values():
-			spaces[getSpaceString(fileIndex,i)] = Vector2(getScreenX(fileIndex), getScreenY(i))
+func getRank(screenY: int) -> int:
+	@warning_ignore("integer_division")
+	var rankInt = ((screenY - (squareSize * 4) - (squareSize/2)) * -1)/squareSize
+	return rankInt
+	
+func getSpaceStringFromLocation(screenX: int, screenY: int) -> String:
+	return "pass"
+
+#func createSpaces():
+	#for i in range(1,9):
+		#for fileIndex in _file.values():
+			#spaces[getSpaceString(fileIndex,i)] = Vector2(getScreenX(fileIndex), getScreenY(i))

@@ -1,203 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://dv0kwkd5jii6y"]
+[gd_scene load_steps=2 format=3 uid="uid://dv0kwkd5jii6y"]
 
-[ext_resource type="Script" uid="uid://sb5kjtau5ogf" path="res://scripts/game_manager.gd" id="1_fxvyr"]
 [ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://assets/boards/prettyinpeach.png" id="1_tutxi"]
-[ext_resource type="PackedScene" uid="uid://caopo8f7auj6r" path="res://gameplay/spaces/space.tscn" id="2_cmd4a"]
-[ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://gameplay/pieces/white/rook/assets/pirouetti_w_R.svg" id="2_wtu3g"]
-[ext_resource type="Texture2D" uid="uid://brb4losrtb2h3" path="res://assets/pieces/pirouetti/N.svg" id="3_mlxh5"]
-[ext_resource type="Texture2D" uid="uid://dpin12epjxvob" path="res://assets/pieces/pirouetti/B.svg" id="4_cmd4a"]
-[ext_resource type="Texture2D" uid="uid://bhcnllnv08hok" path="res://assets/pieces/pirouetti/Q.svg" id="5_fxvyr"]
-[ext_resource type="Texture2D" uid="uid://3gkx6n4fk274" path="res://assets/pieces/pirouetti/K.svg" id="6_llyvo"]
-[ext_resource type="Texture2D" uid="uid://8p26b2bt1acb" path="res://gameplay/pieces/white/pawn/assets/pirouetti_w_P.svg" id="7_btb6x"]
-[ext_resource type="Texture2D" uid="uid://dcv5wyld5o6e4" path="res://assets/pieces/pirouetti/_R.svg" id="8_3jycg"]
-[ext_resource type="Texture2D" uid="uid://e5lbs1krg1bh" path="res://assets/pieces/pirouetti/_N.svg" id="9_ila3n"]
-[ext_resource type="PackedScene" uid="uid://ctmrd7kkm5siu" path="res://gameplay/pieces/white/pawn/w_pawn.tscn" id="10_cmd4a"]
-[ext_resource type="PackedScene" uid="uid://bxjpsy071k4qm" path="res://gameplay/pieces/white/rook/w_rook.tscn" id="10_fxvyr"]
-[ext_resource type="Texture2D" uid="uid://chx67b0gqlenf" path="res://assets/pieces/pirouetti/_B.svg" id="10_tbl5k"]
-[ext_resource type="Texture2D" uid="uid://8bqv0y2wkrvd" path="res://assets/pieces/pirouetti/_Q.svg" id="11_iy3bi"]
-[ext_resource type="Texture2D" uid="uid://dgrcy3ke2oum5" path="res://assets/pieces/pirouetti/_K.svg" id="12_w6n8i"]
-[ext_resource type="Texture2D" uid="uid://ba6o42pky8q8" path="res://assets/pieces/pirouetti/_P.svg" id="13_a2ete"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="camera" type="Camera2D" parent="."]
 
 [node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("1_fxvyr")
 
-[node name="board" type="Sprite2D" parent="GameManager"]
+[node name="board_sprite" type="Sprite2D" parent="GameManager"]
 texture = ExtResource("1_tutxi")
-
-[node name="space" parent="GameManager/board" instance=ExtResource("2_cmd4a")]
 
 [node name="pieces" type="Node2D" parent="GameManager"]
 
 [node name="white" type="Node2D" parent="GameManager/pieces"]
 
-[node name="white_knight_b" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(-200, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_mlxh5")
-flip_h = true
-
-[node name="white_bishop_c" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(-120, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_cmd4a")
-flip_h = true
-
-[node name="white_queen" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(-40, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("5_fxvyr")
-flip_h = true
-
-[node name="white_king" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(40, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("6_llyvo")
-flip_h = true
-
-[node name="white_bishop_f" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(120, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_cmd4a")
-flip_h = true
-
-[node name="white_knight_g" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(200, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_mlxh5")
-
-[node name="white_rook_h" type="Sprite2D" parent="GameManager/pieces/white"]
-position = Vector2(280, 280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_wtu3g")
-
 [node name="pawns" type="Node2D" parent="GameManager/pieces/white"]
-
-[node name="white_pawn_d" type="Sprite2D" parent="GameManager/pieces/white/pawns"]
-position = Vector2(-40, 200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_btb6x")
-
-[node name="white_pawn_e" type="Sprite2D" parent="GameManager/pieces/white/pawns"]
-position = Vector2(40, 200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_btb6x")
-
-[node name="white_pawn_f" type="Sprite2D" parent="GameManager/pieces/white/pawns"]
-position = Vector2(120, 200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_btb6x")
-
-[node name="white_pawn_g" type="Sprite2D" parent="GameManager/pieces/white/pawns"]
-position = Vector2(200, 200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_btb6x")
-
-[node name="white_pawn_h" type="Sprite2D" parent="GameManager/pieces/white/pawns"]
-position = Vector2(280, 200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_btb6x")
-
-[node name="white_pawn_a" parent="GameManager/pieces/white/pawns" instance=ExtResource("10_cmd4a")]
-position = Vector2(-280, 200)
-
-[node name="white_pawn_b" parent="GameManager/pieces/white/pawns" instance=ExtResource("10_cmd4a")]
-position = Vector2(-200, 200)
-
-[node name="white_pawn_c" parent="GameManager/pieces/white/pawns" instance=ExtResource("10_cmd4a")]
-position = Vector2(-120, 200)
-
-[node name="area" parent="GameManager/pieces/white" instance=ExtResource("10_fxvyr")]
-position = Vector2(-280, 280)
 
 [node name="black" type="Node2D" parent="GameManager/pieces"]
 
-[node name="black_rook_a" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(-280, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_3jycg")
-
-[node name="black_knight_b" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(-200, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_ila3n")
-flip_h = true
-
-[node name="black_bishop_c" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(-120, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("10_tbl5k")
-flip_h = true
-
-[node name="black_queen" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(-40, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("11_iy3bi")
-flip_h = true
-
-[node name="black_king" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(40, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("12_w6n8i")
-flip_h = true
-
-[node name="black_bishop_f" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(120, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("10_tbl5k")
-flip_h = true
-
-[node name="black_knight_g" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(200, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("9_ila3n")
-
-[node name="black_rook_h" type="Sprite2D" parent="GameManager/pieces/black"]
-position = Vector2(280, -280)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("8_3jycg")
-
 [node name="pawns" type="Node2D" parent="GameManager/pieces/black"]
 
-[node name="black_pawn_a" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(-280, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_b" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(-200, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_c" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(-120, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_d" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(-40, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_e" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(40, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_f" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(120, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_g" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(200, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
-
-[node name="black_pawn_h" type="Sprite2D" parent="GameManager/pieces/black/pawns"]
-position = Vector2(280, -200)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("13_a2ete")
+[node name="spaces" type="Node" parent="GameManager"]

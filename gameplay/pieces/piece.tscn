@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://behxkj7dobq83"]
+[gd_scene load_steps=5 format=3 uid="uid://behxkj7dobq83"]
 
-[ext_resource type="Script" uid="uid://cg75wmnvm76mg" path="res://gameplay/pieces/piece.gd" id="1_1l50v"]
-[ext_resource type="Script" uid="uid://5tomiocdg68u" path="res://gameplay/pieces/physicspiece.gd" id="2_1koo1"]
-[ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://gameplay/pieces/white/rook/assets/pirouetti_w_R.svg" id="2_hkrpp"]
+[ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://gameplay/pieces/rook/assets/pirouetti_w_R.svg" id="2_hkrpp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtu3g"]
 size = Vector2(80, 80)
@@ -14,7 +12,6 @@ radius = 5.0
 size = Vector2(50, 60)
 
 [node name="area" type="Area2D"]
-script = ExtResource("1_1l50v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wtu3g")
@@ -33,7 +30,6 @@ shape = SubResource("CircleShape2D_s58gp")
 collision_layer = 256
 collision_mask = 768
 angular_damp = 5.0
-script = ExtResource("2_1koo1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="physics/RigidBody2D"]
 position = Vector2(0, 5)
@@ -52,4 +48,3 @@ angular_limit_upper = 0.7853982
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
-[connection signal="movingPiece" from="." to="physics/RigidBody2D" method="_movement_detected"]

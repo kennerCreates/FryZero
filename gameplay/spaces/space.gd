@@ -1,19 +1,22 @@
 extends Area2D
 
 var isMouseEntered = false
+var spaceName
 
 func _ready() -> void:
 	self.add_to_group("Space")
 	
+func getSpaceName():
+	rank = GlobalRef.getScreenX()
+	GlobalRef.getSpaceString()
+
 func _on_mouse_entered() -> void:
 	isMouseEntered = true
 
 func _on_mouse_exited() -> void:
 	isMouseEntered = false
 
-func grabPiece() -> Vector2:
+func grabPiece():
 	if isMouseEntered:
-		print("squaregrabber")
-		return self.global_position
-	else:
-		return Vector2(12,12)
+		print(spaceName)
+	
