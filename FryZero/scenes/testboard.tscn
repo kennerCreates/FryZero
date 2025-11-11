@@ -9,14 +9,14 @@
 
 [node name="camera" type="Camera2D" parent="."]
 
+[node name="PieceScript" type="Area2D" parent="." node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_u14r2")
+Sprite = NodePath("../Visuals/pieces/sprites/pawn_w")
+metadata/_custom_type_script = "uid://sp52bp6quxdq"
+
 [node name="GameManager" type="Node2D" parent="."]
 
 [node name="pieces" type="Node2D" parent="GameManager"]
-
-[node name="pawn" type="Area2D" parent="GameManager/pieces" node_paths=PackedStringArray("Sprite")]
-script = ExtResource("1_u14r2")
-Sprite = NodePath("../../../Visuals/pieces/sprites/pawn_w")
-metadata/_custom_type_script = "uid://sp52bp6quxdq"
 
 [node name="board_sprite" type="Sprite2D" parent="GameManager"]
 scale = Vector2(2, 2)

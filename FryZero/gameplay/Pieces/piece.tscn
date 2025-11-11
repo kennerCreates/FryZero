@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://behxkj7dobq83"]
+[gd_scene load_steps=5 format=3 uid="uid://behxkj7dobq83"]
 
-[ext_resource type="Script" uid="uid://gol4g8d5vhmt" path="res://gameplay/pieces/pawn/pawn_script.cs" id="1_1l50v"]
-[ext_resource type="Texture2D" uid="uid://38cprnrr7mcl" path="res://gameplay/pieces/rook/assets/pirouetti_w_R.svg" id="2_hkrpp"]
+[ext_resource type="Texture2D" uid="uid://08d5dx7lqdo7" path="res://gameplay/pieces/rook/assets/pirouetti_w_R.svg" id="2_hkrpp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtu3g"]
 size = Vector2(80, 80)
@@ -13,7 +12,6 @@ radius = 5.0
 size = Vector2(50, 60)
 
 [node name="area" type="Area2D"]
-script = ExtResource("1_1l50v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wtu3g")
