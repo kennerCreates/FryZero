@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://dv0kwkd5jii6y"]
+
+[ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://assets/boards/prettyinpeach.png" id="1_tutxi"]
+[ext_resource type="Script" uid="uid://sp52bp6quxdq" path="res://gameplay/Pieces/PieceScript.cs" id="1_u14r2"]
+[ext_resource type="Texture2D" uid="uid://drcnknfnxmf6" path="res://gameplay/Pieces/Pawn/assets/pirouetti_w_P.svg" id="3_e6nas"]
+[ext_resource type="Texture2D" uid="uid://blq538hsqyk8d" path="res://gameplay/Pieces/Pawn/assets/pirouetti_b_P.svg" id="4_mn17o"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="camera" type="Camera2D" parent="."]
+
+[node name="GameManager" type="Node2D" parent="."]
+
+[node name="pieces" type="Node2D" parent="GameManager"]
+
+[node name="pawn" type="Area2D" parent="GameManager/pieces" node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_u14r2")
+Sprite = NodePath("../../../Visuals/pieces/sprites/pawn_w")
+metadata/_custom_type_script = "uid://sp52bp6quxdq"
+
+[node name="board_sprite" type="Sprite2D" parent="GameManager"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_tutxi")
+
+[node name="spaces" type="Node" parent="GameManager"]
+
+[node name="Visuals" type="Node" parent="."]
+
+[node name="pieces" type="Node" parent="Visuals"]
+
+[node name="sprites" type="Node" parent="Visuals/pieces"]
+
+[node name="pawn_w" type="Sprite2D" parent="Visuals/pieces/sprites"]
+position = Vector2(1497, 557)
+texture = ExtResource("3_e6nas")
+
+[node name="pawn_b" type="Sprite2D" parent="Visuals/pieces/sprites"]
+position = Vector2(1503, 403)
+texture = ExtResource("4_mn17o")
