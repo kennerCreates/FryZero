@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmtyos4jjpnyv"]
+
+[ext_resource type="Script" uid="uid://qcagfjm1gq34" path="res://gameplay/Pieces/Piece.cs" id="1_aeo05"]
+[ext_resource type="Texture2D" uid="uid://drcnknfnxmf6" path="res://Assets/Pieces/Pirouetti/White/Pawn.svg" id="2_slimr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mbamr"]
+radius = 5.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f8rta"]
+size = Vector2(160, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_slimr"]
+size = Vector2(160, 160)
+
+[node name="PieceScene" type="Node2D"]
+script = ExtResource("1_aeo05")
+
+[node name="physics" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="physics"]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="physics/StaticBody2D"]
+position = Vector2(0, -40)
+shape = SubResource("CircleShape2D_mbamr")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="physics"]
+collision_layer = 256
+collision_mask = 768
+angular_damp = 5.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="physics/RigidBody2D"]
+shape = SubResource("RectangleShape2D_f8rta")
+
+[node name="Sprite2D" type="Sprite2D" parent="physics/RigidBody2D"]
+texture = ExtResource("2_slimr")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="physics"]
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../RigidBody2D")
+softness = 1.0
+angular_limit_lower = -0.7853982
+angular_limit_upper = 0.7853982
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_slimr")

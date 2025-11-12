@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://caopo8f7auj6r"]
 
-[ext_resource type="Texture2D" uid="uid://wii2po6yjtmi" path="res://assets/pieces/california/bK.svg" id="2_li6kj"]
+[ext_resource type="Texture2D" uid="uid://dgrcy3ke2oum5" path="res://Assets/Pieces/Pirouetti/Black/King.svg" id="1_kf7cn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m05qc"]
 size = Vector2(80, 80)
@@ -12,7 +12,7 @@ shape = SubResource("RectangleShape2D_m05qc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_li6kj")
+texture = ExtResource("1_kf7cn")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

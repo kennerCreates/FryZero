@@ -1,39 +1,206 @@
-[gd_scene load_steps=5 format=3 uid="uid://dv0kwkd5jii6y"]
+[gd_scene load_steps=3 format=3 uid="uid://dv0kwkd5jii6y"]
 
-[ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://assets/boards/prettyinpeach.png" id="1_tutxi"]
-[ext_resource type="Script" uid="uid://sp52bp6quxdq" path="res://gameplay/Pieces/PieceScript.cs" id="1_u14r2"]
-[ext_resource type="Texture2D" uid="uid://drcnknfnxmf6" path="res://gameplay/Pieces/Pawn/assets/pirouetti_w_P.svg" id="3_e6nas"]
-[ext_resource type="Texture2D" uid="uid://blq538hsqyk8d" path="res://gameplay/Pieces/Pawn/assets/pirouetti_b_P.svg" id="4_mn17o"]
+[ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://Assets/boards/prettyinpeach.png" id="1_tutxi"]
+[ext_resource type="PackedScene" uid="uid://bmtyos4jjpnyv" path="res://gameplay/Pieces/Piece_scene.tscn" id="2_u14r2"]
 
 [node name="Node2D" type="Node2D"]
 
 [node name="camera" type="Camera2D" parent="."]
 
-[node name="PieceScript" type="Area2D" parent="." node_paths=PackedStringArray("Sprite")]
-script = ExtResource("1_u14r2")
-Sprite = NodePath("../Visuals/pieces/sprites/pawn_w")
-metadata/_custom_type_script = "uid://sp52bp6quxdq"
+[node name="Game" type="Node" parent="."]
 
-[node name="GameManager" type="Node2D" parent="."]
-
-[node name="pieces" type="Node2D" parent="GameManager"]
-
-[node name="board_sprite" type="Sprite2D" parent="GameManager"]
+[node name="board_sprite" type="Sprite2D" parent="Game"]
 scale = Vector2(2, 2)
 texture = ExtResource("1_tutxi")
 
-[node name="spaces" type="Node" parent="GameManager"]
+[node name="Spaces" type="Node" parent="Game"]
 
-[node name="Visuals" type="Node" parent="."]
+[node name="Pieces" type="Node" parent="Game"]
 
-[node name="pieces" type="Node" parent="Visuals"]
+[node name="Black" type="Node" parent="Game/Pieces"]
 
-[node name="sprites" type="Node" parent="Visuals/pieces"]
+[node name="Rook_A" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(-560, -560)
+Type = 3
+Color = 1
+Rank = 7
 
-[node name="pawn_w" type="Sprite2D" parent="Visuals/pieces/sprites"]
-position = Vector2(1497, 557)
-texture = ExtResource("3_e6nas")
+[node name="Knight_B" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(-400, -560)
+Type = 1
+Color = 1
+File = 1
+Rank = 7
 
-[node name="pawn_b" type="Sprite2D" parent="Visuals/pieces/sprites"]
-position = Vector2(1503, 403)
-texture = ExtResource("4_mn17o")
+[node name="Bishop_C" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(-240, -560)
+Type = 2
+Color = 1
+File = 2
+Rank = 7
+
+[node name="Bishop_F" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(240, -560)
+Type = 2
+Color = 1
+File = 5
+Rank = 7
+
+[node name="King" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(80, -560)
+Type = 5
+Color = 1
+File = 4
+Rank = 7
+
+[node name="Queen" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(-80, -560)
+Type = 4
+Color = 1
+File = 3
+Rank = 7
+
+[node name="Knight_G" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(400, -560)
+Type = 1
+Color = 1
+File = 6
+Rank = 7
+
+[node name="Rook_H" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
+position = Vector2(560, -560)
+Type = 3
+Color = 1
+File = 7
+Rank = 7
+
+[node name="Pawns" type="Node" parent="Game/Pieces/Black"]
+
+[node name="Pawn_A" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-560, -400)
+Color = 1
+Rank = 6
+
+[node name="Pawn_B" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-400, -400)
+Color = 1
+File = 1
+Rank = 6
+
+[node name="Pawn_C" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-240, -400)
+Color = 1
+File = 2
+Rank = 6
+
+[node name="Pawn_D" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-80, -400)
+Color = 1
+File = 3
+Rank = 6
+
+[node name="Pawn_E" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(80, -400)
+Color = 1
+File = 4
+Rank = 6
+
+[node name="Pawn_F" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(240, -400)
+Color = 1
+File = 5
+Rank = 6
+
+[node name="Pawn_G" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(400, -400)
+Color = 1
+File = 6
+Rank = 6
+
+[node name="Pawn_H" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(560, -400)
+Color = 1
+File = 7
+Rank = 6
+
+[node name="White" type="Node" parent="Game/Pieces"]
+
+[node name="Rook_A" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(-560, 560)
+Type = 3
+
+[node name="Knight_B" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(-400, 560)
+Type = 1
+File = 1
+
+[node name="Bishop_C" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(-240, 560)
+Type = 2
+File = 2
+
+[node name="Bishop_F" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(240, 560)
+Type = 2
+File = 5
+
+[node name="King" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(80, 560)
+Type = 5
+File = 4
+
+[node name="Queen" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(-80, 560)
+Type = 4
+File = 3
+
+[node name="Knight_G" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(400, 560)
+Type = 1
+File = 6
+
+[node name="Rook_H" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
+position = Vector2(560, 560)
+Type = 3
+File = 7
+
+[node name="Pawns" type="Node" parent="Game/Pieces/White"]
+
+[node name="Pawn_A" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-560, 400)
+Rank = 1
+
+[node name="Pawn_B" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-400, 400)
+File = 1
+Rank = 1
+
+[node name="Pawn_C" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-240, 400)
+File = 2
+Rank = 1
+
+[node name="Pawn_D" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(-80, 400)
+File = 3
+Rank = 1
+
+[node name="Pawn_E" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(80, 400)
+File = 4
+Rank = 1
+
+[node name="Pawn_F" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(240, 400)
+File = 5
+Rank = 1
+
+[node name="Pawn_G" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(400, 400)
+File = 6
+Rank = 1
+
+[node name="Pawn_H" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
+position = Vector2(560, 400)
+File = 7
+Rank = 1
