@@ -6,15 +6,13 @@ namespace FryZeroGodot.gameplay.Pieces;
 [Tool]
 public partial class Piece : Node2D
 {
-	[Export] protected bool ChangingProperties;
-
+	
 	[Export]
 	public PieceType Type
 	{
 		get => _pieceType;
 		set
 		{
-			if (!ChangingProperties) return;
 			_pieceType = value;
 			CreatePiece();
 		}
@@ -26,7 +24,6 @@ public partial class Piece : Node2D
 		get => _pieceColor;
 		set
 		{
-			if (!ChangingProperties) return;
 			_pieceColor = value;
 			CreatePiece();
 		}
@@ -38,7 +35,6 @@ public partial class Piece : Node2D
 		get => _pieceStyle;
 		set
 		{
-			if (!ChangingProperties) return;
 			_pieceStyle = value;
 			CreatePiece();
 		}
@@ -50,9 +46,8 @@ public partial class Piece : Node2D
 		get => _pieceFile;
 		set
 		{
-			if (!ChangingProperties) return;
 			_pieceFile = value;
-			SetLocation();
+			SetBoardLocationOfPiece();
 		}
 	}
 
@@ -62,42 +57,64 @@ public partial class Piece : Node2D
 		get => _pieceRank;
 		set
 		{
-			if (!ChangingProperties) return;
 			_pieceRank = value;
-			SetLocation();
+			SetBoardLocationOfPiece();
 		}
 	}
-
+	
 	private PieceColor _pieceColor;
 	private PieceType _pieceType;
 	private PieceStyle _pieceStyle;
 	private File _pieceFile;
 	private Rank _pieceRank;
 	private Sprite2D _pieceSprite;
+	private PhysicsPiece _physicsPiece;
 	private int _squareSize = 160;
+	private bool _isMouseEntered;
+	private bool _isDragging;
+	private int _delay = 10;
+	public void SetMouseEntered(bool entered)
+	{
+		_isMouseEntered = entered;
+	}
+	private void FindPhysicsPiece()
+	{
+		_physicsPiece = (PhysicsPiece)FindChild("RigidBody2D");
+	}
 	
-
-	private void SetLocation()
+	
+	public override void _Ready()
 	{
-		Position = new Vector2(GetFileLocation(_pieceFile), GetRankLocation(_pieceRank));
+		AddToGroup("LeftClick");
+		FindPhysicsPiece();
+	}
+	public override void _PhysicsProcess(double delta)
+	{
+		if (!_isDragging) return;
+		var tween = GetTree().CreateTween();
+		tween.TweenProperty(this, "position", GetGlobalMousePosition(), _delay * delta);
 	}
 
-	private int GetFileLocation(File file)
+	
+	private void PickUpPiece()
 	{
-		var screenX = (int)file * _squareSize - GetHalfBoardSize();
-		return screenX;
+		if (!_isMouseEntered) return;
+		_isDragging = true;
+		_physicsPiece.PickedUpPiece();
 	}
-
-	private int GetRankLocation(Rank rank)
+	private void DropPiece()
 	{
-		var screenY = ((int)rank * _squareSize - GetHalfBoardSize()) * -1;
-		return screenY;
+		if (!_isMouseEntered) return;
+		_isDragging = false;
+		_physicsPiece.DroppedPiece();
 	}
-
-	private int GetHalfBoardSize()
+	
+	
+	private void SetBoardLocationOfPiece()
 	{
-		return _squareSize * 3 + _squareSize / 2;
+		Position = BoardLocations.GetPieceLocation(_pieceFile, _pieceRank);
 	}
+	
 	private void CreatePiece()
 	{
 		SetPieceImage();
@@ -113,4 +130,5 @@ public partial class Piece : Node2D
 	{
 		_pieceSprite = GetNode<Sprite2D>("physics/RigidBody2D/Sprite2D");
 	}
+	
 }

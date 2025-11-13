@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmtyos4jjpnyv"]
+[gd_scene load_steps=8 format=3 uid="uid://bmtyos4jjpnyv"]
 
 [ext_resource type="Script" uid="uid://qcagfjm1gq34" path="res://gameplay/Pieces/Piece.cs" id="1_aeo05"]
-[ext_resource type="Texture2D" uid="uid://drcnknfnxmf6" path="res://Assets/Pieces/Pirouetti/White/Pawn.svg" id="2_slimr"]
+[ext_resource type="Texture2D" uid="uid://wr6v0fwf4i2f" path="res://Assets/Pieces/Gioco/White/Pawn.svg" id="2_aeo05"]
+[ext_resource type="Script" uid="uid://bc334udo4biy6" path="res://gameplay/Pieces/PhysicsPiece.cs" id="2_mbamr"]
+[ext_resource type="Script" uid="uid://dgqa438gyya0c" path="res://gameplay/Pieces/PieceArea.cs" id="3_mbamr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mbamr"]
 radius = 5.0
@@ -13,6 +15,7 @@ size = Vector2(160, 160)
 size = Vector2(160, 160)
 
 [node name="PieceScene" type="Node2D"]
+position = Vector2(-560, 560)
 script = ExtResource("1_aeo05")
 
 [node name="physics" type="Node2D" parent="."]
@@ -29,12 +32,14 @@ shape = SubResource("CircleShape2D_mbamr")
 collision_layer = 256
 collision_mask = 768
 angular_damp = 5.0
+script = ExtResource("2_mbamr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="physics/RigidBody2D"]
 shape = SubResource("RectangleShape2D_f8rta")
 
 [node name="Sprite2D" type="Sprite2D" parent="physics/RigidBody2D"]
-texture = ExtResource("2_slimr")
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("2_aeo05")
 
 [node name="PinJoint2D" type="PinJoint2D" parent="physics"]
 node_a = NodePath("../StaticBody2D")
@@ -44,6 +49,7 @@ angular_limit_lower = -0.7853982
 angular_limit_upper = 0.7853982
 
 [node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("3_mbamr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_slimr")
