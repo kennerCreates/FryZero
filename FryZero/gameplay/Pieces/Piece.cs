@@ -69,9 +69,8 @@ public partial class Piece : Node2D
 	private Rank _pieceRank;
 	private Sprite2D _pieceSprite;
 	private PhysicsPiece _physicsPiece;
-	private int _squareSize = 160;
 	private bool _isMouseEntered;
-	private bool _isDragging;
+	private bool _isBeingMoved;
 	private int _delay = 10;
 	public void SetMouseEntered(bool entered)
 	{
@@ -90,7 +89,7 @@ public partial class Piece : Node2D
 	}
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!_isDragging) return;
+		if (!_isBeingMoved) return;
 		var tween = GetTree().CreateTween();
 		tween.TweenProperty(this, "position", GetGlobalMousePosition(), _delay * delta);
 	}
@@ -99,13 +98,13 @@ public partial class Piece : Node2D
 	private void PickUpPiece()
 	{
 		if (!_isMouseEntered) return;
-		_isDragging = true;
+		_isBeingMoved = true;
 		_physicsPiece.PickedUpPiece();
 	}
 	private void DropPiece()
 	{
 		if (!_isMouseEntered) return;
-		_isDragging = false;
+		_isBeingMoved = false;
 		_physicsPiece.DroppedPiece();
 	}
 	
@@ -115,20 +114,14 @@ public partial class Piece : Node2D
 		Position = BoardLocations.GetPieceLocation(_pieceFile, _pieceRank);
 	}
 	
-	private void CreatePiece()
-	{
-		SetPieceImage();
-	}
-
+	private void CreatePiece() => SetPieceImage();
 	private void SetPieceImage()
 	{
 		GetPieceSprite();
 		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{_pieceStyle}/{_pieceColor}/{_pieceType}.svg");
 	}
 
-	private void GetPieceSprite()
-	{
+	private void GetPieceSprite() =>
 		_pieceSprite = GetNode<Sprite2D>("physics/RigidBody2D/Sprite2D");
-	}
 	
 }
