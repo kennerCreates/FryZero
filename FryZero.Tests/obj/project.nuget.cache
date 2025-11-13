@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "MuwA61hwf04=",
+  "dgSpecHash": "RHSz7KP/Hz4=",
   "success": true,
   "projectFilePath": "C:\\code\\2025Q4\\FryZero\\FryZero.Tests\\FryZero.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\laure\\.nuget\\packages\\coverlet.collector\\6.0.0\\coverlet.collector.6.0.0.nupkg.sha512",
+    "C:\\Users\\laure\\.nuget\\packages\\godot.sourcegenerators\\4.5.0\\godot.sourcegenerators.4.5.0.nupkg.sha512",
+    "C:\\Users\\laure\\.nuget\\packages\\godotsharp\\4.5.0\\godotsharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\laure\\.nuget\\packages\\godotsharpeditor\\4.5.0\\godotsharpeditor.4.5.0.nupkg.sha512",
     "C:\\Users\\laure\\.nuget\\packages\\microsoft.codecoverage\\17.8.0\\microsoft.codecoverage.17.8.0.nupkg.sha512",
     "C:\\Users\\laure\\.nuget\\packages\\microsoft.net.test.sdk\\17.8.0\\microsoft.net.test.sdk.17.8.0.nupkg.sha512",
     "C:\\Users\\laure\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

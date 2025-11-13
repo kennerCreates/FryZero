@@ -69,9 +69,17 @@ public partial class Piece : Node2D
 	private Rank _pieceRank;
 	private Sprite2D _pieceSprite;
 	private PhysicsPiece _physicsPiece;
+	private int _squareSize;
 	private bool _isMouseEntered;
 	private bool _isBeingMoved;
-	private int _delay = 10;
+	private int _movementDelay = 10;
+	
+	private PieceOptions PieceOptions => new()
+	{
+		PieceFile = _pieceFile,
+		PieceRank = _pieceRank,
+		SquareSize = _squareSize
+	};
 	public void SetMouseEntered(bool entered)
 	{
 		_isMouseEntered = entered;
@@ -91,7 +99,7 @@ public partial class Piece : Node2D
 	{
 		if (!_isBeingMoved) return;
 		var tween = GetTree().CreateTween();
-		tween.TweenProperty(this, "position", GetGlobalMousePosition(), _delay * delta);
+		tween.TweenProperty(this, "position", GetGlobalMousePosition(), _movementDelay * delta);
 	}
 
 	
@@ -111,7 +119,7 @@ public partial class Piece : Node2D
 	
 	private void SetBoardLocationOfPiece()
 	{
-		Position = BoardLocations.GetPieceLocation(_pieceFile, _pieceRank);
+		Position = BoardLocations.GetLocationFromSquare(PieceOptions);
 	}
 	
 	private void CreatePiece() => SetPieceImage();

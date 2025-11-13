@@ -98,3 +98,8 @@ C:\code\2025Q4\FryZero\FryZero.Tests\obj\Debug\net8.0\refint\FryZero.Tests.dll
 C:\code\2025Q4\FryZero\FryZero.Tests\obj\Debug\net8.0\FryZero.Tests.pdb
 C:\code\2025Q4\FryZero\FryZero.Tests\obj\Debug\net8.0\FryZero.Tests.genruntimeconfig.cache
 C:\code\2025Q4\FryZero\FryZero.Tests\obj\Debug\net8.0\ref\FryZero.Tests.dll
+C:\code\2025Q4\FryZero\FryZero.Tests\bin\Debug\net8.0\CoverletSourceRootsMapping_FryZero.Tests
+C:\code\2025Q4\FryZero\FryZero.Tests\bin\Debug\net8.0\GodotSharp.dll
+C:\code\2025Q4\FryZero\FryZero.Tests\bin\Debug\net8.0\GodotSharpEditor.dll
+C:\code\2025Q4\FryZero\FryZero.Tests\bin\Debug\net8.0\FryZeroGodot.dll
+C:\code\2025Q4\FryZero\FryZero.Tests\bin\Debug\net8.0\FryZeroGodot.pdb

@@ -1,21 +1,24 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.gameplay.Pieces;
 using Godot;
 
 namespace FryZeroGodot.gameplay;
 
 public static class BoardLocations
 {
-    private const int SquareSize = 160;
-    
-    public static Vector2 GetPieceLocation(File file, Rank rank) => 
-        new(GetFileLocation(file), GetRankLocation(rank));
 
-    private static int GetRankLocation(Rank rank) => 
-        ((int)rank * SquareSize - GetHalfBoardSize()) * -1;
+    public static File GetFileFromLocation(int location, PieceOptions options) => 
+        (File)(location + CenterBoardLocation(options));
 
-    private static int GetFileLocation(File file) => 
-        (int)file * SquareSize - GetHalfBoardSize();
+    public static Vector2 GetLocationFromSquare(PieceOptions options) =>
+        new(GetLocationFromFile(options), GetLocationFromRank(options));
+
+    private static int GetLocationFromRank(PieceOptions options) => 
+        ((int)options.PieceRank * options.SquareSize - CenterBoardLocation(options)) * -1;
+
+    public static int GetLocationFromFile(PieceOptions options) => 
+        (int)options.PieceFile * options.SquareSize - CenterBoardLocation(options);
         
-    private static int GetHalfBoardSize() => 
-        SquareSize * 3 + SquareSize / 2;
+    public static int CenterBoardLocation(PieceOptions options) => 
+        options.SquareSize * 3 + options.SquareSize / 2;
 }
