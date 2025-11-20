@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv0kwkd5jii6y"]
+[gd_scene load_steps=5 format=3 uid="uid://dv0kwkd5jii6y"]
 
 [ext_resource type="Script" uid="uid://02wyhtoqtjs1" path="res://gameplay/Game.cs" id="1_soh8q"]
 [ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://Assets/boards/prettyinpeach.png" id="1_tutxi"]
-[ext_resource type="PackedScene" uid="uid://bmtyos4jjpnyv" path="res://gameplay/Pieces/Piece_scene.tscn" id="2_u14r2"]
+[ext_resource type="Script" uid="uid://qcagfjm1gq34" path="res://gameplay/Pieces/Piece.cs" id="3_soh8q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_soh8q"]
+size = Vector2(80, 80)
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,219 +24,14 @@ texture = ExtResource("1_tutxi")
 
 [node name="Black" type="Node" parent="Game/Pieces"]
 
-[node name="Rook_A" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(-560, -560)
-Type = 3
-Color = 1
-Style = 1
-StartingRank = 7
-
-[node name="Knight_B" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(-400, -560)
-Type = 1
-Color = 1
-Style = 1
-StartingFile = 1
-StartingRank = 7
-
-[node name="Bishop_C" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(-240, -560)
-Type = 2
-Color = 1
-Style = 1
-StartingFile = 2
-StartingRank = 7
-
-[node name="Bishop_F" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(240, -560)
-Type = 2
-Color = 1
-Style = 1
-StartingFile = 5
-StartingRank = 7
-
-[node name="King" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(80, -560)
-Type = 5
-Color = 1
-Style = 1
-StartingFile = 4
-StartingRank = 7
-
-[node name="Queen" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(-80, -560)
-Type = 4
-Color = 1
-Style = 1
-StartingFile = 3
-StartingRank = 7
-
-[node name="Knight_G" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(400, -560)
-Type = 1
-Color = 1
-Style = 1
-StartingFile = 6
-StartingRank = 7
-
-[node name="Rook_H" parent="Game/Pieces/Black" instance=ExtResource("2_u14r2")]
-position = Vector2(560, -560)
-Type = 3
-Color = 1
-Style = 1
-StartingFile = 7
-StartingRank = 7
-
 [node name="Pawns" type="Node" parent="Game/Pieces/Black"]
-
-[node name="Pawn_A" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-560, -400)
-Color = 1
-Style = 1
-StartingRank = 6
-
-[node name="Pawn_B" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-400, -400)
-Color = 1
-Style = 1
-StartingFile = 1
-StartingRank = 6
-
-[node name="Pawn_C" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-240, -400)
-Color = 1
-Style = 1
-StartingFile = 2
-StartingRank = 6
-
-[node name="Pawn_D" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-80, -400)
-Color = 1
-Style = 1
-StartingFile = 3
-StartingRank = 6
-
-[node name="Pawn_E" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(80, -400)
-Color = 1
-Style = 1
-StartingFile = 4
-StartingRank = 6
-
-[node name="Pawn_F" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(240, -400)
-Color = 1
-Style = 1
-StartingFile = 5
-StartingRank = 6
-
-[node name="Pawn_G" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(400, -400)
-Color = 1
-Style = 1
-StartingFile = 6
-StartingRank = 6
-
-[node name="Pawn_H" parent="Game/Pieces/Black/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(560, -400)
-Color = 1
-Style = 1
-StartingFile = 7
-StartingRank = 6
 
 [node name="White" type="Node" parent="Game/Pieces"]
 
-[node name="A_Rook" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-Type = 3
-Style = 1
-
-[node name="B_Knight" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(-400, 560)
-Type = 1
-Style = 1
-StartingFile = 1
-
-[node name="C_Bishop" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(-240, 560)
-Type = 2
-Style = 1
-StartingFile = 2
-
-[node name="D_Queen" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(-80, 560)
-Type = 4
-Style = 1
-StartingFile = 3
-
-[node name="E_King" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(80, 560)
-Type = 5
-Style = 1
-StartingFile = 4
-
-[node name="F_Bishop" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(240, 560)
-Type = 2
-Style = 1
-StartingFile = 5
-
-[node name="G_Knight" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(400, 560)
-Type = 1
-Style = 1
-StartingFile = 6
-
-[node name="H_Rook" parent="Game/Pieces/White" instance=ExtResource("2_u14r2")]
-position = Vector2(560, 560)
-Type = 3
-Style = 1
-StartingFile = 7
-
 [node name="Pawns" type="Node" parent="Game/Pieces/White"]
 
-[node name="A_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-560, 400)
-Style = 1
-StartingRank = 1
-
-[node name="B_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-400, 400)
-Style = 1
-StartingFile = 1
-StartingRank = 1
-
-[node name="C_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-240, 400)
-Style = 1
-StartingFile = 2
-StartingRank = 1
-
-[node name="D_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(-80, 400)
-Style = 1
-StartingFile = 3
-StartingRank = 1
-
-[node name="E_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(80, 400)
-Style = 1
-StartingFile = 4
-StartingRank = 1
-
-[node name="F_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(240, 400)
-Style = 1
-StartingFile = 5
-StartingRank = 1
-
-[node name="G_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(400, 400)
-Style = 1
-StartingFile = 6
-StartingRank = 1
-
-[node name="H_Pawn" parent="Game/Pieces/White/Pawns" instance=ExtResource("2_u14r2")]
-position = Vector2(560, 400)
-Style = 1
-StartingFile = 7
-StartingRank = 1
+[node name="Piece" type="Node2D" parent="Game/Pieces/White/Pawns"]
+position = Vector2(-94, -257)
+script = ExtResource("3_soh8q")
+Shape = SubResource("RectangleShape2D_soh8q")
+metadata/_custom_type_script = "uid://qcagfjm1gq34"

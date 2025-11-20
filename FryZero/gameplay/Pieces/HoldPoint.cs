@@ -1,15 +1,15 @@
 using Godot;
 
 namespace FryZeroGodot.gameplay.Pieces;
+
 [GlobalClass]
-public partial class PhysicsPiece : RigidBody2D
+public partial class HoldPoint : StaticBody2D
 {
 	[Export] public Shape2D Shape;
+
 	public override void _Ready()
 	{
 		SpawnCollisionShape();
-		CollisionLayer = 9;
-		ZIndex = 10;
 	}
 
 	private void SpawnCollisionShape()
@@ -17,17 +17,6 @@ public partial class PhysicsPiece : RigidBody2D
 		var collisionShape = new CollisionShape2D();
 		collisionShape.Shape = Shape;
 		AddChild(collisionShape);
-		GD.Print("Collision shape added");
+		GD.Print("Hold point collision shape added");
 	}
-	public void DroppedPiece()
-		{
-			CollisionLayer = 9;
-			ZIndex = 10;
-		}
-	public void PickedUpPiece()
-		{
-			CollisionLayer = 10;
-			ZIndex = 20;
-		}
 }
-	

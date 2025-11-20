@@ -1,10 +1,10 @@
 ﻿using FryZeroGodot.Config.Enums;
+using Godot;
 
-namespace FryZeroGodot.gameplay.Pieces;
+namespace FryZeroGodot.Config.Pieces;
 
-public class PieceOptions
+public class PieceAttributes
 {
     public int SquareSize { get; init; }
-    public File PieceFile { get; init; }
-    public Rank PieceRank { get; init; }
+    public int MovementDelay { get; init; }
 }

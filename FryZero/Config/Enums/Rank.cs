@@ -2,6 +2,7 @@
 
 public enum Rank
 {
+    None,
     One,
     Two,
     Three,

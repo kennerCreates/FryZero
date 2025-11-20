@@ -6,18 +6,14 @@
     &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Pieces.PieceTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3e474353_002D1d7b_002D4310_002Dab15_002D5f6652b073db/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="PieceTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Pieces.PieceTests&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7e17e7b5_002D4497_002D4809_002Db65b_002D7f27d007090c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetHalfBoardTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Pieces.PieceTests.GetHalfBoardTest&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c5344823_002D5795_002D4a65_002D84d9_002Dabb4656c802d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetHalfBoardTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c5344823_002D5795_002D4a65_002D84d9_002Dabb4656c802d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="GetHalfBoardTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Pieces.PieceTests.GetHalfBoardTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.BoardLocationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
