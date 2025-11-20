@@ -1,5 +1,6 @@
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Pieces;
+using FryZeroGodot.Config.Structs;
 using Godot;
 
 namespace FryZeroGodot.gameplay.Pieces;
@@ -45,9 +46,33 @@ public partial class Piece : Node2D
 	[Export]
 	public Shape2D Shape { get; set; }
 
+	[Export]
+	public File StartingFile
+	{
+		get => _startingFile;
+		set
+		{
+			_startingFile = value;
+			CreatePiece();
+		}
+	}
+
+	[Export]
+	public Rank StartingRank
+	{
+		get => _startingRank;
+		set
+		{
+			_startingRank = value;
+			CreatePiece();
+		}
+	}
+
 	private PieceColor _pieceColor;
 	private PieceType _pieceType;
 	private PieceStyle _pieceStyle;
+	private File _startingFile;
+	private Rank _startingRank;
 	
 	private Sprite2D _pieceSprite;
 	private PhysicsPiece _physicsPiece;
@@ -128,8 +153,13 @@ public partial class Piece : Node2D
 		}
 		
 		SetPieceImage();
+		SetPiecePosition();
 	}
 	
+	private void SetPiecePosition()
+	{
+		Position = BoardLocations.GetLocationFromSquare(PieceAttributes, new Square(StartingFile, StartingRank));
+	}
 	private void SetPieceImage()
 	{
 		
@@ -146,11 +176,9 @@ public partial class Piece : Node2D
 	{
 		_physicsPiece = new PhysicsPiece();
 		_physicsPiece.Shape = Shape;
-		_physicsPiece.Position = new Vector2(0, 0);
 		AddChild(_physicsPiece);
 	}
 	
-
 	private void CreatePinJointDeferred()
 	{
 		CallDeferred(nameof(CreatePinJoint));
@@ -183,7 +211,7 @@ public partial class Piece : Node2D
 		_holdPoint.Shape = circle;
 		_holdPoint.CollisionLayer = 0;
 		_holdPoint.CollisionMask = 0;
-		_holdPoint.Position = new Vector2(0, -40);
+		_holdPoint.Position = Position + new Vector2(0, -40);
 		AddChild(_holdPoint);
 	
 	}

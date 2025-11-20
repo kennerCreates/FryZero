@@ -23,7 +23,7 @@ public partial class PieceArea : Area2D
     public override void _MouseExit()
     {
         _boardLocationParent.SetMouseEntered(false);
-        GD.Print("Mouse entered");
+        GD.Print("Mouse exited");
     }
        
 

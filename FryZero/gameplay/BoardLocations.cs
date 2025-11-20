@@ -32,10 +32,10 @@ public static class BoardLocations
         new(GetLocationFromFile(attributes, square ), GetLocationFromRank(attributes, square));
 
     public static int GetLocationFromRank(PieceAttributes attributes, Square square) =>
-        ((int)square.Rank - 1) * attributes.SquareSize - CenterBoardLocation(attributes);
+        (8 - (int)square.Rank) * attributes.SquareSize - CenterBoardLocation(attributes);
 
     public static int GetLocationFromFile(PieceAttributes attributes, Square square) => 
-        ((int)square.File -1) * attributes.SquareSize - CenterBoardLocation(attributes);
+        ((int)square.File - 1) * attributes.SquareSize - CenterBoardLocation(attributes);
         
     public static int CenterBoardLocation(PieceAttributes attributes) => 
         attributes.SquareSize * 3 + attributes.SquareSize / 2;
