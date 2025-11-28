@@ -1,115 +1,77 @@
-﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Pieces;
+﻿using FryZeroGodot.Config;
+using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Structs;
 using FryZeroGodot.gameplay;
-using Godot;
 using File = FryZeroGodot.Config.Enums.File;
 
 namespace FryZero.Tests.Gameplay;
 
 public class BoardLocationTests
 {
-    
-    [Fact]
-    public void GetHalfBoardTest()
+    [Theory]
+    [InlineData(File.D, Rank.Four, 30, -15)]
+    [InlineData(File.D, Rank.Five, 30, -15)]
+    [InlineData(File.E, Rank.Four, 30, 15)]
+    [InlineData(File.E, Rank.Five, 30, 15)]
+    [InlineData(File.A, Rank.One, 30, -105)]
+    [InlineData(File.A, Rank.Eight, 30, -105)]
+    [InlineData(File.H, Rank.One, 30, 105)]
+    [InlineData(File.H, Rank.Eight, 30, 105)]
+    public void XCoordinate_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expected)
     {
-        var options = new PieceAttributes
+        var square = new Square(file, rank);
+        var boardOptions = new BoardOptions
         {
-            SquareSize = 30
+            SquareSize = squareSize
         };
-        const int expected = 105;
-        var actual = BoardLocations.CenterBoardLocation(options);
-        
+
+        float actual = square.XCoordinate(boardOptions);
+
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void GetLocationFromFileTest()
+    [Theory]
+    [InlineData(File.D, Rank.Four, 30, 15)]
+    [InlineData(File.D, Rank.Five, 30, -15)]
+    [InlineData(File.E, Rank.Four, 30, 15)]
+    [InlineData(File.E, Rank.Five, 30, -15)]
+    [InlineData(File.A, Rank.One, 30, 105)]
+    [InlineData(File.A, Rank.Eight, 30, -105)]
+    [InlineData(File.H, Rank.One, 30, 105)]
+    [InlineData(File.H, Rank.Eight, 30, -105)]
+    public void YCoordinate_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expected)
     {
-        var options = new PieceAttributes
+        var square = new Square(file, rank);
+        var boardOptions = new BoardOptions
         {
-            SquareSize = 30
+            SquareSize = squareSize
         };
-        
-        const int expected = -15;
-        
-        var actual = BoardLocations.GetLocationFromFile(options, new Square(File.D, Rank.Three));
-        
-        Assert.Equal(expected, actual);
-    }
-    
-    [Fact]
-    public void GetLocationFromRankTest()
-    {
-        var options = new PieceAttributes
-        {
-            SquareSize = 60
-        };
-        const int expected = -210;
-        
-        var actual = BoardLocations.GetLocationFromRank(options, new Square(File.D, Rank.One));
-        
+
+        float actual = square.YCoordinate(boardOptions);
+
         Assert.Equal(expected, actual);
     }
 
-    [Fact]
-    public void GetLocationFromSquareTest()
+    [Theory]
+    [InlineData(File.D, Rank.Four, 30, -15, 15)]
+    [InlineData(File.D, Rank.Five, 30, -15, -15)]
+    [InlineData(File.E, Rank.Four, 30, 15, 15)]
+    [InlineData(File.E, Rank.Five, 30, 15, -15)]
+    [InlineData(File.A, Rank.One, 30, -105, 105)]
+    [InlineData(File.A, Rank.Eight, 30, -105, -105)]
+    [InlineData(File.H, Rank.One, 30, 105, 105)]
+    [InlineData(File.H, Rank.Eight, 30, 105, -105)]
+    public void LocationVector_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expectedX, float expectedY)
     {
-        var options = new PieceAttributes
+        var square = new Square(file, rank);
+        var boardOptions = new BoardOptions
         {
-            SquareSize = 40
+            SquareSize = squareSize
         };
-        
-        Vector2 expected = new(140,-20);
-        
-        var actual = BoardLocations.GetLocationFromSquare(options, new Square(File.H, Rank.Four));
-        
-        Assert.Equal(expected, actual);
-    }
-    
-    [Fact]
-    public void GetFileFromLocationTest()
-    {
-        var options = new PieceAttributes()
-        {
-            SquareSize = 40
-        };
-        
-        var expected = File.C;
-        
-        var actual = BoardLocations.GetFileFromLocation(options, -60);
-        
-        Assert.Equal(expected, actual);
-    }
-    
-    [Fact]
-    public void GetRankFromLocationTest()
-    {
-        var options = new PieceAttributes()
-        {
-            SquareSize = 40
-        };
-        
-        var expected = Rank.Two;
-        
-        var actual = BoardLocations.GetRankFromLocation(options, -100);
-        
-        Assert.Equal(expected, actual);
-    }
 
-    [Fact]
-    public void GetDecimalVectorTest()
-    {
-        var options = new PieceAttributes()
-        {
-            SquareSize = 40
-        };
-        var location = new Vector2(-140, 40);
-        var expected = new Vector2(-.5f, 0);
-        
-        var actual = BoardLocations.GetDecimalVector(options, location);
-        
-        Assert.Equal(expected, actual);
+        var actual = square.LocationVector(boardOptions);
+
+        Assert.Equal(expectedX, actual.X);
+        Assert.Equal(expectedY, actual.Y);
     }
-    
 }

@@ -2,7 +2,6 @@
 
 public enum File
 {
-    None,
     A,
     B,
     C,

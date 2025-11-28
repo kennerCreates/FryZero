@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://fcajqksr2gbb"
-path="res://.godot/imported/maple.jpg-283b74b6078c48a0b6fa6b8f0b09faed.ctex"
+path="res://.godot/imported/maple.jpg-f9be284ea99d5361722d5b81edcf8a77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/boards/maple.jpg"
-dest_files=["res://.godot/imported/maple.jpg-283b74b6078c48a0b6fa6b8f0b09faed.ctex"]
+source_file="res://assets/boards/maple.jpg"
+dest_files=["res://.godot/imported/maple.jpg-f9be284ea99d5361722d5b81edcf8a77.ctex"]
 
 [params]
 

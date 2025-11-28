@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpe2mafgnt48t"
-path="res://.godot/imported/King.svg-a2d1d06d9f809a027960012e104a0629.ctex"
+path="res://.godot/imported/King.svg-25c539e9e8fc114075b5dc3beaf391b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Staunty/Black/King.svg"
-dest_files=["res://.godot/imported/King.svg-a2d1d06d9f809a027960012e104a0629.ctex"]
+source_file="res://assets/Pieces/Staunty/Black/King.svg"
+dest_files=["res://.godot/imported/King.svg-25c539e9e8fc114075b5dc3beaf391b9.ctex"]
 
 [params]
 

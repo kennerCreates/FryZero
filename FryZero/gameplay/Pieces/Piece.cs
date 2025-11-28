@@ -1,3 +1,4 @@
+using FryZeroGodot.Config;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Pieces;
 using FryZeroGodot.Config.Structs;
@@ -88,20 +89,23 @@ public partial class Piece : Node2D
 		SquareSize = 160,
 		MovementDelay = 10
 	};
-	
-	
+
+	private static readonly BoardOptions BoardOptions = new()
+	{
+		SquareSize = 160
+	};
+
 	public override void _Ready()
 	{
 		if (Engine.IsEditorHint())
 		{
 			CreatePiece();
-			
 		}
 		else
 		{
 			CreatePiece();
 			CreateRuntimePiece();
-			AddToGroup("LeftClick");
+			AddToGroup(CallGroups.LeftClick);
 		}
 	}
 	public override void _PhysicsProcess(double delta)
@@ -111,14 +115,14 @@ public partial class Piece : Node2D
 		tween.TweenProperty(this, "position", GetGlobalMousePosition(), PieceAttributes.MovementDelay * delta);
 	}
 
-	
-	private void PickUpPiece()
+	public void PickUpPiece()
 	{
 		if (!_isMouseEntered) return;
 		_isBeingMoved = true;
 		_physicsPiece.PickedUpPiece();
 	}
-	private void DropPiece()
+
+	public void DropPiece()
 	{
 		if (!_isMouseEntered) return;
 		_isBeingMoved = false;
@@ -146,7 +150,6 @@ public partial class Piece : Node2D
 	}
 	private void CreatePiece()
 	{
-		
 		if (_pieceSprite == null)
 		{
 			CreateSprite();
@@ -158,11 +161,12 @@ public partial class Piece : Node2D
 	
 	private void SetPiecePosition()
 	{
-		Position = BoardLocations.GetLocationFromSquare(PieceAttributes, new Square(StartingFile, StartingRank));
+		var square = new Square(StartingFile, StartingRank);
+		Position = square.LocationVector(BoardOptions);
 	}
+
 	private void SetPieceImage()
 	{
-		
 		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{_pieceStyle}/{_pieceColor}/{_pieceType}.svg");
 	}
 
@@ -183,6 +187,7 @@ public partial class Piece : Node2D
 	{
 		CallDeferred(nameof(CreatePinJoint));
 	}
+
 	private void CreatePinJoint()
 	{
 		if (_holdPoint == null || _physicsPiece == null) return;
@@ -213,7 +218,6 @@ public partial class Piece : Node2D
 		_holdPoint.CollisionMask = 0;
 		_holdPoint.Position = Position + new Vector2(0, -40);
 		AddChild(_holdPoint);
-	
 	}
 	
 	public void SetMouseEntered(bool entered)

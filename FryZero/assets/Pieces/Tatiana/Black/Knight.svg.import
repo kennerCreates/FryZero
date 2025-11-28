@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://31wynyq2057m"
-path="res://.godot/imported/Knight.svg-bd3b8690218ee5bca75c4b83027fff3c.ctex"
+path="res://.godot/imported/Knight.svg-6e757661ee8bdb796ec80dc17cc3e5ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Tatiana/Black/Knight.svg"
-dest_files=["res://.godot/imported/Knight.svg-bd3b8690218ee5bca75c4b83027fff3c.ctex"]
+source_file="res://assets/Pieces/Tatiana/Black/Knight.svg"
+dest_files=["res://.godot/imported/Knight.svg-6e757661ee8bdb796ec80dc17cc3e5ef.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dltoin22cvo8j"
-path="res://.godot/imported/Rook.svg-18a939b70e5632597c611ba45219ea23.ctex"
+path="res://.godot/imported/Rook.svg-7e4ee213464090054f5854f5e88a3ee6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Tatiana/White/Rook.svg"
-dest_files=["res://.godot/imported/Rook.svg-18a939b70e5632597c611ba45219ea23.ctex"]
+source_file="res://assets/Pieces/Tatiana/White/Rook.svg"
+dest_files=["res://.godot/imported/Rook.svg-7e4ee213464090054f5854f5e88a3ee6.ctex"]
 
 [params]
 

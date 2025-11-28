@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ohb2oyux8osr"
-path="res://.godot/imported/Queen.svg-e6b2fe7055e6ba8645488cf9a72a8bf4.ctex"
+path="res://.godot/imported/Queen.svg-0b1713266fcdeeb10db03118b14f7d55.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Gioco/White/Queen.svg"
-dest_files=["res://.godot/imported/Queen.svg-e6b2fe7055e6ba8645488cf9a72a8bf4.ctex"]
+source_file="res://assets/Pieces/Gioco/White/Queen.svg"
+dest_files=["res://.godot/imported/Queen.svg-0b1713266fcdeeb10db03118b14f7d55.ctex"]
 
 [params]
 

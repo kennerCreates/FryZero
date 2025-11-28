@@ -1,6 +1,7 @@
 using Godot;
 
 namespace FryZeroGodot.gameplay.Pieces;
+
 [GlobalClass]
 public partial class PhysicsPiece : RigidBody2D
 {
@@ -30,4 +31,3 @@ public partial class PhysicsPiece : RigidBody2D
 			ZIndex = 20;
 		}
 }
-	

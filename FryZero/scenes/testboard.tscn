@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dv0kwkd5jii6y"]
 
 [ext_resource type="Script" uid="uid://02wyhtoqtjs1" path="res://gameplay/Game.cs" id="1_soh8q"]
-[ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://Assets/boards/prettyinpeach.png" id="1_tutxi"]
+[ext_resource type="Texture2D" uid="uid://pp0ju1nig8a5" path="res://assets/boards/prettyinpeach.png" id="1_tutxi"]
 [ext_resource type="Script" uid="uid://qcagfjm1gq34" path="res://gameplay/Pieces/Piece.cs" id="3_soh8q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_soh8q"]
@@ -32,8 +32,7 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 1
-StartingRank = 7
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -42,8 +41,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 2
-StartingRank = 7
+StartingFile = 1
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -52,8 +51,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 3
-StartingRank = 7
+StartingFile = 2
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -62,8 +61,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 4
-StartingRank = 7
+StartingFile = 3
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -72,8 +71,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 5
-StartingRank = 7
+StartingFile = 4
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -82,8 +81,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 6
-StartingRank = 7
+StartingFile = 5
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -92,8 +91,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 7
-StartingRank = 7
+StartingFile = 6
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
@@ -102,8 +101,8 @@ script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 8
-StartingRank = 7
+StartingFile = 7
+StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="A_rook" type="Node2D" parent="Game/Pieces/Black"]
@@ -113,8 +112,7 @@ Type = 3
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 1
-StartingRank = 8
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_knight" type="Node2D" parent="Game/Pieces/Black"]
@@ -124,8 +122,8 @@ Type = 1
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 2
-StartingRank = 8
+StartingFile = 1
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_bishop" type="Node2D" parent="Game/Pieces/Black"]
@@ -135,8 +133,8 @@ Type = 2
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 3
-StartingRank = 8
+StartingFile = 2
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_queen" type="Node2D" parent="Game/Pieces/Black"]
@@ -146,8 +144,8 @@ Type = 4
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 4
-StartingRank = 8
+StartingFile = 3
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_king" type="Node2D" parent="Game/Pieces/Black"]
@@ -157,8 +155,8 @@ Type = 5
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 5
-StartingRank = 8
+StartingFile = 4
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_bishop" type="Node2D" parent="Game/Pieces/Black"]
@@ -168,8 +166,8 @@ Type = 2
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 6
-StartingRank = 8
+StartingFile = 5
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_knight" type="Node2D" parent="Game/Pieces/Black"]
@@ -179,8 +177,8 @@ Type = 1
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 7
-StartingRank = 8
+StartingFile = 6
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_rook" type="Node2D" parent="Game/Pieces/Black"]
@@ -190,8 +188,8 @@ Type = 3
 Color = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 8
-StartingRank = 8
+StartingFile = 7
+StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="White" type="Node" parent="Game/Pieces"]
@@ -203,8 +201,7 @@ position = Vector2(-560, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 1
-StartingRank = 2
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -212,8 +209,8 @@ position = Vector2(-400, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 2
-StartingRank = 2
+StartingFile = 1
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -221,8 +218,8 @@ position = Vector2(-240, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 3
-StartingRank = 2
+StartingFile = 2
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -230,8 +227,8 @@ position = Vector2(-80, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 4
-StartingRank = 2
+StartingFile = 3
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -239,8 +236,8 @@ position = Vector2(80, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 5
-StartingRank = 2
+StartingFile = 4
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -248,8 +245,8 @@ position = Vector2(240, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 6
-StartingRank = 2
+StartingFile = 5
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -257,8 +254,8 @@ position = Vector2(400, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 7
-StartingRank = 2
+StartingFile = 6
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
@@ -266,8 +263,8 @@ position = Vector2(560, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 8
-StartingRank = 2
+StartingFile = 7
+StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="A_rook" type="Node2D" parent="Game/Pieces/White"]
@@ -276,8 +273,6 @@ script = ExtResource("3_soh8q")
 Type = 3
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 1
-StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_knight" type="Node2D" parent="Game/Pieces/White"]
@@ -286,8 +281,7 @@ script = ExtResource("3_soh8q")
 Type = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 2
-StartingRank = 1
+StartingFile = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_bishop" type="Node2D" parent="Game/Pieces/White"]
@@ -296,8 +290,7 @@ script = ExtResource("3_soh8q")
 Type = 2
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 3
-StartingRank = 1
+StartingFile = 2
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_queen" type="Node2D" parent="Game/Pieces/White"]
@@ -306,8 +299,7 @@ script = ExtResource("3_soh8q")
 Type = 4
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 4
-StartingRank = 1
+StartingFile = 3
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_king" type="Node2D" parent="Game/Pieces/White"]
@@ -316,8 +308,7 @@ script = ExtResource("3_soh8q")
 Type = 5
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 5
-StartingRank = 1
+StartingFile = 4
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_bishop" type="Node2D" parent="Game/Pieces/White"]
@@ -326,8 +317,7 @@ script = ExtResource("3_soh8q")
 Type = 2
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 6
-StartingRank = 1
+StartingFile = 5
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_knight" type="Node2D" parent="Game/Pieces/White"]
@@ -336,8 +326,7 @@ script = ExtResource("3_soh8q")
 Type = 1
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 7
-StartingRank = 1
+StartingFile = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_rook" type="Node2D" parent="Game/Pieces/White"]
@@ -346,6 +335,5 @@ script = ExtResource("3_soh8q")
 Type = 3
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
-StartingFile = 8
-StartingRank = 1
+StartingFile = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"

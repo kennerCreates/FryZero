@@ -1,6 +1,7 @@
 using Godot;
 
 namespace FryZeroGodot.gameplay.Pieces;
+
 [GlobalClass]
 public partial class PieceArea : Area2D
 {
@@ -25,7 +26,6 @@ public partial class PieceArea : Area2D
         _boardLocationParent.SetMouseEntered(false);
         GD.Print("Mouse exited");
     }
-       
 
     private void SpawnCollisionShape()
     {
@@ -38,6 +38,5 @@ public partial class PieceArea : Area2D
     {
         var parent = GetParent<Piece>();
         if (parent != null) _boardLocationParent = parent;
-        
     }
 }
