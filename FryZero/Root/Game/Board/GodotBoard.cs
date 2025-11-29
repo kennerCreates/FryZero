@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using System.Numerics;
+using FryZeroGodot.Config.Enums;
 using Godot;
 using Color = Godot.Color;
 using Vector2 = Godot.Vector2;
@@ -12,6 +13,7 @@ namespace FryZeroGodot.Root.Game.Board;
 
 public partial class GodotBoard : Node2D
 {
+    [ExportCategory("Board")]
     [Export] public Color LightSquareColor
     {
         get => _lightSquareColor;
@@ -94,7 +96,6 @@ public partial class GodotBoard : Node2D
         UpdateDarkSquareColor();
         UpdateLightSquareTexture();
         UpdateDarkSquareTexture();
-        UpdateSquareScale();
     }
 
     private void CreateDarkSquares()
@@ -114,7 +115,7 @@ public partial class GodotBoard : Node2D
     private int _squareSize;
     private void UpdateScreenSize()
     {
-        var viewportSize = GetViewport().GetVisibleRect().Size;
+        var viewportSize = DisplayServer.WindowGetSize();
         _squareSize = (int)viewportSize.Y / 9;
     }
 
@@ -123,22 +124,57 @@ public partial class GodotBoard : Node2D
         UpdateScreenSize();
         _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
         _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
+        UpdatePieceManager();
+    }
+
+    [ExportCategory("Pieces")]
+    [Export]
+    public PieceStyle PieceStyle
+    {
+        get => _pieceStyle;
+        set
+        {
+            _pieceStyle = value;
+            UpdatePieceManager();
+        }
+    }
+    private PieceStyle _pieceStyle;
+
+    private Pieces.GodotPieceManager _pieceManager;
+    private void CreatePieceManager()
+    {
+        _pieceManager = new Pieces.GodotPieceManager();
+        AddChild(_pieceManager);
+        _pieceManager.SquareSize = _squareSize;
+        _pieceManager.Style = _pieceStyle;
+    }
+    private void UpdatePieceManager()
+    {
+        if (_pieceManager == null)
+        {
+            CreatePieceManager();
+        }
+        else
+        {
+            _pieceManager.SquareSize = _squareSize;
+            _pieceManager.Style = _pieceStyle;
+        }
     }
 
     private void EditorOnReady()
     {
-        GetViewport().Connect("size_changed", Callable.From(UpdateSquareScale));
         UpdateSquares();
+        UpdatePieceManager();
     }
 
     private void GameOnReady()
     {
-
+        UpdateSquareScale();
+        GetViewport().Connect("size_changed", Callable.From(UpdateSquareScale));
     }
 
     public override void _EnterTree()
     {
-        CreateLightSquares();
     }
 
     public override void _Ready()

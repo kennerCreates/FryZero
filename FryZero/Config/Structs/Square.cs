@@ -1,4 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.Root.Game.Pieces;
 
 namespace FryZeroGodot.Config.Structs;
 

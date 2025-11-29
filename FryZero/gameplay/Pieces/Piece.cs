@@ -14,7 +14,8 @@ public partial class Piece : Node2D
 	[Export] public PieceType Type;
 	[Export] public PieceColor Color;
 	[Export] public PieceStyle Style;
-	[Export] public Shape2D Shape { get; set; }
+	[Export] public Shape2D Shape;
+	[Export] public int SquareSize;
 
 	[Export]
 	public File StartingFile
@@ -37,10 +38,6 @@ public partial class Piece : Node2D
 			CreatePiece();
 		}
 	}
-
-	private PieceColor _pieceColor;
-	private PieceType _pieceType;
-	private PieceStyle _pieceStyle;
 	private File _startingFile;
 	private Rank _startingRank;
 	
@@ -57,11 +54,6 @@ public partial class Piece : Node2D
 	{
 		SquareSize = 160,
 		MovementDelay = 10
-	};
-
-	private static readonly BoardOptions BoardOptions = new()
-	{
-		SquareSize = 160
 	};
 
 	public override void _Ready()
@@ -131,12 +123,12 @@ public partial class Piece : Node2D
 	private void SetPiecePosition()
 	{
 		var square = new Square(StartingFile, StartingRank);
-		Position = square.LocationVector(BoardOptions);
+		Position = square.LocationVector(SquareSize);
 	}
 
 	private void SetPieceImage()
 	{
-		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{_pieceStyle}/{_pieceColor}/{_pieceType}.svg");
+		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Color}/{Type}.svg");
 	}
 
 	private void CreateSprite()

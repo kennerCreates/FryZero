@@ -1,9 +1,8 @@
-﻿using System.Net.NetworkInformation;
-using FryZeroGodot.Config.Enums;
+﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.gameplay.Pieces;
 using Godot;
 
-namespace FryZeroGodot.Root.Game.Board;
+namespace FryZeroGodot.Root.Game.Pieces;
 
 [Tool]
 
@@ -11,27 +10,54 @@ namespace FryZeroGodot.Root.Game.Board;
 
 public partial class GodotPieceManager : Node2D
 {
-    [Export] public int SquareSize;
-    [Export] public PieceStyle Style;
-
-    private Piece CreatePiece(PieceType pieceType, PieceColor pieceColor, PieceStyle pieceStyle)
+    [Export]
+    public int SquareSize
     {
-        var piece = new Piece();
-        UpdatePiece(piece, pieceType, pieceColor, pieceStyle);
-        return piece;
+        get => _size;
+        set
+        {
+            _size = value;
+            UpdateAllPieces();
+        }
+    }
+    private int _size = 160;
+
+    [Export]
+    public PieceStyle Style
+    {
+        get => _style;
+        set
+        {
+            _style = value;
+            UpdateAllPieces();
+        }
+    }
+    private PieceStyle _style;
+
+    private void UpdateAllPieces()
+    {
+
+    }
+    private void CreateAllPieces()
+    {
+        CreateOnePiece(PieceType.King, PieceColor.White, Rank.Two, File.E);
     }
 
-    private Piece UpdatePiece(Piece piece, PieceType pieceType, PieceColor pieceColor, PieceStyle pieceStyle)
+    private void CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
     {
-        piece.Type = pieceType;
-        piece.Color = pieceColor;
-        piece.Style = pieceStyle;
-        piece.SquareSize = SquareSize;
-        return piece;
+        var piece = new GodotPiece();
+        AddChild(piece);
+        piece.SquareSize = _size;
+        piece.Style = _style;
+        piece.Type = type;
+        piece.Color = color;
+        piece.Rank = rank;
+        piece.File = file;
     }
+
     private void EditorOnReady()
     {
-        AddChild(CreatePiece(PieceType.Rook, PieceColor.Black, Style));
+        CreateAllPieces();
     }
 
     private void GameOnReady()

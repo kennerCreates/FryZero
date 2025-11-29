@@ -20,12 +20,8 @@ public class BoardLocationTests
     public void XCoordinate_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expected)
     {
         var square = new Square(file, rank);
-        var boardOptions = new BoardOptions
-        {
-            SquareSize = squareSize
-        };
 
-        float actual = square.XCoordinate(boardOptions);
+        float actual = square.XCoordinate(squareSize);
 
         Assert.Equal(expected, actual);
     }
@@ -42,12 +38,8 @@ public class BoardLocationTests
     public void YCoordinate_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expected)
     {
         var square = new Square(file, rank);
-        var boardOptions = new BoardOptions
-        {
-            SquareSize = squareSize
-        };
 
-        float actual = square.YCoordinate(boardOptions);
+        float actual = square.YCoordinate(squareSize);
 
         Assert.Equal(expected, actual);
     }
@@ -64,12 +56,7 @@ public class BoardLocationTests
     public void LocationVector_Returns_Expected_Coordinates_Based_On_Square_Size(File file, Rank rank, int squareSize, float expectedX, float expectedY)
     {
         var square = new Square(file, rank);
-        var boardOptions = new BoardOptions
-        {
-            SquareSize = squareSize
-        };
-
-        var actual = square.LocationVector(boardOptions);
+        var actual = square.LocationVector(squareSize);
 
         Assert.Equal(expectedX, actual.X);
         Assert.Equal(expectedY, actual.Y);
