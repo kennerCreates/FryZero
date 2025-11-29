@@ -3,7 +3,7 @@ using Godot;
 
 namespace FryZeroGodot.gameplay;
 
-public partial class Game : Node
+public partial class GameOld : Node
 {
 	public override void _Input(InputEvent @event)
 	{

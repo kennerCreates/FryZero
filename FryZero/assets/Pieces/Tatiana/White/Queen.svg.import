@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d22eprg5dxp8n"
-path="res://.godot/imported/Queen.svg-657db29afbb9708282d11d236d4524d7.ctex"
+path="res://.godot/imported/Queen.svg-75aed95e3c714a8a3617f31ead51d028.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pieces/Tatiana/White/Queen.svg"
-dest_files=["res://.godot/imported/Queen.svg-657db29afbb9708282d11d236d4524d7.ctex"]
+source_file="res://Assets/Pieces/Tatiana/White/Queen.svg"
+dest_files=["res://.godot/imported/Queen.svg-75aed95e3c714a8a3617f31ead51d028.ctex"]
 
 [params]
 

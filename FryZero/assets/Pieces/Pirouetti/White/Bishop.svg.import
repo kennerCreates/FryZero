@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpin12epjxvob"
-path="res://.godot/imported/Bishop.svg-3b602cfc666d27d45d13341b299297e1.ctex"
+path="res://.godot/imported/Bishop.svg-8c0442e2806caed661adb9d80f052946.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pieces/Pirouetti/White/Bishop.svg"
-dest_files=["res://.godot/imported/Bishop.svg-3b602cfc666d27d45d13341b299297e1.ctex"]
+source_file="res://Assets/Pieces/Pirouetti/White/Bishop.svg"
+dest_files=["res://.godot/imported/Bishop.svg-8c0442e2806caed661adb9d80f052946.ctex"]
 
 [params]
 

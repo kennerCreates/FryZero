@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://e5lbs1krg1bh"
-path="res://.godot/imported/Knight.svg-c44e788461dad31338a0e690e401bc6e.ctex"
+path="res://.godot/imported/Knight.svg-a3a36445499d5212c1becf174631ab63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pieces/Pirouetti/Black/Knight.svg"
-dest_files=["res://.godot/imported/Knight.svg-c44e788461dad31338a0e690e401bc6e.ctex"]
+source_file="res://Assets/Pieces/Pirouetti/Black/Knight.svg"
+dest_files=["res://.godot/imported/Knight.svg-a3a36445499d5212c1becf174631ab63.ctex"]
 
 [params]
 

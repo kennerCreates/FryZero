@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FryZeroGodot"
-run/main_scene="uid://dv0kwkd5jii6y"
+run/main_scene="uid://djkkabff2382b"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
