@@ -40,7 +40,12 @@ public partial class GodotSquare : ColorRect
             UpdateSquareColor();
         }
     }
+
     private bool _isLightSquare;
+    private void UpdateSquareColor()
+    {
+        Color = IsLightSquare ? LightSquareColor : DarkSquareColor;
+    }
 
     private void EditorOnReady()
     {
@@ -50,11 +55,6 @@ public partial class GodotSquare : ColorRect
     private void GameOnReady()
     {
 
-    }
-
-    private void UpdateSquareColor()
-    {
-        Color = IsLightSquare ? LightSquareColor : DarkSquareColor;
     }
 
     public override void _Ready()

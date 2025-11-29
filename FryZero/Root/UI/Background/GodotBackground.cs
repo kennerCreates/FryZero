@@ -6,7 +6,7 @@ namespace FryZeroGodot.Root.UI.Background;
 
 [GlobalClass ]
 
-public partial class GodotBackground : Control
+public partial class GodotBackground : Node2D
 {
     private ColorRect _backgroundRect;
     private Color _backgroundColor = Colors.White;
@@ -22,11 +22,13 @@ public partial class GodotBackground : Control
     private void SetColor(Color value)
     {
         _backgroundColor = value;
+        if (_backgroundRect != null) UpdateColor();
     }
 
     private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
+        _backgroundRect.Size = ViewportSize;
         AddChild(_backgroundRect);
     }
 
@@ -34,34 +36,20 @@ public partial class GodotBackground : Control
     {
         _backgroundRect.Color = _backgroundColor;
     }
-    private void SetAnchorsToFullScreen()
+
+    private void UpdateScreenSize()
     {
-        _backgroundRect.AnchorLeft = 0;
-        _backgroundRect.AnchorRight = 1;
-        _backgroundRect.AnchorTop = 0;
-        _backgroundRect.AnchorBottom = 1;
+        _backgroundRect.Size = ViewportSize;
+        _backgroundRect.Position = _backgroundRect.Size / -2;
     }
-    private  void SetPosition()
-    {
-       SetPosition(new Vector2(ViewportSize.X * -0.5f, ViewportSize.Y * -0.5f));
-       AnchorsPreset = (int)LayoutPreset.FullRect;
-       AnchorLeft = 0;
-       AnchorRight = 1;
-       AnchorTop = 0;
-       AnchorBottom = 1;
-    }
-    private Vector2 ViewportSize => GetViewportRect().Size;
+
+    private Vector2 ViewportSize => GetViewport().GetVisibleRect().Size;
 
     private void EditorOnReady()
     {
-        if (_backgroundRect == null)
-        {
-            CreateBackgroundRect();
-        }
+        GetViewport().Connect("size_changed", Callable.From(UpdateScreenSize));
+        UpdateScreenSize();
         UpdateColor();
-        SetAnchorsToFullScreen();
-
-
     }
 
     private void GameOnReady()
@@ -71,7 +59,7 @@ public partial class GodotBackground : Control
 
     public override void _EnterTree()
     {
-        SetPosition();
+        CreateBackgroundRect();
     }
 
     public override void _Ready()

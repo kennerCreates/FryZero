@@ -1,18 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=5 format=3 uid="uid://djkkabff2382b"]
 
-[ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://Root/UI/Background/GodotBackground.cs" id="1_vnmpx"]
+[ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://Root/UI/Background/GodotBackground.cs" id="1_5dv8v"]
+[ext_resource type="Texture2D" uid="uid://dfgttfoqtooge" path="res://Assets/boards/ChessboardBlackSquares.png" id="2_20q55"]
+[ext_resource type="Texture2D" uid="uid://dy2433jj0k3ye" path="res://Assets/boards/ChessboardWhiteSquares.png" id="3_ib006"]
+[ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://Root/Game/Board/GodotBoard.cs" id="4_ltheh"]
 
 [node name="Root" type="Node"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="GodotBackground" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -1292.0
-offset_top = -734.0
-offset_right = 1280.0
-offset_bottom = 720.0
-script = ExtResource("1_vnmpx")
-BackgroundColor = Color(1, 1, 1, 1)
+[node name="GodotBackground" type="Node2D" parent="."]
+script = ExtResource("1_5dv8v")
+BackgroundColor = Color(0.47522414, 0.45573264, 0.57939756, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
+
+[node name="ChessboardBlackSquares" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(144, 144)
+texture = ExtResource("2_20q55")
+
+[node name="ChessboardWhiteSquares" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(144, 144)
+texture = ExtResource("3_ib006")
+
+[node name="GodotBoard" type="Node2D" parent="."]
+script = ExtResource("4_ltheh")
+LightSquareColor = Color(0.99958414, 0.82597077, 0.85307086, 1)
+LightSquareTexture = ExtResource("3_ib006")
+DarkSquareColor = Color(0.9999966, 0.3938667, 0.55086255, 1)
+DarkSquareTexture = ExtResource("2_20q55")
+metadata/_custom_type_script = "uid://cm31dysjcy4q7"
