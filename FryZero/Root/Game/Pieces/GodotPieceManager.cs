@@ -9,24 +9,29 @@ namespace FryZeroGodot.Root.Game.Board;
 
 [GlobalClass]
 
-public partial class GodotPieces : Node2D
+public partial class GodotPieceManager : Node2D
 {
     [Export] public int SquareSize;
+    [Export] public PieceStyle Style;
 
     private Piece CreatePiece(PieceType pieceType, PieceColor pieceColor, PieceStyle pieceStyle)
     {
         var piece = new Piece();
+        UpdatePiece(piece, pieceType, pieceColor, pieceStyle);
+        return piece;
+    }
+
+    private Piece UpdatePiece(Piece piece, PieceType pieceType, PieceColor pieceColor, PieceStyle pieceStyle)
+    {
         piece.Type = pieceType;
         piece.Color = pieceColor;
         piece.Style = pieceStyle;
-        var shape = new RectangleShape2D();
-        shape.Size = new Vector2(SquareSize, SquareSize);
-        piece.Shape = shape;
+        piece.SquareSize = SquareSize;
         return piece;
     }
     private void EditorOnReady()
     {
-        AddChild(CreatePiece(PieceType.Rook, PieceColor.Black, PieceStyle.Gioco));
+        AddChild(CreatePiece(PieceType.Rook, PieceColor.Black, Style));
     }
 
     private void GameOnReady()
