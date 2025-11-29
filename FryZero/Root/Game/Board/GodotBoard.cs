@@ -22,7 +22,7 @@ public partial class GodotBoard : Control
         }
     }
     private Color _lightSquareColor = Colors.White;
-    private ColorRect _lightSquareRect;
+    private ColorRect _lightSquareRect = new();
 
     private void UpdateLightSquareColor()
     {
@@ -39,17 +39,24 @@ public partial class GodotBoard : Control
         }
     }
     private Color _darkSquareColor = Colors.Black;
-    private ColorRect _darkSquareRect;
+    private ColorRect _darkSquareRect = new();
 
     private void UpdateDarkSquareColor()
     {
         _darkSquareRect.Color = _darkSquareColor;
     }
 
+    private int _squareSize;
+    private void UpdateScreenSize()
+    {
+        Vector2 viewportSize = GetViewportRect().Size;
+        _squareSize = (int)viewportSize.Y / 9;
+        Size = new Vector2(_squareSize * 8, _squareSize * 8);
+    }
 
     private void EditorOnReady()
     {
-
+        UpdateScreenSize();
     }
 
     private void GameOnReady()

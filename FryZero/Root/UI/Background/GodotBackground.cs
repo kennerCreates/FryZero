@@ -8,56 +8,70 @@ namespace FryZeroGodot.Root.UI.Background;
 
 public partial class GodotBackground : Control
 {
+    private ColorRect _backgroundRect;
+    private Color _backgroundColor = Colors.White;
     [Export] public Color BackgroundColor
     {
-        get => _backgroundColor;
-        set
-        {
-            _backgroundColor = value;
-            UpdateBackgroundRectangle();
-        }
+        get => GetColor();
+        set => SetColor(value);
     }
-
-    private Color _backgroundColor = Colors.White;
-
-    private ColorRect _backgroundRect;
-
-    private void UpdateBackgroundRectangle()
+    private Color GetColor()
     {
-        if (_backgroundRect == null)
-        {
-            CreateBlankBackground();
-        }
-        SetBackgroundColor(_backgroundRect, _backgroundColor);
-        SetAnchorsToFullScreen(_backgroundRect);
+        return _backgroundColor;
+    }
+    private void SetColor(Color value)
+    {
+        _backgroundColor = value;
     }
 
-    private void CreateBlankBackground()
+    private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
         AddChild(_backgroundRect);
     }
 
-    private void SetAnchorsToFullScreen(ColorRect rect)
+    private void UpdateColor()
     {
-        rect.AnchorLeft = 0;
-        rect.AnchorRight = 1;
-        rect.AnchorTop = 0;
-        rect.AnchorBottom = 1;
+        _backgroundRect.Color = _backgroundColor;
     }
-    private void SetBackgroundColor(ColorRect rect, Color color)
+    private void SetAnchorsToFullScreen()
     {
-        rect.Color = color;
+        _backgroundRect.AnchorLeft = 0;
+        _backgroundRect.AnchorRight = 1;
+        _backgroundRect.AnchorTop = 0;
+        _backgroundRect.AnchorBottom = 1;
     }
+    private  void SetPosition()
+    {
+       SetPosition(new Vector2(ViewportSize.X * -0.5f, ViewportSize.Y * -0.5f));
+       AnchorsPreset = (int)LayoutPreset.FullRect;
+       AnchorLeft = 0;
+       AnchorRight = 1;
+       AnchorTop = 0;
+       AnchorBottom = 1;
+    }
+    private Vector2 ViewportSize => GetViewportRect().Size;
 
     private void EditorOnReady()
     {
-        UpdateBackgroundRectangle();
+        if (_backgroundRect == null)
+        {
+            CreateBackgroundRect();
+        }
+        UpdateColor();
+        SetAnchorsToFullScreen();
+
+
     }
 
     private void GameOnReady()
     {
 
+    }
+
+    public override void _EnterTree()
+    {
+        SetPosition();
     }
 
     public override void _Ready()

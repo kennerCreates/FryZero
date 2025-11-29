@@ -1,44 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=2 format=3 uid="uid://djkkabff2382b"]
 
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://Root/UI/Background/GodotBackground.cs" id="1_vnmpx"]
-[ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://Root/Game/Board/GodotBoard.cs" id="2_5n7m4"]
-[ext_resource type="Script" uid="uid://dkgou44kybh3u" path="res://Root/Game/Board/GodotSquare.cs" id="3_5n7m4"]
 
 [node name="Root" type="Node"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="GodotBackground" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_left = -1292.0
+offset_top = -734.0
+offset_right = 1280.0
+offset_bottom = 720.0
 script = ExtResource("1_vnmpx")
-BackgroundColor = Color(0.70980394, 0.8235294, 0.7882353, 1)
+BackgroundColor = Color(1, 1, 1, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
-
-[node name="GodotBoard" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_5n7m4")
-metadata/_custom_type_script = "uid://cm31dysjcy4q7"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="GodotBoard"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GodotBoard/VBoxContainer"]
-layout_mode = 2
-
-[node name="GodotSquare" type="ColorRect" parent="GodotBoard/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-color = Color(0, 0, 0, 0)
-script = ExtResource("3_5n7m4")
-metadata/_custom_type_script = "uid://dkgou44kybh3u"
