@@ -11,23 +11,13 @@
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_5dv8v")
-BackgroundColor = Color(0.47522414, 0.45573264, 0.57939756, 1)
+BackgroundColor = Color(0.674901, 0.37087083, 0.39499062, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
-
-[node name="ChessboardBlackSquares" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(144, 144)
-texture = ExtResource("2_20q55")
-
-[node name="ChessboardWhiteSquares" type="Sprite2D" parent="."]
-visible = false
-scale = Vector2(144, 144)
-texture = ExtResource("3_ib006")
 
 [node name="GodotBoard" type="Node2D" parent="."]
 script = ExtResource("4_ltheh")
-LightSquareColor = Color(0.99958414, 0.82597077, 0.85307086, 1)
+LightSquareColor = Color(0.59157383, 0.9488928, 0.9749133, 1)
 LightSquareTexture = ExtResource("3_ib006")
-DarkSquareColor = Color(0.9999966, 0.3938667, 0.55086255, 1)
+DarkSquareColor = Color(0.80289924, 0.4702738, 0.94013083, 1)
 DarkSquareTexture = ExtResource("2_20q55")
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"

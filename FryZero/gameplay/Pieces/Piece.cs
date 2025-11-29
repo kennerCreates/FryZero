@@ -10,42 +10,11 @@ namespace FryZeroGodot.gameplay.Pieces;
 [GlobalClass]
 public partial class Piece : Node2D
 {
-	
-	[Export]
-	public PieceType Type
-	{
-		get => _pieceType;
-		set
-		{
-			_pieceType = value;
-			CreatePiece();
-		}
-	}
 
-	[Export]
-	public PieceColor Color
-	{
-		get => _pieceColor;
-		set
-		{
-			_pieceColor = value;
-			CreatePiece();
-		}
-	}
-
-	[Export]
-	public PieceStyle Style
-	{
-		get => _pieceStyle;
-		set
-		{
-			_pieceStyle = value;
-			CreatePiece();
-		}
-	}
-
-	[Export]
-	public Shape2D Shape { get; set; }
+	[Export] public PieceType Type;
+	[Export] public PieceColor Color;
+	[Export] public PieceStyle Style;
+	[Export] public Shape2D Shape { get; set; }
 
 	[Export]
 	public File StartingFile
