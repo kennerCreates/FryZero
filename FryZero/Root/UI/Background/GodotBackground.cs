@@ -6,7 +6,7 @@ namespace FryZeroGodot.Root.UI.Background;
 
 [GlobalClass ]
 
-public partial class Background : Control
+public partial class GodotBackground : Control
 {
     [Export] public Color BackgroundColor
     {
@@ -19,8 +19,36 @@ public partial class Background : Control
     }
 
     private Color _backgroundColor = Colors.White;
+
     private ColorRect _backgroundRect;
 
+    private void UpdateBackgroundRectangle()
+    {
+        if (_backgroundRect == null)
+        {
+            CreateBlankBackground();
+        }
+        SetBackgroundColor(_backgroundRect, _backgroundColor);
+        SetAnchorsToFullScreen(_backgroundRect);
+    }
+
+    private void CreateBlankBackground()
+    {
+        _backgroundRect = new ColorRect();
+        AddChild(_backgroundRect);
+    }
+
+    private void SetAnchorsToFullScreen(ColorRect rect)
+    {
+        rect.AnchorLeft = 0;
+        rect.AnchorRight = 1;
+        rect.AnchorTop = 0;
+        rect.AnchorBottom = 1;
+    }
+    private void SetBackgroundColor(ColorRect rect, Color color)
+    {
+        rect.Color = color;
+    }
 
     private void EditorOnReady()
     {
@@ -30,34 +58,6 @@ public partial class Background : Control
     private void GameOnReady()
     {
 
-    }
-
-    private void UpdateBackgroundRectangle()
-    {
-        if (_backgroundRect == null)
-        {
-            CreateBackgroundRectangle();
-        }
-        SetBackgroundRectColor();
-        SetAnchorsToFullScreen();
-    }
-
-    private void CreateBackgroundRectangle()
-    {
-        _backgroundRect = new ColorRect();
-        AddChild(_backgroundRect);
-    }
-
-    private void SetAnchorsToFullScreen()
-    {
-        _backgroundRect.AnchorLeft = 0;
-        _backgroundRect.AnchorRight = 1;
-        _backgroundRect.AnchorTop = 0;
-        _backgroundRect.AnchorBottom = 1;
-    }
-    private void SetBackgroundRectColor()
-    {
-        _backgroundRect.Color = BackgroundColor;
     }
 
     public override void _Ready()
