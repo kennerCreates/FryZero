@@ -10,7 +10,6 @@
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GodotBackground" type="Node2D" parent="."]
-visible = false
 script = ExtResource("1_5dv8v")
 BackgroundColor = Color(0.674901, 0.37087083, 0.39499062, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"

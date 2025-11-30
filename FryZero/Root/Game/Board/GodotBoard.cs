@@ -46,7 +46,6 @@ public partial class GodotBoard : Node2D
         _lightSquares.Texture = _lightSquareTexture;
     }
 
-
     [Export] public Color DarkSquareColor
     {
         get => _darkSquareColor;
@@ -96,6 +95,7 @@ public partial class GodotBoard : Node2D
         UpdateDarkSquareColor();
         UpdateLightSquareTexture();
         UpdateDarkSquareTexture();
+        SetSquareScale();
     }
 
     private void CreateDarkSquares()
@@ -112,18 +112,23 @@ public partial class GodotBoard : Node2D
         AddChild(_lightSquares);
     }
 
-    private int _squareSize;
+    private int _squareSize = 160;
     private void UpdateScreenSize()
     {
         var viewportSize = DisplayServer.WindowGetSize();
         _squareSize = (int)viewportSize.Y / 9;
     }
 
-    private void UpdateSquareScale()
+    private void SetSquareScale()
     {
-        UpdateScreenSize();
         _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
         _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
+    }
+
+    private void UpdateSquareSize()
+    {
+        UpdateScreenSize();
+        SetSquareScale();
         UpdatePieceManager();
     }
 
@@ -169,8 +174,8 @@ public partial class GodotBoard : Node2D
 
     private void GameOnReady()
     {
-        UpdateSquareScale();
-        GetViewport().Connect("size_changed", Callable.From(UpdateSquareScale));
+        UpdateSquareSize();
+        GetViewport().Connect("size_changed", Callable.From(UpdateSquareSize));
     }
 
     public override void _EnterTree()
