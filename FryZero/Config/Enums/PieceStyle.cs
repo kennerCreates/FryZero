@@ -2,8 +2,8 @@
 
 public enum PieceStyle
 {
-    Gioco,
-    Pirouetti,
-    Staunty,
-    Tatiana
+    Tiny,
+    Little,
+    Glasses,
+    Outline
 }

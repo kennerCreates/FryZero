@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System;
+using Godot;
 
 namespace FryZeroGodot.Root.UI.Background;
 
@@ -28,7 +29,9 @@ public partial class GodotBackground : Node2D
     private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
-        _backgroundRect.Size = ViewportSize;
+        var sizeX = Math.Max(ViewportSize.X, 288);
+        var sizeY = Math.Max(ViewportSize.Y, 512);
+        _backgroundRect.Size = new Vector2(sizeX, sizeY);
         AddChild(_backgroundRect);
     }
 

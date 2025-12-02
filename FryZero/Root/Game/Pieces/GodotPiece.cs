@@ -78,6 +78,27 @@ public partial class GodotPiece : Node2D
         }
     }
     private File _file;
+    [Export] public Color LightPieceColor
+    {
+        get => _lightPieceColor;
+        set
+        {
+            _lightPieceColor = value;
+            UpdatePiece();
+        }
+    }
+    private Color _lightPieceColor;
+
+    [Export] public Color DarkPieceColor
+    {
+        get => _darkPieceColor;
+        set
+        {
+            _darkPieceColor = value;
+            UpdatePiece();
+        }
+    }
+    private Color _darkPieceColor;
 
     [Export] public Shape2D Shape;
 
@@ -87,17 +108,33 @@ public partial class GodotPiece : Node2D
     private PieceArea _pieceArea;
     private PinJoint2D _pinJoint;
 
-
+    private Shader _shader = GD.Load<Shader>("res://Root/Visuals/HueShiftShadowsHighlights.gdshader");
+    private ShaderMaterial _material;
+    private void CreateShader()
+    {
+        _material = new ShaderMaterial();
+        _material.Shader = _shader;
+    }
 
     private void SetSpriteImage()
     {
-        _sprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Color}/{Type}.svg");
+        _sprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Type}.png");
     }
     private void UpdateSprite()
     {
         SetSpriteImage();
+        _sprite.Material = _material;
         var spriteSize = _sprite.Texture.GetSize();
         _sprite.Scale = new Vector2(SquareSize, SquareSize) / spriteSize;
+        SetSpriteColor();
+    }
+
+    private void SetSpriteColor()
+    {
+        var spriteColor = new Color(_color == PieceColor.White ? _lightPieceColor : _darkPieceColor);
+        var outlineColor = new Color(_color == PieceColor.Black ? _lightPieceColor : _darkPieceColor);
+        _material.SetShaderParameter("main_color", spriteColor);
+        _material.SetShaderParameter("outline_color", outlineColor);
     }
 
     private void UpdateLocation()
@@ -109,6 +146,7 @@ public partial class GodotPiece : Node2D
     {
         _sprite = new Sprite2D();
         AddChild(_sprite);
+        CreateShader();
     }
     private void UpdatePiece()
     {
@@ -119,6 +157,7 @@ public partial class GodotPiece : Node2D
 
     private void EditorOnReady()
     {
+        SetZIndex(5);
         UpdatePiece();
     }
 

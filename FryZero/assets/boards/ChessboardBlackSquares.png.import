@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfgttfoqtooge"
-path="res://.godot/imported/ChessboardBlackSquares.png-240abaea3049326a54fcaa241cc4b355.ctex"
+path="res://.godot/imported/ChessboardBlackSquares.png-abf651e08171211b741329e408450389.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/boards/ChessboardBlackSquares.png"
-dest_files=["res://.godot/imported/ChessboardBlackSquares.png-240abaea3049326a54fcaa241cc4b355.ctex"]
+source_file="res://Assets/Boards/ChessboardBlackSquares.png"
+dest_files=["res://.godot/imported/ChessboardBlackSquares.png-abf651e08171211b741329e408450389.ctex"]
 
 [params]
 

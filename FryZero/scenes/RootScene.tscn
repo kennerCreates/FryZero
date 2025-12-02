@@ -1,23 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=7 format=3 uid="uid://djkkabff2382b"]
 
-[ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://Root/UI/Background/GodotBackground.cs" id="1_5dv8v"]
-[ext_resource type="Texture2D" uid="uid://dfgttfoqtooge" path="res://Assets/boards/ChessboardBlackSquares.png" id="2_20q55"]
-[ext_resource type="Texture2D" uid="uid://dy2433jj0k3ye" path="res://Assets/boards/ChessboardWhiteSquares.png" id="3_ib006"]
+[ext_resource type="Texture2D" uid="uid://cgbojkxknyxji" path="res://Assets/Backgrounds/Diamond1.png" id="1_20q55"]
+[ext_resource type="Texture2D" uid="uid://dfgttfoqtooge" path="res://Assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
+[ext_resource type="Texture2D" uid="uid://dy2433jj0k3ye" path="res://Assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://Root/Game/Board/GodotBoard.cs" id="4_ltheh"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ib006"]
+texture = ExtResource("1_20q55")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ltheh"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ib006")
 
 [node name="Root" type="Node"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_ltheh")
 
-[node name="GodotBackground" type="Node2D" parent="."]
-script = ExtResource("1_5dv8v")
-BackgroundColor = Color(0.674901, 0.37087083, 0.39499062, 1)
-metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
+[node name="ColorRect" type="ColorRect" parent="TileMapLayer"]
+offset_left = -2452.0
+offset_top = -1383.0
+offset_right = 2206.0
+offset_bottom = 1515.0
+color = Color(0.24973631, 0.09420616, 0.26855576, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GodotBoard" type="Node2D" parent="."]
 script = ExtResource("4_ltheh")
-LightSquareColor = Color(0.59157383, 0.9488928, 0.9749133, 1)
+LightSquareColor = Color(0.9002843, 0.51396024, 0.685559, 1)
 LightSquareTexture = ExtResource("3_ib006")
-DarkSquareColor = Color(0.80289924, 0.4702738, 0.94013083, 1)
+DarkSquareColor = Color(0.7957076, 0.33153918, 0.55847734, 1)
 DarkSquareTexture = ExtResource("2_20q55")
+PieceStyle = 3
+LightPieceColor = Color(0.9907138, 0.86879504, 0.7868162, 1)
+DarkPieceColor = Color(0.7813418, 0.34959084, 0.7968752, 1)
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"

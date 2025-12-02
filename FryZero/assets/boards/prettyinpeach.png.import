@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://pp0ju1nig8a5"
-path="res://.godot/imported/prettyinpeach.png-aaab523facaaa125bf419c5c47275af6.ctex"
+path="res://.godot/imported/prettyinpeach.png-472fb7b3ecfaff369dc174e4c1f2b6f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/boards/prettyinpeach.png"
-dest_files=["res://.godot/imported/prettyinpeach.png-aaab523facaaa125bf419c5c47275af6.ctex"]
+source_file="res://Assets/Boards/prettyinpeach.png"
+dest_files=["res://.godot/imported/prettyinpeach.png-472fb7b3ecfaff369dc174e4c1f2b6f6.ctex"]
 
 [params]
 

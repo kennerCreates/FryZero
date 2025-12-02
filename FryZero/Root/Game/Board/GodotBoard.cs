@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Numerics;
+﻿using System;
 using FryZeroGodot.Config.Enums;
 using Godot;
 using Color = Godot.Color;
@@ -116,7 +115,8 @@ public partial class GodotBoard : Node2D
     private void UpdateScreenSize()
     {
         var viewportSize = DisplayServer.WindowGetSize();
-        _squareSize = (int)viewportSize.Y / 9;
+        var size = viewportSize.Y / 9;
+        _squareSize = Math.Max(size, 32);
     }
 
     private void SetSquareScale()
@@ -143,15 +143,44 @@ public partial class GodotBoard : Node2D
             UpdatePieceManager();
         }
     }
-    private PieceStyle _pieceStyle;
+    private PieceStyle _pieceStyle = PieceStyle.Tiny;
+
+    [Export] public Color LightPieceColor
+    {
+        get => _lightPieceColor;
+        set
+        {
+            _lightPieceColor = value;
+            UpdatePieceManager();
+        }
+    }
+    private Color _lightPieceColor = Colors.White;
+    [Export] public Color DarkPieceColor
+    {
+        get => _darkPieceColor;
+        set
+        {
+            _darkPieceColor = value;
+            UpdatePieceManager();
+        }
+    }
+    private Color _darkPieceColor = Colors.Black;
+
 
     private Pieces.GodotPieceManager _pieceManager;
     private void CreatePieceManager()
     {
         _pieceManager = new Pieces.GodotPieceManager();
         AddChild(_pieceManager);
+        UpdatePieceManagerProperties();
+    }
+
+    private void UpdatePieceManagerProperties()
+    {
         _pieceManager.SquareSize = _squareSize;
         _pieceManager.Style = _pieceStyle;
+        _pieceManager.LightPieceColor = _lightPieceColor;
+        _pieceManager.DarkPieceColor = _darkPieceColor;
     }
     private void UpdatePieceManager()
     {
@@ -161,8 +190,7 @@ public partial class GodotBoard : Node2D
         }
         else
         {
-            _pieceManager.SquareSize = _squareSize;
-            _pieceManager.Style = _pieceStyle;
+           UpdatePieceManagerProperties();
         }
     }
 
