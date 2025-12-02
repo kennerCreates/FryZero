@@ -1,30 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=5 format=3 uid="uid://djkkabff2382b"]
 
 [ext_resource type="Texture2D" uid="uid://cgbojkxknyxji" path="res://Assets/Backgrounds/Diamond1.png" id="1_20q55"]
 [ext_resource type="Texture2D" uid="uid://dfgttfoqtooge" path="res://Assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
 [ext_resource type="Texture2D" uid="uid://dy2433jj0k3ye" path="res://Assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://Root/Game/Board/GodotBoard.cs" id="4_ltheh"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ib006"]
-texture = ExtResource("1_20q55")
-texture_region_size = Vector2i(32, 32)
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ltheh"]
-tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_ib006")
-
 [node name="Root" type="Node"]
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_ltheh")
-
-[node name="ColorRect" type="ColorRect" parent="TileMapLayer"]
-offset_left = -2452.0
-offset_top = -1383.0
-offset_right = 2206.0
-offset_bottom = 1515.0
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -1920.0
+offset_top = -1080.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 color = Color(0.24973631, 0.09420616, 0.26855576, 1)
+
+[node name="Diamond1" type="Sprite2D" parent="."]
+modulate = Color(0.41741022, 0.10733809, 0.38129255, 1)
+texture_repeat = 2
+position = Vector2(-5.169879e-26, -3.637979e-12)
+scale = Vector2(5, 5)
+texture = ExtResource("1_20q55")
+region_enabled = true
+region_rect = Rect2(0, 0, 800, 800)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -35,6 +32,6 @@ LightSquareTexture = ExtResource("3_ib006")
 DarkSquareColor = Color(0.7957076, 0.33153918, 0.55847734, 1)
 DarkSquareTexture = ExtResource("2_20q55")
 PieceStyle = 3
-LightPieceColor = Color(0.9907138, 0.86879504, 0.7868162, 1)
-DarkPieceColor = Color(0.7813418, 0.34959084, 0.7968752, 1)
+LightPieceColor = Color(0.6169562, 0.31830373, 0.7886278, 1)
+DarkPieceColor = Color(0.14109883, 0.30255538, 0.6053362, 1)
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"

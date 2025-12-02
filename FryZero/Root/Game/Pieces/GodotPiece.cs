@@ -108,7 +108,7 @@ public partial class GodotPiece : Node2D
     private PieceArea _pieceArea;
     private PinJoint2D _pinJoint;
 
-    private Shader _shader = GD.Load<Shader>("res://Root/Visuals/HueShiftShadowsHighlights.gdshader");
+    private Shader _shader = GD.Load<Shader>("res://Root/Visuals/HueShift.gdshader");
     private ShaderMaterial _material;
     private void CreateShader()
     {
