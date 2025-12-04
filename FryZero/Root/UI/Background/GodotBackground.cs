@@ -5,33 +5,28 @@ namespace FryZeroGodot.Root.UI.Background;
 
 [Tool]
 
-[GlobalClass ]
+[GlobalClass]
 
 public partial class GodotBackground : Node2D
 {
     private ColorRect _backgroundRect;
-    private Color _backgroundColor = Colors.White;
-    [Export] public Color BackgroundColor
-    {
-        get => GetColor();
-        set => SetColor(value);
-    }
-    private Color GetColor()
-    {
-        return _backgroundColor;
-    }
-    private void SetColor(Color value)
-    {
-        _backgroundColor = value;
-        if (_backgroundRect != null) UpdateColor();
-    }
+    private Color _backgroundColor;
 
+    [Export]
+    public Color BackgroundColor
+    {
+        get => _backgroundColor;
+        set
+        {
+            _backgroundColor = value;
+            if (_backgroundRect != null) UpdateColor();
+        }
+    }
     private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
-        var sizeX = Math.Max(ViewportSize.X, 288);
-        var sizeY = Math.Max(ViewportSize.Y, 512);
-        _backgroundRect.Size = new Vector2(sizeX, sizeY);
+        _backgroundRect.Size = new Vector2(4000, 4000);
+        _backgroundRect.Position = new Vector2(-2000, -2000);
         AddChild(_backgroundRect);
     }
 
@@ -40,19 +35,38 @@ public partial class GodotBackground : Node2D
         _backgroundRect.Color = _backgroundColor;
     }
 
-    private void UpdateScreenSize()
+    private Sprite2D _backgroundSprite;
+    private Texture2D _backgroundTexture;
+    [Export]
+    public Texture2D BackgroundTexture
     {
-        _backgroundRect.Size = ViewportSize;
-        _backgroundRect.Position = _backgroundRect.Size / -2;
+        get => _backgroundTexture;
+        set
+        {
+            _backgroundTexture = value;
+            if (_backgroundSprite != null) UpdateSprite();
+        }
     }
 
-    private Vector2 ViewportSize => GetViewport().GetVisibleRect().Size;
+    private void CreateBackgroundSprite()
+    {
+        _backgroundSprite = new Sprite2D();
+        AddChild(_backgroundSprite);
+        UpdateSprite();
+    }
+    private void UpdateSprite()
+    {
+        _backgroundSprite.Texture = _backgroundTexture;
+        _backgroundSprite.Scale = new Vector2(5, 5);
+        _backgroundSprite.RegionEnabled = true;
+        _backgroundSprite.RegionRect = new Rect2(0, 0, 800, 800);
+        _backgroundSprite.TextureRepeat = TextureRepeatEnum.Enabled;
+    }
 
     private void EditorOnReady()
     {
-        GetViewport().Connect("size_changed", Callable.From(UpdateScreenSize));
-        UpdateScreenSize();
         UpdateColor();
+
     }
 
     private void GameOnReady()
@@ -63,6 +77,7 @@ public partial class GodotBackground : Node2D
     public override void _EnterTree()
     {
         CreateBackgroundRect();
+        CreateBackgroundSprite();
     }
 
     public override void _Ready()
