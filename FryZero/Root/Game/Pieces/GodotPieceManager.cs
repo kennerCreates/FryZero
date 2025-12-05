@@ -1,4 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.gameplay;
 using FryZeroGodot.gameplay.Pieces;
 using Godot;
 
@@ -45,6 +46,17 @@ public partial class GodotPieceManager : Node2D
         }
     }
     private Color _lightPieceColor = Colors.White;
+    private Color _lightPieceOutlineColor = Colors.Black;
+    [Export]
+    public Color LightPieceOutlineColor
+    {
+        get => _lightPieceOutlineColor;
+        set
+        {
+            _lightPieceOutlineColor = value;
+            UpdateAllPieces();
+        }
+    }
 
     [Export]
     public Color DarkPieceColor
@@ -57,6 +69,17 @@ public partial class GodotPieceManager : Node2D
         }
     }
     private Color _darkPieceColor = Colors.White;
+    private Color _darkPieceOutlineColor = Colors.White;
+    [Export]
+    public Color DarkPieceOutlineColor
+    {
+        get => _darkPieceOutlineColor;
+        set
+        {
+            _darkPieceOutlineColor = value;
+            UpdateAllPieces();
+        }
+    }
 
     private void UpdateAllPieces()
     {
@@ -67,6 +90,8 @@ public partial class GodotPieceManager : Node2D
             piece.Style = _style;
             piece.DarkPieceColor = _darkPieceColor;
             piece.LightPieceColor = _lightPieceColor;
+            piece.DarkPieceOutlineColor = _darkPieceOutlineColor;
+            piece.LightPieceOutlineColor = _lightPieceOutlineColor;
             piece.SquareSize = _size;
         }
     }
@@ -132,17 +157,10 @@ public partial class GodotPieceManager : Node2D
     {
         CreateAllPiecesInStartingPosition();
     }
-
     private void GameOnReady()
     {
 
     }
-
-    public override void _EnterTree()
-    {
-
-    }
-
     public override void _Ready()
     {
         if (Engine.IsEditorHint())
@@ -154,6 +172,22 @@ public partial class GodotPieceManager : Node2D
             EditorOnReady();
             GameOnReady();
         }
+    }
+
+    private void PickUpOrDropPiece(InputEvent @event)
+    {
+        if (@event is not InputEventMouseButton mouseButtonEvent) return;
+
+        var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
+        if (!isLeftMouseButtonEvent) return;
+
+        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.PickUpPiece) : nameof(GodotPiece.DropPiece);
+        GetTree().CallGroup(CallGroups.LeftClick, method);
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        PickUpOrDropPiece(@event);
     }
 
 }

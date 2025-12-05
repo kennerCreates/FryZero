@@ -10,8 +10,9 @@
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.31890035, 0.08193838, 0.35410753, 1)
+BackgroundColor = Color(0.13029435, 0.19139236, 0.3865423, 1)
 BackgroundTexture = ExtResource("1_20q55")
+PatternColor = Color(0.17648733, 0.2947324, 0.5126127, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -23,6 +24,8 @@ LightSquareTexture = ExtResource("3_ib006")
 DarkSquareColor = Color(0.7957076, 0.33153918, 0.55847734, 1)
 DarkSquareTexture = ExtResource("2_20q55")
 PieceStyle = 3
-LightPieceColor = Color(0.6169562, 0.31830373, 0.7886278, 1)
-DarkPieceColor = Color(0.14109883, 0.30255538, 0.6053362, 1)
+LightPieceColor = Color(0.6146506, 0.7745415, 0.8086066, 1)
+LightPieceOutlineColor = Color(0.12667906, 0.39050904, 0.30114567, 1)
+DarkPieceColor = Color(0.14149004, 0.35401723, 0.38458827, 1)
+DarkPieceOutlineColor = Color(0.6665657, 0.93627864, 0.7802287, 1)
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"

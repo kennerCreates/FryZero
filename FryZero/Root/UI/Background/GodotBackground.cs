@@ -11,6 +11,9 @@ public partial class GodotBackground : Node2D
 {
     private ColorRect _backgroundRect;
     private Color _backgroundColor;
+    private Sprite2D _backgroundSprite;
+    private Texture2D _backgroundTexture;
+    private Color _patternColor;
 
     [Export]
     public Color BackgroundColor
@@ -29,14 +32,11 @@ public partial class GodotBackground : Node2D
         _backgroundRect.Position = new Vector2(-2000, -2000);
         AddChild(_backgroundRect);
     }
-
     private void UpdateColor()
     {
         _backgroundRect.Color = _backgroundColor;
     }
 
-    private Sprite2D _backgroundSprite;
-    private Texture2D _backgroundTexture;
     [Export]
     public Texture2D BackgroundTexture
     {
@@ -47,7 +47,16 @@ public partial class GodotBackground : Node2D
             if (_backgroundSprite != null) UpdateSprite();
         }
     }
-
+    [Export]
+    public Color PatternColor
+    {
+        get => _patternColor;
+        set
+        {
+            _patternColor = value;
+            if (_backgroundSprite != null) UpdateSprite();
+        }
+    }
     private void CreateBackgroundSprite()
     {
         _backgroundSprite = new Sprite2D();
@@ -61,19 +70,17 @@ public partial class GodotBackground : Node2D
         _backgroundSprite.RegionEnabled = true;
         _backgroundSprite.RegionRect = new Rect2(0, 0, 800, 800);
         _backgroundSprite.TextureRepeat = TextureRepeatEnum.Enabled;
+        _backgroundSprite.Modulate = PatternColor;
     }
-
     private void EditorOnReady()
     {
         UpdateColor();
 
     }
-
     private void GameOnReady()
     {
 
     }
-
     public override void _EnterTree()
     {
         CreateBackgroundRect();

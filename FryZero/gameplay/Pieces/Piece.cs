@@ -143,11 +143,6 @@ public partial class Piece : Node2D
 		_physicsPiece.Shape = Shape;
 		AddChild(_physicsPiece);
 	}
-	
-	private void CreatePinJointDeferred()
-	{
-		CallDeferred(nameof(CreatePinJoint));
-	}
 
 	private void CreatePinJoint()
 	{

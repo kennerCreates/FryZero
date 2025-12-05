@@ -13,7 +13,16 @@ namespace FryZeroGodot.Root.Game.Board;
 public partial class GodotBoard : Node2D
 {
     [ExportCategory("Board")]
-    [Export] public Color LightSquareColor
+    private int _squareSize = 160;
+    private Color _lightSquareColor = Colors.White;
+    private Color _darkSquareColor = Colors.Black;
+    private Texture2D _lightSquareTexture;
+    private Texture2D _darkSquareTexture;
+    private Sprite2D _lightSquares;
+    private Sprite2D _darkSquares;
+
+    [Export]
+    public Color LightSquareColor
     {
         get => _lightSquareColor;
         set
@@ -22,14 +31,13 @@ public partial class GodotBoard : Node2D
             UpdateLightSquareColor();
         }
     }
-    private Color _lightSquareColor = Colors.White;
     private void UpdateLightSquareColor()
     {
         if (_lightSquares == null) return;
         _lightSquares.Modulate = _lightSquareColor;
     }
-
-    [Export] public Texture2D LightSquareTexture
+    [Export]
+    public Texture2D LightSquareTexture
     {
         get => _lightSquareTexture;
         set
@@ -38,14 +46,13 @@ public partial class GodotBoard : Node2D
             UpdateLightSquareTexture();
         }
     }
-    private Texture2D _lightSquareTexture;
     private void UpdateLightSquareTexture()
     {
         if (_lightSquares == null) return;
         _lightSquares.Texture = _lightSquareTexture;
     }
-
-    [Export] public Color DarkSquareColor
+    [Export]
+    public Color DarkSquareColor
     {
         get => _darkSquareColor;
         set
@@ -54,14 +61,13 @@ public partial class GodotBoard : Node2D
             UpdateDarkSquareColor();
         }
     }
-    private Color _darkSquareColor = Colors.Black;
-
     private void UpdateDarkSquareColor()
     {
         if (_darkSquares == null) return;
         _darkSquares.Modulate = _darkSquareColor;
     }
-    [Export] public Texture2D DarkSquareTexture
+    [Export]
+    public Texture2D DarkSquareTexture
     {
         get => _darkSquareTexture;
         set
@@ -70,61 +76,52 @@ public partial class GodotBoard : Node2D
             UpdateDarkSquareTexture();
         }
     }
-    private Texture2D _darkSquareTexture;
     private void UpdateDarkSquareTexture()
     {
         if (_darkSquares == null) return;
         _darkSquares.Texture = _darkSquareTexture;
     }
-
-    private Sprite2D _lightSquares;
-    private Sprite2D _darkSquares;
-
     private void UpdateSquares()
     {
         if (_lightSquares == null)
         {
             CreateLightSquares();
         }
+
         if (_darkSquares == null)
         {
             CreateDarkSquares();
         }
+
         UpdateLightSquareColor();
         UpdateDarkSquareColor();
         UpdateLightSquareTexture();
         UpdateDarkSquareTexture();
         SetSquareScale();
     }
-
     private void CreateDarkSquares()
     {
         _darkSquares = new Sprite2D();
         _darkSquares.Texture = _darkSquareTexture;
         AddChild(_darkSquares);
     }
-
     private void CreateLightSquares()
     {
         _lightSquares = new Sprite2D();
         _lightSquares.Texture = _lightSquareTexture;
         AddChild(_lightSquares);
     }
-
-    private int _squareSize = 160;
     private void UpdateScreenSize()
     {
         var viewportSize = DisplayServer.WindowGetSize();
         var size = viewportSize.Y / 9;
         _squareSize = Math.Max(size, 32);
     }
-
     private void SetSquareScale()
     {
         _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
         _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
     }
-
     private void UpdateSquareSize()
     {
         UpdateScreenSize();
@@ -132,7 +129,16 @@ public partial class GodotBoard : Node2D
         UpdatePieceManager();
     }
 
+
+
     [ExportCategory("Pieces")]
+    private PieceStyle _pieceStyle = PieceStyle.Tiny;
+    private Color _lightPieceColor = Colors.White;
+    private Color _lightPieceOutlineColor = Colors.Black;
+    private Color _darkPieceColor = Colors.Black;
+    private Color _darkPieceOutlineColor = Colors.White;
+    private Pieces.GodotPieceManager _pieceManager;
+
     [Export]
     public PieceStyle PieceStyle
     {
@@ -143,9 +149,8 @@ public partial class GodotBoard : Node2D
             UpdatePieceManager();
         }
     }
-    private PieceStyle _pieceStyle = PieceStyle.Tiny;
-
-    [Export] public Color LightPieceColor
+    [Export]
+    public Color LightPieceColor
     {
         get => _lightPieceColor;
         set
@@ -154,7 +159,16 @@ public partial class GodotBoard : Node2D
             UpdatePieceManager();
         }
     }
-    private Color _lightPieceColor = Colors.White;
+    [Export]
+    public Color LightPieceOutlineColor
+    {
+        get => _lightPieceOutlineColor;
+        set
+        {
+            _lightPieceOutlineColor = value;
+            UpdatePieceManager();
+        }
+    }
     [Export] public Color DarkPieceColor
     {
         get => _darkPieceColor;
@@ -164,23 +178,30 @@ public partial class GodotBoard : Node2D
             UpdatePieceManager();
         }
     }
-    private Color _darkPieceColor = Colors.Black;
-
-
-    private Pieces.GodotPieceManager _pieceManager;
+    [Export]
+    public Color DarkPieceOutlineColor
+    {
+        get => _darkPieceOutlineColor;
+        set
+        {
+            _darkPieceOutlineColor = value;
+            UpdatePieceManager();
+        }
+    }
     private void CreatePieceManager()
     {
         _pieceManager = new Pieces.GodotPieceManager();
         AddChild(_pieceManager);
         UpdatePieceManagerProperties();
     }
-
     private void UpdatePieceManagerProperties()
     {
         _pieceManager.SquareSize = _squareSize;
         _pieceManager.Style = _pieceStyle;
         _pieceManager.LightPieceColor = _lightPieceColor;
+        _pieceManager.LightPieceOutlineColor = _lightPieceOutlineColor;
         _pieceManager.DarkPieceColor = _darkPieceColor;
+        _pieceManager.DarkPieceOutlineColor = _darkPieceOutlineColor;
     }
     private void UpdatePieceManager()
     {
@@ -193,23 +214,19 @@ public partial class GodotBoard : Node2D
            UpdatePieceManagerProperties();
         }
     }
-
     private void EditorOnReady()
     {
         UpdateSquares();
         UpdatePieceManager();
     }
-
     private void GameOnReady()
     {
         UpdateSquareSize();
         GetViewport().Connect("size_changed", Callable.From(UpdateSquareSize));
     }
-
     public override void _EnterTree()
     {
     }
-
     public override void _Ready()
     {
         if (Engine.IsEditorHint())
