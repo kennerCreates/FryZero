@@ -150,6 +150,7 @@ public partial class GodotPieceManager : Node2D
         piece.Color = color;
         piece.Rank = rank;
         piece.File = file;
+        piece.ZIndex = 9;
         AddChild(piece);
     }
 

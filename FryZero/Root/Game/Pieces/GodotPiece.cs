@@ -170,6 +170,7 @@ public partial class GodotPiece : Node2D
         UpdatePhysicsPiece();
         UpdateArea();
         UpdateHoldPoint();
+        UpdatePinJoint();
     }
 
     private RectangleShape2D _shape;
@@ -258,14 +259,14 @@ public partial class GodotPiece : Node2D
         _holdPoint.Shape = circle;
         _holdPoint.CollisionLayer = 0;
         _holdPoint.CollisionMask = 0;
-        _holdPoint.Position = Position + new Vector2(0, -(_squareSize / 4));
+        _holdPoint.Position = new Vector2(0, -(_squareSize / 4));
         AddChild(_holdPoint);
     }
 
     private void UpdateHoldPoint()
     {
         if (_holdPoint == null) return;
-        _holdPoint.Position = Position + new Vector2(0, -(_squareSize / 4));
+        _holdPoint.Position = new Vector2(0, -(_squareSize / 4));
     }
 
     private void CreatePinJoint()
@@ -273,15 +274,19 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint = new PinJoint2D();
         AddChild(_pinJoint);
-        _pinJoint.Softness = 1;
+        _pinJoint.Softness = 0f;
         _pinJoint.NodeA = _holdPoint.GetPath();
         _pinJoint.NodeB = _physics.GetPath();
-        _pinJoint.Position = (_physics.Position + _holdPoint.Position) / 2;
-        _pinJoint.AngularLimitEnabled = true;
-        _pinJoint.AngularLimitLower = -Mathf.Pi / 4;
-        _pinJoint.AngularLimitUpper = Mathf.Pi / 4;
+        _pinJoint.Position = _holdPoint.Position;
         if (_pinJoint.NodeA == null) GD.Print("NodeA missing");
         if (_pinJoint.NodeB == null) GD.Print("NodeB missing");
+    }
+
+    private void UpdatePinJoint()
+    {
+        if (_pinJoint == null) return;
+        _pinJoint.Position = _holdPoint.Position;
+        _pinJoint.Softness = 0f;
     }
 
     public void PickUpPiece()
@@ -326,10 +331,11 @@ public partial class GodotPiece : Node2D
         }
     }
 
+
     public override void _PhysicsProcess(double delta)
     {
         if (!_isBeingMoved) return;
-        var tween = GetTree().CreateTween();
-        tween.TweenProperty(this, "position", GetGlobalMousePosition(), 10 * delta);
+        GlobalPosition = GetGlobalMousePosition();
     }
+
 }

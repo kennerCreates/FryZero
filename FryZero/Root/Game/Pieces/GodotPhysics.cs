@@ -8,6 +8,7 @@ public partial class GodotPhysics : RigidBody2D
     private Shape2D _shape;
     private CollisionShape2D _collision;
 
+
     [Export]
     public Shape2D Shape
     {
@@ -27,11 +28,9 @@ public partial class GodotPhysics : RigidBody2D
             return;
         }
         SpawnCollisionShape();
-        Freeze = true;
         CollisionLayer = 0;
         CollisionMask = 0;
         ZIndex = 10;
-        AngularDamp = 5;
     }
 
     private void SpawnCollisionShape()
@@ -49,19 +48,16 @@ public partial class GodotPhysics : RigidBody2D
 
     public void DroppedPiece()
     {
-        Freeze = true;
         CollisionLayer = 0;
         CollisionMask = 0;
         ZIndex = 10;
-        GD.Print("Dropped Piece");
     }
+
 
     public void PickedUpPiece()
     {
-        Freeze = false;
         CollisionLayer = 1;
         CollisionMask = 1;
         ZIndex = 20;
-        GD.Print("Picked Up Piece");
     }
 }
