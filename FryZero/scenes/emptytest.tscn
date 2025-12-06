@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://doa46h5x8sqh2"]
+
+[ext_resource type="Texture2D" uid="uid://byklxsj26fp7v" path="res://Assets/Pieces/Tiny/Queen.png" id="1_2rdcv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qk1vy"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+scale = Vector2(10, 10)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Node2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/RigidBody2D"]
+shape = SubResource("RectangleShape2D_qk1vy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/RigidBody2D"]
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_2rdcv")

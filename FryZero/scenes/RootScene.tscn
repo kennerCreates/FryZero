@@ -10,12 +10,13 @@
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.13029435, 0.19139236, 0.3865423, 1)
+BackgroundColor = Color(0.22274002, 0.18439096, 0.2946026, 1)
 BackgroundTexture = ExtResource("1_20q55")
-PatternColor = Color(0.17648733, 0.2947324, 0.5126127, 1)
+PatternColor = Color(0.33520627, 0.22851595, 0.5254204, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_enabled = false
 
 [node name="GodotBoard" type="Node2D" parent="."]
 script = ExtResource("4_ltheh")

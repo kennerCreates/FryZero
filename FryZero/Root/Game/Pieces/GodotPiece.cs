@@ -186,14 +186,17 @@ public partial class GodotPiece : Node2D
         {
             CreateShape();
         }
+
         if (_physics == null)
         {
             CreatePhysicsPiece();
         }
+
         if (_area == null)
         {
             CreateArea();
         }
+
         if (_holdPoint == null)
         {
             CreateHoldPoint();
@@ -221,6 +224,11 @@ public partial class GodotPiece : Node2D
         _physics = new GodotPhysics();
         _physics.Shape = _shape;
         AddChild(_physics);
+        if (_sprite.GetParent() != null)
+        {
+            _sprite.GetParent().RemoveChild(_sprite);
+        }
+        _physics.AddChild(_sprite);
     }
 
     private void UpdatePhysicsPiece()
@@ -268,7 +276,12 @@ public partial class GodotPiece : Node2D
         _pinJoint.Softness = 1;
         _pinJoint.NodeA = _holdPoint.GetPath();
         _pinJoint.NodeB = _physics.GetPath();
-        _pinJoint.GlobalPosition = (_holdPoint.GlobalPosition + _physics.GlobalPosition) / 2;
+        _pinJoint.Position = (_physics.Position + _holdPoint.Position) / 2;
+        _pinJoint.AngularLimitEnabled = true;
+        _pinJoint.AngularLimitLower = -Mathf.Pi / 4;
+        _pinJoint.AngularLimitUpper = Mathf.Pi / 4;
+        if (_pinJoint.NodeA == null) GD.Print("NodeA missing");
+        if (_pinJoint.NodeB == null) GD.Print("NodeB missing");
     }
 
     public void PickUpPiece()
@@ -292,7 +305,6 @@ public partial class GodotPiece : Node2D
 
     private void EditorOnReady()
     {
-        SetZIndex(5);
         UpdatePiece();
     }
     private void GameOnReady()

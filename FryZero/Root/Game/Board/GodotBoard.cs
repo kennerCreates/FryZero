@@ -221,8 +221,8 @@ public partial class GodotBoard : Node2D
     }
     private void GameOnReady()
     {
-        UpdateSquareSize();
-        GetViewport().Connect("size_changed", Callable.From(UpdateSquareSize));
+        //UpdateSquareSize();
+        //GetViewport().Connect("size_changed", Callable.From(UpdateSquareSize));
     }
     public override void _EnterTree()
     {

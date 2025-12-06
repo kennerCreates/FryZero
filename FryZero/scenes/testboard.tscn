@@ -27,7 +27,6 @@ texture = ExtResource("1_tutxi")
 [node name="Pawns" type="Node" parent="Game/Pieces/Black"]
 
 [node name="A_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(-560, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -36,7 +35,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(-400, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -46,7 +44,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(-240, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -56,7 +53,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(-80, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -66,7 +62,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(80, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -76,7 +71,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(240, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -86,17 +80,16 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(400, -400)
 script = ExtResource("3_soh8q")
-Color = 1
-Style = 1
+Type = 2
+Style = 2
 Shape = SubResource("RectangleShape2D_soh8q")
+SquareSize = 160
 StartingFile = 6
 StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_pawn" type="Node2D" parent="Game/Pieces/Black/Pawns"]
-position = Vector2(560, -400)
 script = ExtResource("3_soh8q")
 Color = 1
 Style = 1
@@ -106,7 +99,6 @@ StartingRank = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="A_rook" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(-560, -560)
 script = ExtResource("3_soh8q")
 Type = 3
 Color = 1
@@ -116,7 +108,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_knight" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(-400, -560)
 script = ExtResource("3_soh8q")
 Type = 1
 Color = 1
@@ -127,7 +118,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_bishop" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(-240, -560)
 script = ExtResource("3_soh8q")
 Type = 2
 Color = 1
@@ -138,7 +128,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_queen" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(-80, -560)
 script = ExtResource("3_soh8q")
 Type = 4
 Color = 1
@@ -149,7 +138,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_king" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(80, -560)
 script = ExtResource("3_soh8q")
 Type = 5
 Color = 1
@@ -160,7 +148,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_bishop" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(240, -560)
 script = ExtResource("3_soh8q")
 Type = 2
 Color = 1
@@ -171,7 +158,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_knight" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(400, -560)
 script = ExtResource("3_soh8q")
 Type = 1
 Color = 1
@@ -182,7 +168,6 @@ StartingRank = 7
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_rook" type="Node2D" parent="Game/Pieces/Black"]
-position = Vector2(560, -560)
 script = ExtResource("3_soh8q")
 Type = 3
 Color = 1
@@ -197,7 +182,6 @@ metadata/_custom_type_script = "uid://qcagfjm1gq34"
 [node name="Pawns" type="Node" parent="Game/Pieces/White"]
 
 [node name="A_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(-560, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -205,7 +189,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(-400, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -214,7 +197,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(-240, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -223,7 +205,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(-80, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -232,7 +213,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(80, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -241,7 +221,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(240, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -250,7 +229,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(400, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -259,7 +237,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_pawn" type="Node2D" parent="Game/Pieces/White/Pawns"]
-position = Vector2(560, 400)
 script = ExtResource("3_soh8q")
 Style = 1
 Shape = SubResource("RectangleShape2D_soh8q")
@@ -268,7 +245,6 @@ StartingRank = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="A_rook" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(-560, 560)
 script = ExtResource("3_soh8q")
 Type = 3
 Style = 1
@@ -276,7 +252,6 @@ Shape = SubResource("RectangleShape2D_soh8q")
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="B_knight" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(-400, 560)
 script = ExtResource("3_soh8q")
 Type = 1
 Style = 1
@@ -285,7 +260,6 @@ StartingFile = 1
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="C_bishop" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(-240, 560)
 script = ExtResource("3_soh8q")
 Type = 2
 Style = 1
@@ -294,7 +268,6 @@ StartingFile = 2
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="D_queen" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(-80, 560)
 script = ExtResource("3_soh8q")
 Type = 4
 Style = 1
@@ -303,7 +276,6 @@ StartingFile = 3
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="E_king" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(80, 560)
 script = ExtResource("3_soh8q")
 Type = 5
 Style = 1
@@ -312,7 +284,6 @@ StartingFile = 4
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="F_bishop" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(240, 560)
 script = ExtResource("3_soh8q")
 Type = 2
 Style = 1
@@ -321,7 +292,6 @@ StartingFile = 5
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="G_knight" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(400, 560)
 script = ExtResource("3_soh8q")
 Type = 1
 Style = 1
@@ -330,7 +300,6 @@ StartingFile = 6
 metadata/_custom_type_script = "uid://qcagfjm1gq34"
 
 [node name="H_rook" type="Node2D" parent="Game/Pieces/White"]
-position = Vector2(560, 560)
 script = ExtResource("3_soh8q")
 Type = 3
 Style = 1

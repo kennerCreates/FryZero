@@ -22,6 +22,11 @@ public partial class GodotHoldPoint : StaticBody2D
 
     public override void _Ready()
     {
+        if (_shape == null)
+        {
+            GD.Print("Shape is null");
+            return;
+        }
         SpawnCollisionShape();
     }
 

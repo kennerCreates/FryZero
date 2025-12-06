@@ -128,7 +128,7 @@ public partial class Piece : Node2D
 
 	private void SetPieceImage()
 	{
-		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Color}/{Type}.svg");
+		_pieceSprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Type}.png");
 	}
 
 	private void CreateSprite()

@@ -21,9 +21,17 @@ public partial class GodotPhysics : RigidBody2D
 
     public override void _Ready()
     {
+        if (_shape == null)
+        {
+            GD.Print("Shape is null");
+            return;
+        }
         SpawnCollisionShape();
-        CollisionLayer = 9;
+        Freeze = true;
+        CollisionLayer = 0;
+        CollisionMask = 0;
         ZIndex = 10;
+        AngularDamp = 5;
     }
 
     private void SpawnCollisionShape()
@@ -41,13 +49,19 @@ public partial class GodotPhysics : RigidBody2D
 
     public void DroppedPiece()
     {
-        CollisionLayer = 9;
+        Freeze = true;
+        CollisionLayer = 0;
+        CollisionMask = 0;
         ZIndex = 10;
+        GD.Print("Dropped Piece");
     }
 
     public void PickedUpPiece()
     {
-        CollisionLayer = 10;
+        Freeze = false;
+        CollisionLayer = 1;
+        CollisionMask = 1;
         ZIndex = 20;
+        GD.Print("Picked Up Piece");
     }
 }

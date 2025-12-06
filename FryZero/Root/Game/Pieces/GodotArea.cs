@@ -57,12 +57,10 @@ public partial class GodotArea : Area2D
     public override void _MouseEnter()
     {
         _parentPiece.SetMouseEntered(true);
-        GD.Print("Mouse Entered");
     }
 
     public override void _MouseExit()
     {
         _parentPiece.SetMouseEntered(false);
-        GD.Print("Mouse Exited");
     }
 }

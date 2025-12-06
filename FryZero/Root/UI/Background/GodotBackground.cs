@@ -79,7 +79,7 @@ public partial class GodotBackground : Node2D
     }
     private void GameOnReady()
     {
-
+        _backgroundRect.MouseFilter = Control.MouseFilterEnum.Ignore;
     }
     public override void _EnterTree()
     {
