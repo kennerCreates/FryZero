@@ -2,6 +2,7 @@
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Structs;
 using FryZeroGodot.gameplay;
+using Godot;
 using File = FryZeroGodot.Config.Enums.File;
 
 namespace FryZero.Tests.Gameplay;
@@ -61,4 +62,51 @@ public class BoardLocationTests
         Assert.Equal(expectedX, actual.X);
         Assert.Equal(expectedY, actual.Y);
     }
+
+    [Theory]
+    [InlineData(5,6, 100, File.E)]
+    [InlineData(-256,256, 100, File.B)]
+    [InlineData(306,-306, 100, File.H)]
+    [InlineData(-5,-6, 100, File.D)]
+    [InlineData(256,-256, 100, File.G)]
+    [InlineData(-306,-306, 100, File.A)]
+    public void XGameCoordinate_Returns_Expected_File_Based_On_Square_Size(float locationX, float locationY, int squareSize, File expected)
+    {
+        var location = new Vector2(locationX, locationY);
+        var actual = location.X.GetFile(squareSize);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(5,6, 100, Rank.Four)]
+    [InlineData(-256,256, 100, Rank.Two)]
+    [InlineData(306,306, 100, Rank.One)]
+    [InlineData(-5,-6, 100, Rank.Five)]
+    [InlineData(256,-256, 100, Rank.Seven)]
+    [InlineData(-306,-306, 100, Rank.Eight)]
+    public void YGameCoordinate_Returns_Expected_Rank_Based_On_Square_Size(float locationX, float locationY, int squareSize, Rank expected)
+    {
+        var location = new Vector2(locationX, locationY);
+        var actual = location.Y.GetRank(squareSize);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(5,6, 100, File.E, Rank.Four)]
+    [InlineData(-256,256, 100, File.B, Rank.Two)]
+    [InlineData(306,306, 100, File.H, Rank.One)]
+    [InlineData(-5,-6, 100, File.D, Rank.Five)]
+    [InlineData(256,-256, 100, File.G, Rank.Seven)]
+    [InlineData(-306,-306, 100, File.A, Rank.Eight)]
+    public void GameCoordinate_Returns_Expected_Square_Based_On_Square_Size(float locationX, float locationY, int squareSize, File file, Rank rank)
+    {
+        var location = new Vector2(locationX, locationY);
+        var actual = location.GetSquare(squareSize);
+        var expectedSquare = new Square(file, rank);
+
+        Assert.Equal(expectedSquare, actual);
+    }
+
 }

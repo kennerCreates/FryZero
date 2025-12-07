@@ -31,6 +31,7 @@ public partial class GodotPhysics : RigidBody2D
         CollisionLayer = 0;
         CollisionMask = 0;
         ZIndex = 10;
+        CanSleep = false;
     }
 
     private void SpawnCollisionShape()

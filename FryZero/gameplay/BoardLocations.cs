@@ -1,4 +1,6 @@
-﻿using FryZeroGodot.Config;
+﻿using System;
+using FryZeroGodot.Config;
+using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Structs;
 using Godot;
 
@@ -6,6 +8,22 @@ namespace FryZeroGodot.gameplay;
 
 public static class BoardLocations
 {
+    public static Square GetSquare(this Vector2 position, int squareSize) =>
+    new(position.X.GetFile(squareSize), position.Y.GetRank(squareSize));
+    public static File GetFile(this float position, int squareSize)
+    {
+        var scaledBoardSquare = position / squareSize;
+        var centeredBoardSquare = MathF.Truncate(scaledBoardSquare + 4f);
+        return (File)centeredBoardSquare;
+    }
+
+    public static Rank GetRank(this float position, int squareSize)
+    {
+        var scaledBoardSquare = position / squareSize;
+        var centeredBoardSquare = MathF.Truncate(4 - scaledBoardSquare);
+        return (Rank)centeredBoardSquare;
+    }
+
     public static Vector2 LocationVector(this Square square, int squareSize) =>
         new(square.XCoordinate(squareSize), square.YCoordinate(squareSize));
 

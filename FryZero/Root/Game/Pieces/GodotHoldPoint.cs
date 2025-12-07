@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using FryZeroGodot.gameplay;
+using Godot;
 
 namespace FryZeroGodot.Root.Game.Pieces;
 
@@ -7,7 +8,10 @@ namespace FryZeroGodot.Root.Game.Pieces;
 public partial class GodotHoldPoint : StaticBody2D
 {
     private Shape2D _shape;
+    private int _squareSize;
     private CollisionShape2D _collision;
+    private GodotPiece _piece;
+    private bool _isMoving;
 
     [Export]
     public Shape2D Shape
@@ -20,6 +24,16 @@ public partial class GodotHoldPoint : StaticBody2D
         }
     }
 
+    [Export]
+    public int SquareSize
+    {
+        get => _squareSize;
+        set
+        {
+            _squareSize = value;
+        }
+    }
+
     public override void _Ready()
     {
         if (_shape == null)
@@ -28,6 +42,7 @@ public partial class GodotHoldPoint : StaticBody2D
             return;
         }
         SpawnCollisionShape();
+        _piece = GetParent<GodotPiece>();
     }
 
     private void SpawnCollisionShape()

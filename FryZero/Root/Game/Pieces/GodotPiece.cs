@@ -274,7 +274,7 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint = new PinJoint2D();
         AddChild(_pinJoint);
-        _pinJoint.Softness = 0f;
+        _pinJoint.Softness = 1f;
         _pinJoint.NodeA = _holdPoint.GetPath();
         _pinJoint.NodeB = _physics.GetPath();
         _pinJoint.Position = _holdPoint.Position;
