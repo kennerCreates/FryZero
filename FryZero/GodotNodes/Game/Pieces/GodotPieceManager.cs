@@ -1,9 +1,8 @@
 ﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.gameplay;
-using FryZeroGodot.gameplay.Pieces;
+using FryZeroGodot.Godot.EngineFiles;
 using Godot;
 
-namespace FryZeroGodot.Root.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 [Tool]
 
@@ -86,7 +85,7 @@ public partial class GodotPieceManager : Node2D
         var children = GetChildren();
         foreach (var child in children)
         {
-            if (child is not GodotPiece piece) continue;
+            if (child is not GodotNodes.Game.Pieces.GodotPiece piece) continue;
             piece.Style = _style;
             piece.DarkPieceColor = _darkPieceColor;
             piece.LightPieceColor = _lightPieceColor;
@@ -143,7 +142,7 @@ public partial class GodotPieceManager : Node2D
 
     private void CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
     {
-        var piece = new GodotPiece();
+        var piece = new GodotNodes.Game.Pieces.GodotPiece();
         piece.SquareSize = _size;
         piece.Style = _style;
         piece.Type = type;
@@ -182,7 +181,7 @@ public partial class GodotPieceManager : Node2D
         var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
         if (!isLeftMouseButtonEvent) return;
 
-        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.PickUpPiece) : nameof(GodotPiece.DropPiece);
+        var method = mouseButtonEvent.Pressed ? nameof(GodotNodes.Game.Pieces.GodotPiece.PickUpPiece) : nameof(GodotNodes.Game.Pieces.GodotPiece.DropPiece);
         GetTree().CallGroup(CallGroups.LeftClick, method);
     }
 

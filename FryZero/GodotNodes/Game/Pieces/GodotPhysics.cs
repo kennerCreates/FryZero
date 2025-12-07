@@ -1,13 +1,13 @@
 ﻿using Godot;
 
-namespace FryZeroGodot.Root.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 [GlobalClass]
-
-public partial class GodotArea : Area2D
+public partial class GodotPhysics : RigidBody2D
 {
     private Shape2D _shape;
     private CollisionShape2D _collision;
+
 
     [Export]
     public Shape2D Shape
@@ -20,8 +20,6 @@ public partial class GodotArea : Area2D
         }
     }
 
-    private GodotPiece _parentPiece;
-
     public override void _Ready()
     {
         if (_shape == null)
@@ -29,10 +27,11 @@ public partial class GodotArea : Area2D
             GD.Print("Shape is null");
             return;
         }
-
-        InputPickable = true;
         SpawnCollisionShape();
-        GetPieceParent();
+        CollisionLayer = 0;
+        CollisionMask = 0;
+        ZIndex = 10;
+        CanSleep = false;
     }
 
     private void SpawnCollisionShape()
@@ -48,19 +47,19 @@ public partial class GodotArea : Area2D
         _collision.Shape = _shape;
     }
 
-    private void GetPieceParent()
+    public void DroppedPiece()
     {
-        var parent = GetParent<GodotPiece>();
-        if (parent != null) _parentPiece = parent;
+        CollisionLayer = 0;
+        CollisionMask = 0;
+        ZIndex = 10;
     }
 
-    public override void _MouseEnter()
-    {
-        _parentPiece.SetMouseEntered(true);
-    }
 
-    public override void _MouseExit()
+    public void PickedUpPiece()
     {
-        _parentPiece.SetMouseEntered(false);
+        //ApplyImpulse(new Vector2(5000,0), Position);
+        CollisionLayer = 1;
+        CollisionMask = 1;
+        ZIndex = 20;
     }
 }

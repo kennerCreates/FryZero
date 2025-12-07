@@ -1,9 +1,10 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Structs;
 using FryZeroGodot.gameplay;
+using FryZeroGodot.Godot.EngineFiles;
 using Godot;
 
-namespace FryZeroGodot.Root.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 [Tool]
 
@@ -116,7 +117,7 @@ public partial class GodotPiece : Node2D
         }
     }
     private Sprite2D _sprite;
-    private Shader _shader = GD.Load<Shader>("res://Root/Visuals/HueShift.gdshader");
+    private Shader _shader = GD.Load<Shader>("res://GodotNodes/Visuals/HueShift.gdshader");
     private ShaderMaterial _material;
 
     private void CreateShader()
@@ -173,7 +174,7 @@ public partial class GodotPiece : Node2D
 
     private RectangleShape2D _shape;
     private GodotPhysics _physics;
-    private GodotHoldPoint _holdPoint;
+    private GodotNodes.Game.Pieces.GodotHoldPoint _holdPoint;
     private GodotArea _area;
     private PinJoint2D _pinJoint;
     private bool _isMouseEntered;
@@ -251,7 +252,7 @@ public partial class GodotPiece : Node2D
     }
     private void CreateHoldPoint()
     {
-        _holdPoint = new GodotHoldPoint();
+        _holdPoint = new GodotNodes.Game.Pieces.GodotHoldPoint();
         var circle = new CircleShape2D();
         circle.Radius = 5;
         _holdPoint.Shape = circle;

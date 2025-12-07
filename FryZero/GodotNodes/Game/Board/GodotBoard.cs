@@ -2,9 +2,10 @@
 using FryZeroGodot.Config.Enums;
 using Godot;
 using Color = Godot.Color;
+using GodotPieceManager = FryZeroGodot.GodotNodes.Game.Pieces.GodotPieceManager;
 using Vector2 = Godot.Vector2;
 
-namespace FryZeroGodot.Root.Game.Board;
+namespace FryZeroGodot.GodotNodes.Game.Board;
 
 [Tool]
 
@@ -137,7 +138,7 @@ public partial class GodotBoard : Node2D
     private Color _lightPieceOutlineColor = Colors.Black;
     private Color _darkPieceColor = Colors.Black;
     private Color _darkPieceOutlineColor = Colors.White;
-    private Pieces.GodotPieceManager _pieceManager;
+    private GodotPieceManager _pieceManager;
 
     [Export]
     public PieceStyle PieceStyle
@@ -190,7 +191,7 @@ public partial class GodotBoard : Node2D
     }
     private void CreatePieceManager()
     {
-        _pieceManager = new Pieces.GodotPieceManager();
+        _pieceManager = new GodotPieceManager();
         AddChild(_pieceManager);
         UpdatePieceManagerProperties();
     }

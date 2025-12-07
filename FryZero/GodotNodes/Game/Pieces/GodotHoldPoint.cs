@@ -1,7 +1,6 @@
-﻿using FryZeroGodot.gameplay;
-using Godot;
+﻿using Godot;
 
-namespace FryZeroGodot.Root.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 [GlobalClass]
 

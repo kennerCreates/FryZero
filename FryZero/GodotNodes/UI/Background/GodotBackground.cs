@@ -1,7 +1,6 @@
-﻿using System;
-using Godot;
+﻿using Godot;
 
-namespace FryZeroGodot.Root.UI.Background;
+namespace FryZeroGodot.GodotNodes.UI.Background;
 
 [Tool]
 

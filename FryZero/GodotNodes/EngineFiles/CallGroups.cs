@@ -1,4 +1,4 @@
-﻿namespace FryZeroGodot.gameplay;
+﻿namespace FryZeroGodot.Godot.EngineFiles;
 
 public static class CallGroups
 {
