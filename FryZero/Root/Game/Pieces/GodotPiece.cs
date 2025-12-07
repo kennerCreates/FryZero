@@ -147,9 +147,8 @@ public partial class GodotPiece : Node2D
         _material.SetShaderParameter("outline_color", outlineColor);
     }
 
-    private void UpdateLocation()
+    private void UpdateLocation(Square square)
     {
-        var square = new Square(_file, _rank);
         Position = square.LocationVector(_squareSize);
     }
 
@@ -164,12 +163,11 @@ public partial class GodotPiece : Node2D
     {
         if (_sprite == null) CreateSprite();
         UpdateSprite();
-        UpdateLocation();
+        UpdateLocation(new Square(_file, _rank));
         if (Engine.IsEditorHint()) return;
         UpdateShape();
         UpdatePhysicsPiece();
         UpdateArea();
-        UpdateHoldPoint();
         UpdatePinJoint();
     }
 
@@ -180,6 +178,7 @@ public partial class GodotPiece : Node2D
     private PinJoint2D _pinJoint;
     private bool _isMouseEntered;
     private bool _isBeingMoved;
+    private bool _isOnASquare = true;
 
     private void CreateRuntimePiece()
     {
@@ -250,7 +249,6 @@ public partial class GodotPiece : Node2D
         if (_area == null) return;
         _area.Shape = _shape;
     }
-
     private void CreateHoldPoint()
     {
         _holdPoint = new GodotHoldPoint();
@@ -259,14 +257,7 @@ public partial class GodotPiece : Node2D
         _holdPoint.Shape = circle;
         _holdPoint.CollisionLayer = 0;
         _holdPoint.CollisionMask = 0;
-        _holdPoint.Position = new Vector2(0, -(_squareSize / 4));
         AddChild(_holdPoint);
-    }
-
-    private void UpdateHoldPoint()
-    {
-        if (_holdPoint == null) return;
-        _holdPoint.Position = new Vector2(0, -(_squareSize / 4));
     }
 
     private void CreatePinJoint()
@@ -274,7 +265,7 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint = new PinJoint2D();
         AddChild(_pinJoint);
-        _pinJoint.Softness = 1f;
+        _pinJoint.Softness = _squareSize/100f;
         _pinJoint.NodeA = _holdPoint.GetPath();
         _pinJoint.NodeB = _physics.GetPath();
         _pinJoint.Position = _holdPoint.Position;
@@ -285,23 +276,30 @@ public partial class GodotPiece : Node2D
     private void UpdatePinJoint()
     {
         if (_pinJoint == null) return;
+        _pinJoint.Softness = _squareSize/100f;
         _pinJoint.Position = _holdPoint.Position;
-        _pinJoint.Softness = 0f;
     }
 
     public void PickUpPiece()
     {
         if (!_isMouseEntered) return;
         _isBeingMoved = true;
+        _isOnASquare = false;
         _physics.PickedUpPiece();
     }
 
     public void DropPiece()
     {
-        if (!_isMouseEntered) return;
+        if (_isOnASquare) return;
         _isBeingMoved = false;
         _physics.DroppedPiece();
+        _file = FindClosestSquare().File;
+        _rank = FindClosestSquare().Rank;
     }
+
+    private Square FindClosestSquare() =>
+        GetGlobalMousePosition().GetSquare(_squareSize);
+
 
     public void SetMouseEntered(bool isEntered)
     {
@@ -331,11 +329,32 @@ public partial class GodotPiece : Node2D
         }
     }
 
-
     public override void _PhysicsProcess(double delta)
     {
-        if (!_isBeingMoved) return;
-        GlobalPosition = GetGlobalMousePosition();
+        if (_isBeingMoved || !_isOnASquare)
+        {
+            if (_isBeingMoved)
+            {
+                var tween = GetTree().CreateTween();
+                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), 10 * delta);
+                tween.Finished += () =>
+                {
+                    tween.Dispose();
+                    tweener.Dispose();
+                };
+            }
+            else
+            {
+                var tween = GetTree().CreateTween();
+                var targetLocation = new Square(_file, _rank).LocationVector(_squareSize);
+                var tweener = tween.TweenProperty(this, "position", targetLocation, 10 * delta);
+                tween.Finished += () =>
+                {
+                    _isOnASquare = true;
+                    tween.Dispose();
+                    tweener.Dispose();
+                };
+            }
+        }
     }
-
 }

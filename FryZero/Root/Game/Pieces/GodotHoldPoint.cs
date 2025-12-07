@@ -24,16 +24,6 @@ public partial class GodotHoldPoint : StaticBody2D
         }
     }
 
-    [Export]
-    public int SquareSize
-    {
-        get => _squareSize;
-        set
-        {
-            _squareSize = value;
-        }
-    }
-
     public override void _Ready()
     {
         if (_shape == null)

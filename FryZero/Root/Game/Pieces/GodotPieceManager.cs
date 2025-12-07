@@ -186,9 +186,8 @@ public partial class GodotPieceManager : Node2D
         GetTree().CallGroup(CallGroups.LeftClick, method);
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
         PickUpOrDropPiece(@event);
     }
-
 }

@@ -57,6 +57,7 @@ public partial class GodotPhysics : RigidBody2D
 
     public void PickedUpPiece()
     {
+        //ApplyImpulse(new Vector2(5000,0), Position);
         CollisionLayer = 1;
         CollisionMask = 1;
         ZIndex = 20;
