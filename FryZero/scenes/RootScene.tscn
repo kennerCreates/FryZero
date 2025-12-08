@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://djkkabff2382b"]
 
-[ext_resource type="Texture2D" uid="uid://cgbojkxknyxji" path="res://Assets/Backgrounds/Diamond1.png" id="1_20q55"]
+[ext_resource type="Texture2D" uid="uid://dfp2xpm5bftw6" path="res://assets/Backgrounds/Diamond1.png" id="1_20q55"]
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotNodes/UI/Background/GodotBackground.cs" id="1_ib006"]
-[ext_resource type="Texture2D" uid="uid://dfgttfoqtooge" path="res://Assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
-[ext_resource type="Texture2D" uid="uid://dy2433jj0k3ye" path="res://Assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
+[ext_resource type="Texture2D" uid="uid://dbm3j3mgxidnj" path="res://assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
+[ext_resource type="Texture2D" uid="uid://dftmx0p8ucrsp" path="res://assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotNodes/Game/Board/GodotBoard.cs" id="3_ltheh"]
 
 [node name="Root" type="Node"]
@@ -13,17 +13,18 @@ limit_enabled = false
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.47058824, 0.2, 0.14117648, 1)
+BackgroundColor = Color(0.280551, 0.38062772, 0.6137525, 1)
 BackgroundTexture = ExtResource("1_20q55")
-PatternColor = Color(0.5019608, 0.22352941, 0.3882353, 1)
+PatternColor = Color(0.3849373, 0.47530228, 0.7135614, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="GodotBoard" type="Node2D" parent="."]
 script = ExtResource("3_ltheh")
-LightSquareColor = Color(0.69470245, 0.551964, 0.6957017, 1)
+LightSquareColor = Color(0.51407826, 0.607699, 0.7925002, 1)
 LightSquareTexture = ExtResource("3_ib006")
 DarkSquareColor = Color(0.46552247, 0.17941901, 0.11747486, 1)
 DarkSquareTexture = ExtResource("2_20q55")
+PieceSpeed = 5
 PieceStyle = 3
 LightPieceColor = Color(0.55191976, 0.76444453, 0.77770746, 1)
 LightPieceOutlineColor = Color(0.016271388, 0.13314095, 0.22475716, 1)

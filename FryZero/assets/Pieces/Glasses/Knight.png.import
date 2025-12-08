@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b078uk0kjmvdt"
-path="res://.godot/imported/Knight.png-2df956570078ee8786f945ae5b2d1479.ctex"
+uid="uid://b121n1hivuxhl"
+path="res://.godot/imported/Knight.png-7f92800c8d432adef70efecad295560f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Glasses/Knight.png"
-dest_files=["res://.godot/imported/Knight.png-2df956570078ee8786f945ae5b2d1479.ctex"]
+source_file="res://assets/Pieces/Glasses/Knight.png"
+dest_files=["res://.godot/imported/Knight.png-7f92800c8d432adef70efecad295560f.ctex"]
 
 [params]
 

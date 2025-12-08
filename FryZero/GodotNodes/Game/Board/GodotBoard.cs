@@ -141,6 +141,9 @@ public partial class GodotBoard : Node2D
     private GodotPieceManager _pieceManager;
 
     [Export]
+    public int PieceMovementDelay { get; set; } = 10;
+
+    [Export]
     public PieceStyle PieceStyle
     {
         get => _pieceStyle;
@@ -203,6 +206,7 @@ public partial class GodotBoard : Node2D
         _pieceManager.LightPieceOutlineColor = _lightPieceOutlineColor;
         _pieceManager.DarkPieceColor = _darkPieceColor;
         _pieceManager.DarkPieceOutlineColor = _darkPieceOutlineColor;
+        _pieceManager.PieceMovementDelay = PieceMovementDelay;
     }
     private void UpdatePieceManager()
     {

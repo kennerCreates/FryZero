@@ -10,6 +10,7 @@ namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 public partial class GodotPieceManager : Node2D
 {
+    [Export]public int PieceMovementDelay { get; set; } = 10;
     [Export]
     public int SquareSize
     {
@@ -142,7 +143,7 @@ public partial class GodotPieceManager : Node2D
 
     private void CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
     {
-        var piece = new GodotNodes.Game.Pieces.GodotPiece();
+        var piece = new GodotPiece();
         piece.SquareSize = _size;
         piece.Style = _style;
         piece.Type = type;
@@ -150,6 +151,7 @@ public partial class GodotPieceManager : Node2D
         piece.Rank = rank;
         piece.File = file;
         piece.ZIndex = 9;
+        piece.MovementDelay = PieceMovementDelay;
         AddChild(piece);
     }
 

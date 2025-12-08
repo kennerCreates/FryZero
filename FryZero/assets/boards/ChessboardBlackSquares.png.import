@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfgttfoqtooge"
-path="res://.godot/imported/ChessboardBlackSquares.png-abf651e08171211b741329e408450389.ctex"
+uid="uid://dbm3j3mgxidnj"
+path="res://.godot/imported/ChessboardBlackSquares.png-f43b3d6c13b331f9cb21d27536670548.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Boards/ChessboardBlackSquares.png"
-dest_files=["res://.godot/imported/ChessboardBlackSquares.png-abf651e08171211b741329e408450389.ctex"]
+source_file="res://assets/Boards/ChessboardBlackSquares.png"
+dest_files=["res://.godot/imported/ChessboardBlackSquares.png-f43b3d6c13b331f9cb21d27536670548.ctex"]
 
 [params]
 

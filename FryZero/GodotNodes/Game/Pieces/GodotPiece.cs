@@ -23,6 +23,8 @@ public partial class GodotPiece : Node2D
     private Color _darkPieceColor = Colors.Black;
     private Color _darkPieceOutlineColor = Colors.White;
 
+    [Export] public int MovementDelay { get; set; } = 10;
+
     [Export] public int SquareSize
     {
         get => _squareSize;
@@ -174,7 +176,7 @@ public partial class GodotPiece : Node2D
 
     private RectangleShape2D _shape;
     private GodotPhysics _physics;
-    private GodotNodes.Game.Pieces.GodotHoldPoint _holdPoint;
+    private GodotHoldPoint _holdPoint;
     private GodotArea _area;
     private PinJoint2D _pinJoint;
     private bool _isMouseEntered;
@@ -337,7 +339,7 @@ public partial class GodotPiece : Node2D
             if (_isBeingMoved)
             {
                 var tween = GetTree().CreateTween();
-                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), 10 * delta);
+                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), MovementDelay * delta);
                 tween.Finished += () =>
                 {
                     tween.Dispose();
@@ -348,7 +350,7 @@ public partial class GodotPiece : Node2D
             {
                 var tween = GetTree().CreateTween();
                 var targetLocation = new Square(_file, _rank).LocationVector(_squareSize);
-                var tweener = tween.TweenProperty(this, "position", targetLocation, 10 * delta);
+                var tweener = tween.TweenProperty(this, "position", targetLocation, MovementDelay * delta);
                 tween.Finished += () =>
                 {
                     _isOnASquare = true;

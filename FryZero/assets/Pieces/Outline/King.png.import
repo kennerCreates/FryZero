@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bimyacusp01w7"
-path="res://.godot/imported/King.png-db68b0830176b61470af99ff52fa71ff.ctex"
+uid="uid://fcbkofv1bgac"
+path="res://.godot/imported/King.png-d3704762d86760d5f5295e1810731612.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Pieces/Outline/King.png"
-dest_files=["res://.godot/imported/King.png-db68b0830176b61470af99ff52fa71ff.ctex"]
+source_file="res://assets/Pieces/Outline/King.png"
+dest_files=["res://.godot/imported/King.png-d3704762d86760d5f5295e1810731612.ctex"]
 
 [params]
 
