@@ -1,7 +1,7 @@
 ﻿using System;
 using FryZeroGodot.Config;
 using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Structs;
+using FryZeroGodot.Config.Records;
 using Godot;
 
 namespace FryZeroGodot.gameplay;

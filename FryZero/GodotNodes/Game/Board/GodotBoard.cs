@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using FryZeroGodot.Config.Enums;
+using FryZeroGodot.Config.Records;
 using Godot;
 using Color = Godot.Color;
 using GodotPieceManager = FryZeroGodot.GodotNodes.Game.Pieces.GodotPieceManager;

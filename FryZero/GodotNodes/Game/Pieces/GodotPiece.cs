@@ -1,5 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Structs;
+using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.Godot.EngineFiles;
 using Godot;
