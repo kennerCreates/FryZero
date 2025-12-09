@@ -291,6 +291,12 @@ public partial class GodotPiece : Node2D
         _physics.PickedUpPiece();
     }
 
+    private GodotPieceManager _pieceManager;
+
+    private void GetPieceManager()
+    {
+        _pieceManager = GetParent<GodotPieceManager>();
+    }
     public void DropPiece()
     {
         if (_isOnASquare) return;
@@ -298,6 +304,7 @@ public partial class GodotPiece : Node2D
         _physics.DroppedPiece();
         _file = FindClosestSquare().File;
         _rank = FindClosestSquare().Rank;
+        this.UpdateChessPosition(_pieceManager.ChessPosition);
     }
 
     private Square FindClosestSquare() =>
@@ -311,6 +318,7 @@ public partial class GodotPiece : Node2D
 
     private void EditorOnReady()
     {
+        GetPieceManager();
         UpdatePiece();
     }
     private void GameOnReady()

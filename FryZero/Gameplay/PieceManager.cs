@@ -4,6 +4,7 @@ using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.GodotNodes.Game.Pieces;
+using Godot;
 
 namespace FryZeroGodot.gameplay;
 
@@ -33,7 +34,7 @@ public static class PieceManager
         SetPiece(CreateOnePiece(PieceType.Knight, PieceColor.White, Rank.One, File.G),position);
         SetPiece(CreateOnePiece(PieceType.Rook, PieceColor.White, Rank.One, File.H), position);
         // White Pawns
-        foreach (File file in Enum.GetValues<File>())
+        foreach (var file in Enum.GetValues<File>())
         {
             SetPiece(CreateOnePiece(PieceType.Pawn, PieceColor.White, Rank.Two, file), position);
         }
@@ -47,7 +48,7 @@ public static class PieceManager
         SetPiece(CreateOnePiece(PieceType.Knight, PieceColor.Black, Rank.Eight, File.G), position);
         SetPiece(CreateOnePiece(PieceType.Rook, PieceColor.Black, Rank.Eight, File.H), position);
         // Black Pawns
-        foreach (File file in Enum.GetValues<File>())
+        foreach (var file in Enum.GetValues<File>())
         {
             SetPiece(CreateOnePiece(PieceType.Pawn, PieceColor.Black, Rank.Seven, file), position);
         }
@@ -68,4 +69,26 @@ public static class PieceManager
         piece.File = file;
         return piece;
     }
+    public static void UpdatePieceNodes(ChessPosition position)
+    {
+        var squares = position.Squares;
+        foreach ( var square in squares)
+        {
+            if (square.Piece is null) continue;
+            if (square.File == square.Piece.File && square.Rank == square.Piece.Rank) continue;
+            square.Piece.File = square.File;
+            square.Piece.Rank = square.Rank;
+        }
+    }
+
+    public static void UpdateChessPosition(this GodotPiece piece, ChessPosition position)
+    {
+        var newSquare = position.Squares.Single(s => s.File == piece.File && s.Rank == piece.Rank);
+        var oldSquare = position.Squares.Single(s => s.Piece == piece);
+        oldSquare.Piece = null;
+        newSquare.Piece = piece;
+        GD.Print(oldSquare.File, oldSquare.Rank," - ", newSquare.File, newSquare.Rank);
+    }
+
+
 }

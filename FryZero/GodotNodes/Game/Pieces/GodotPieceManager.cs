@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
@@ -86,10 +84,11 @@ public partial class GodotPieceManager : Node2D
         }
     }
 
-    private new ChessPosition Position { get; set; } = new();
+    public ChessPosition ChessPosition { get; } = new();
 
     private void UpdateAllPieces()
     {
+        PieceManager.UpdatePieceNodes(ChessPosition);
         var children = GetChildren();
         foreach (var child in children)
         {
@@ -103,6 +102,10 @@ public partial class GodotPieceManager : Node2D
         }
     }
 
+    private void UpdateChessPosition()
+    {
+        
+    }
     private void DestroyExistingPieces()
     {
         var children = GetChildren();
@@ -114,8 +117,7 @@ public partial class GodotPieceManager : Node2D
 
     private void SpawnPieceNodes(ChessPosition position)
     {
-        var squares = position.Squares;
-        foreach (var piece in squares.Select(square => square.Piece).Where(piece => piece != null))
+        foreach (var piece in position.Squares.Select(square => square.Piece).Where(piece => piece is not null))
         {
             piece.SquareSize = _size;
             piece.Style = _style;
@@ -127,10 +129,10 @@ public partial class GodotPieceManager : Node2D
 
     private void EditorOnReady()
     {
-        PieceManager.InitializeEmptyBoard(Position);
-        PieceManager.CreatePiecesInStartingPosition(Position);
+        PieceManager.InitializeEmptyBoard(ChessPosition);
+        PieceManager.CreatePiecesInStartingPosition(ChessPosition);
         DestroyExistingPieces();
-        SpawnPieceNodes(Position);
+        SpawnPieceNodes(ChessPosition);
     }
     private void GameOnReady()
     {
@@ -156,7 +158,7 @@ public partial class GodotPieceManager : Node2D
         var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
         if (!isLeftMouseButtonEvent) return;
 
-        var method = mouseButtonEvent.Pressed ? nameof(GodotNodes.Game.Pieces.GodotPiece.PickUpPiece) : nameof(GodotNodes.Game.Pieces.GodotPiece.DropPiece);
+        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.PickUpPiece) : nameof(GodotPiece.DropPiece);
         GetTree().CallGroup(CallGroups.LeftClick, method);
     }
 
