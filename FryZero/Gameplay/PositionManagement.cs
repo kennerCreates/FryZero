@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
@@ -8,7 +7,7 @@ using Godot;
 
 namespace FryZeroGodot.gameplay;
 
-public static class PieceManager
+public static class PositionManagement
 {
     public static void InitializeEmptyBoard(ChessPosition position)
     {

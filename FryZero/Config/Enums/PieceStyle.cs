@@ -4,6 +4,4 @@ public enum PieceStyle
 {
     Tiny,
     Little,
-    Glasses,
-    Outline
 }

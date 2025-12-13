@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxyp3fkaulons"
-path="res://.godot/imported/Bishop.png-8b8b21313d50e4da053424f9fd88365e.ctex"
+uid="uid://bjmglc8rpdlrg"
+path="res://.godot/imported/Bishop.png-5e1e7a1269cf292ce4fcebf82eb7037c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pieces/Little/Bishop.png"
-dest_files=["res://.godot/imported/Bishop.png-8b8b21313d50e4da053424f9fd88365e.ctex"]
+source_file="res://assets/Pieces/Outline/Bishop.png"
+dest_files=["res://.godot/imported/Bishop.png-5e1e7a1269cf292ce4fcebf82eb7037c.ctex"]
 
 [params]
 

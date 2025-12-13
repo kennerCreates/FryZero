@@ -88,7 +88,7 @@ public partial class GodotPieceManager : Node2D
 
     private void UpdateAllPieces()
     {
-        PieceManager.UpdatePieceNodes(ChessPosition);
+        PositionManagement.UpdatePieceNodes(ChessPosition);
         var children = GetChildren();
         foreach (var child in children)
         {
@@ -129,8 +129,8 @@ public partial class GodotPieceManager : Node2D
 
     private void EditorOnReady()
     {
-        PieceManager.InitializeEmptyBoard(ChessPosition);
-        PieceManager.CreatePiecesInStartingPosition(ChessPosition);
+        PositionManagement.InitializeEmptyBoard(ChessPosition);
+        PositionManagement.CreatePiecesInStartingPosition(ChessPosition);
         DestroyExistingPieces();
         SpawnPieceNodes(ChessPosition);
     }
