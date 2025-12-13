@@ -2,6 +2,9 @@
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.Godot.EngineFiles;
+using FryZeroGodot.GodotInterface;
+using FryZeroGodot.GodotInterface.Extensions;
+using FryZeroGodot.GodotInterface.Models;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.Game.Pieces;
@@ -161,23 +164,23 @@ public partial class GodotPiece : Node2D
         CreateHueShiftShader();
     }
 
-    private void UpdatePiece()
+    public void UpdatePiece()
     {
-        if (_sprite == null) CreateSprite();
+        if (_sprite is null) CreateSprite();
         UpdateSprite();
         UpdateLocation(new Square(_file, _rank));
         if (Engine.IsEditorHint()) return;
         UpdateShape();
         UpdatePhysicsPiece();
         UpdateArea();
-        UpdatePinJoint();
+        _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
     private RectangleShape2D _shape;
     private GodotPhysics _physics;
     private GodotHoldPoint _holdPoint;
     private GodotArea _area;
-    private PinJoint2D _pinJoint;
+    private PinJoint2D _pinJoint2D;
     private bool _isMouseEntered;
     private bool _isBeingMoved;
     private bool _isOnASquare = true;
@@ -204,7 +207,7 @@ public partial class GodotPiece : Node2D
             CreateHoldPoint();
         }
 
-        if (_pinJoint == null)
+        if (_pinJoint2D == null)
         {
             CreatePinJoint();
         }
@@ -262,24 +265,17 @@ public partial class GodotPiece : Node2D
         AddChild(_holdPoint);
     }
 
-    private void CreatePinJoint()
+    public void CreatePinJoint()
     {
         if (_holdPoint == null || _physics == null) return;
-        _pinJoint = new PinJoint2D();
-        AddChild(_pinJoint);
-        _pinJoint.Softness = _squareSize/100f;
-        _pinJoint.NodeA = _holdPoint.GetPath();
-        _pinJoint.NodeB = _physics.GetPath();
-        _pinJoint.Position = _holdPoint.Position;
-        if (_pinJoint.NodeA == null) GD.Print("NodeA missing");
-        if (_pinJoint.NodeB == null) GD.Print("NodeB missing");
-    }
-
-    private void UpdatePinJoint()
-    {
-        if (_pinJoint == null) return;
-        _pinJoint.Softness = _squareSize/100f;
-        _pinJoint.Position = _holdPoint.Position;
+        _pinJoint2D = new PinJoint2D();
+        AddChild(_pinJoint2D);
+        _pinJoint2D.Softness = _squareSize/100f;
+        _pinJoint2D.NodeA = _holdPoint.GetPath();
+        _pinJoint2D.NodeB = _physics.GetPath();
+        _pinJoint2D.Position = _holdPoint.Position;
+        if (_pinJoint2D.NodeA == null) GD.Print("NodeA missing");
+        if (_pinJoint2D.NodeB == null) GD.Print("NodeB missing");
     }
 
     public void PickUpPiece()

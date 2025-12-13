@@ -24,4 +24,8 @@
       <ProjectReference Include="..\FryZero\FryZeroGodot.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="GodotNodes\Game\Pieces\" />
+    </ItemGroup>
+
 </Project>
