@@ -24,10 +24,17 @@ public static class GodotUntestableMapper
             Size = godotRectangle.Size.ToVector()
         };
 
-    // public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea)
-    // {
-    //     var godotShape = godotArea.Shape
-    // }
+    public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea)
+    {
+        godotArea.Shape = ourArea.Shape.ToRectangleShape2D(godotArea.Shape);
+        return godotArea;
+    }
+
+    public static Area ToArea (this GodotArea godotArea) =>
+        new()
+        {
+            Shape = godotArea.Shape.ToRectangleShape()
+        };
 
     public static PinJoint2D ToPinJoint2D(this PinJoint ourPinJoint, PinJoint2D godotPinJoint)
         {
