@@ -1,4 +1,5 @@
 using FryZeroGodot.GodotInterface.Models;
+using FryZeroGodot.GodotNodes.Game.Pieces;
 using Godot;
 
 namespace FryZeroGodot.GodotInterface;
@@ -22,6 +23,11 @@ public static class GodotUntestableMapper
         {
             Size = godotRectangle.Size.ToVector()
         };
+
+    // public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea)
+    // {
+    //     var godotShape = godotArea.Shape
+    // }
 
     public static PinJoint2D ToPinJoint2D(this PinJoint ourPinJoint, PinJoint2D godotPinJoint)
         {

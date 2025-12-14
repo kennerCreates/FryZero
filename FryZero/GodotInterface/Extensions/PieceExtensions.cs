@@ -26,4 +26,7 @@ public static class PieceExtensions
     {
         godotRectangle.ToRectangleShape().WithUpdateShape(squareSize).ToRectangleShape2D(godotRectangle);
     }
+
+    
+
 }

@@ -172,6 +172,7 @@ public partial class GodotPiece : Node2D
         if (Engine.IsEditorHint()) return;
         _shape?.UpdateShape(_squareSize);
         UpdatePhysicsPiece();
+        UpdateArea();
         _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
@@ -215,7 +216,7 @@ public partial class GodotPiece : Node2D
     private void CreateShape()
     {
         _shape = new RectangleShape2D();
-        _shape.Size = new Vector2(_squareSize, _squareSize);
+        _shape.UpdateShape(_squareSize);
     }
 
 
