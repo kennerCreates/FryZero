@@ -36,6 +36,18 @@ public static class GodotUntestableMapper
             Shape = godotArea.Shape.ToRectangleShape()
         };
 
+    public static GodotPhysics ToGodotPhysics(this Physics ourPhysics, GodotPhysics godotPhysics)
+    {
+        godotPhysics.Shape = ourPhysics.Shape.ToRectangleShape2D(godotPhysics.Shape);
+        return godotPhysics;
+    }
+
+    public static Physics ToPhysics(this GodotPhysics godotPhysics) =>
+        new()
+        {
+            Shape = godotPhysics.Shape.ToRectangleShape()
+        };
+
     public static PinJoint2D ToPinJoint2D(this PinJoint ourPinJoint, PinJoint2D godotPinJoint)
         {
             godotPinJoint.Softness = ourPinJoint.Softness;

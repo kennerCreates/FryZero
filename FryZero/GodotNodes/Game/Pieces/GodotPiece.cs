@@ -171,8 +171,8 @@ public partial class GodotPiece : Node2D
         UpdateLocation(new Square(_file, _rank));
         if (Engine.IsEditorHint()) return;
         _shape?.UpdateShape(_squareSize);
-        UpdatePhysicsPiece();
-        UpdateArea();
+        _physics?.UpdatePhysics(_shape);
+        _area?.UpdateArea(_shape);
         _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
@@ -187,27 +187,27 @@ public partial class GodotPiece : Node2D
 
     private void CreateRuntimePiece()
     {
-        if (_shape == null)
+        if (_shape is null)
         {
             CreateShape();
         }
 
-        if (_physics == null)
+        if (_physics is null)
         {
             CreatePhysicsPiece();
         }
 
-        if (_area == null)
+        if (_area is null)
         {
             CreateArea();
         }
 
-        if (_holdPoint == null)
+        if (_holdPoint is null)
         {
             CreateHoldPoint();
         }
 
-        if (_pinJoint2D == null)
+        if (_pinJoint2D is null)
         {
             CreatePinJoint();
         }
@@ -223,32 +223,17 @@ public partial class GodotPiece : Node2D
     private void CreatePhysicsPiece()
     {
         _physics = new GodotPhysics();
-        _physics.Shape = _shape;
+        _physics.UpdatePhysics(_shape);
         AddChild(_physics);
-        if (_sprite.GetParent() != null)
-        {
-            _sprite.GetParent().RemoveChild(_sprite);
-        }
+        _sprite.GetParent()?.RemoveChild(_sprite);
         _physics.AddChild(_sprite);
-    }
-
-    private void UpdatePhysicsPiece()
-    {
-        if (_physics == null) return;
-        _physics.Shape = _shape;
     }
 
     private void CreateArea()
     {
         _area = new GodotArea();
-        _area.Shape = _shape;
+        _area.UpdateArea(_shape);
         AddChild(_area);
-    }
-
-    private void UpdateArea()
-    {
-        if (_area == null) return;
-        _area.Shape = _shape;
     }
     private void CreateHoldPoint()
     {

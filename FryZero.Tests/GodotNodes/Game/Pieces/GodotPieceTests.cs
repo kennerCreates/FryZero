@@ -36,7 +36,51 @@ public class GodotPieceTests
             Size = new Vector(36,36)
         };
 
-        var actual = shape.WithUpdateShape(squareSize);
+        var actual = shape.WithUpdatedShape(squareSize);
+
+        Assert.Equivalent(expected, actual);
+    }
+
+    [Fact]
+    public void GetUpdatedArea()
+    {
+        var shape = new RectangleShape
+        {
+            Size = new Vector(12,12)
+        };
+        var area = new Area();
+
+        var expected = new Area
+        {
+            Shape = new RectangleShape
+            {
+                Size = new Vector(12,12)
+            },
+        };
+
+        var actual = area.WithUpdatedArea(shape);
+
+        Assert.Equivalent(expected, actual);
+    }
+
+    [Fact]
+    public void GetUpdatedPhsyics()
+    {
+        var shape = new RectangleShape
+        {
+            Size = new Vector(30,30)
+        };
+        var physics = new Physics();
+
+        var expected = new Physics
+        {
+            Shape = new RectangleShape
+            {
+                Size = new Vector(30,30)
+            },
+        };
+
+        var actual = physics.WithUpdatedPhysics(shape);
 
         Assert.Equivalent(expected, actual);
     }

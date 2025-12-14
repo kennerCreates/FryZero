@@ -5,12 +5,12 @@ namespace FryZeroGodot.GodotNodes.Game.Pieces;
 [GlobalClass]
 public partial class GodotPhysics : RigidBody2D
 {
-    private Shape2D _shape;
+    private RectangleShape2D _shape;
     private CollisionShape2D _collision;
 
 
     [Export]
-    public Shape2D Shape
+    public RectangleShape2D Shape
     {
         get => _shape;
         set
