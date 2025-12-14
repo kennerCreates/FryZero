@@ -25,4 +25,19 @@ public class GodotPieceTests
         
         Assert.Equivalent(expected, actual);
     }
+
+    [Fact]
+    public void GetUpdatedRectangleShape()
+    {
+        int squareSize = 36;
+        var shape = new RectangleShape();
+        var expected = new RectangleShape
+        {
+            Size = new Vector(36,36)
+        };
+
+        var actual = shape.WithUpdateShape(squareSize);
+
+        Assert.Equivalent(expected, actual);
+    }
 }

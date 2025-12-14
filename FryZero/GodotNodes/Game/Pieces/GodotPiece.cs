@@ -170,9 +170,8 @@ public partial class GodotPiece : Node2D
         UpdateSprite();
         UpdateLocation(new Square(_file, _rank));
         if (Engine.IsEditorHint()) return;
-        UpdateShape();
+        _shape?.UpdateShape(_squareSize);
         UpdatePhysicsPiece();
-        UpdateArea();
         _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
@@ -218,11 +217,7 @@ public partial class GodotPiece : Node2D
         _shape = new RectangleShape2D();
         _shape.Size = new Vector2(_squareSize, _squareSize);
     }
-    private void UpdateShape()
-    {
-        if (_shape == null) return;
-        _shape.Size = new Vector2(_squareSize, _squareSize);
-    }
+
 
     private void CreatePhysicsPiece()
     {
@@ -270,7 +265,7 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint2D = new PinJoint2D();
         AddChild(_pinJoint2D);
-        _pinJoint2D.Softness = _squareSize/100f;
+        _pinJoint2D.UpdateSoftness(_squareSize);
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
         _pinJoint2D.Position = _holdPoint.Position;

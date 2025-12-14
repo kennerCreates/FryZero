@@ -70,6 +70,8 @@ public static class PositionManagement
     }
     public static void UpdatePieceNodes(ChessPosition position)
     {
+
+        // https://github.com/listenheremoose/lc0backend/blob/main/Lc0Backend/Chess/MoveUpdater.cs#L31-L40
         var squares = position.Squares;
         foreach ( var square in squares)
         {

@@ -1,5 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
-
 namespace FryZeroGodot.GodotInterface.Models;
 
 public record Vector
@@ -9,7 +7,7 @@ public record Vector
         X = x;
         Y = y;
     }
-    
+
     public float X {get; init;}
     public float Y {get; init;}
 }
