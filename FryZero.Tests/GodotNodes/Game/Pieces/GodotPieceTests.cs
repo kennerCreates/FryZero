@@ -36,7 +36,7 @@ public class GodotPieceTests
             Size = new Vector(36,36)
         };
 
-        var actual = shape.WithUpdatedShape(squareSize);
+        var actual = shape.WithUpdatedShapex(squareSize);
 
         Assert.Equivalent(expected, actual);
     }

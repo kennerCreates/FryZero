@@ -12,11 +12,11 @@ public static class GodotUntestableMapper
     public static Vector ToVector(this Vector2 godotVector) =>
         new(godotVector.X, godotVector.Y);
 
-    public static RectangleShape2D ToRectangleShape2D(this RectangleShape ourRectangle, RectangleShape2D godotRectangle)
+    public static RectangleShape2D ToRectangleShape2D(this RectangleShape ourRectangle, RectangleShape2D godotRectangle) =>
+        new()
         {
-            godotRectangle.Size = ourRectangle.Size.ToVector2();
-            return godotRectangle;
-        }
+            Size = ourRectangle.Size.ToVector2()
+        };
     
     public static RectangleShape ToRectangleShape(this RectangleShape2D godotRectangle) =>
         new()
@@ -24,11 +24,12 @@ public static class GodotUntestableMapper
             Size = godotRectangle.Size.ToVector()
         };
 
-    public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea)
-    {
-        godotArea.Shape = ourArea.Shape.ToRectangleShape2D(godotArea.Shape);
-        return godotArea;
-    }
+// note if you want to add more properties than shape this will create more node copies -- i think
+    public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea) =>
+        new()
+        {
+            Shape = ourArea.Shape.ToRectangleShape2D(godotArea.Shape)
+        };
 
     public static Area ToArea (this GodotArea godotArea) =>
         new()
@@ -36,11 +37,12 @@ public static class GodotUntestableMapper
             Shape = godotArea.Shape.ToRectangleShape()
         };
 
-    public static GodotPhysics ToGodotPhysics(this Physics ourPhysics, GodotPhysics godotPhysics)
-    {
-        godotPhysics.Shape = ourPhysics.Shape.ToRectangleShape2D(godotPhysics.Shape);
-        return godotPhysics;
-    }
+// note if you want to add more properties than shape this will create more node copies -- i think
+    public static GodotPhysics ToGodotPhysics(this Physics ourPhysics, GodotPhysics godotPhysics) =>
+        new()
+        {
+            Shape = ourPhysics.Shape.ToRectangleShape2D(godotPhysics.Shape)
+        };
 
     public static Physics ToPhysics(this GodotPhysics godotPhysics) =>
         new()

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FryZero.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc52c1c7418117d1c0898bb104132d301c329c29")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2818f9bae147ae35efd1d28be27f8c0fc7d884fe")]
 [assembly: System.Reflection.AssemblyProductAttribute("FryZero.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FryZero.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

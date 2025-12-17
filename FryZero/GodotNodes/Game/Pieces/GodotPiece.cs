@@ -2,9 +2,7 @@
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.Godot.EngineFiles;
-using FryZeroGodot.GodotInterface;
 using FryZeroGodot.GodotInterface.Extensions;
-using FryZeroGodot.GodotInterface.Models;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.Game.Pieces;
@@ -170,9 +168,9 @@ public partial class GodotPiece : Node2D
         UpdateSprite();
         UpdateLocation(new Square(_file, _rank));
         if (Engine.IsEditorHint()) return;
-        _shape?.UpdateShape(_squareSize);
-        _physics?.UpdatePhysics(_shape);
-        _area?.UpdateArea(_shape);
+        _shape?.WithUpdatedShape(_squareSize);
+        _physics?.WithUpdatedPhysics(_shape);
+        _area?.WithUpdatedArea(_shape);
         _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
@@ -216,14 +214,14 @@ public partial class GodotPiece : Node2D
     private void CreateShape()
     {
         _shape = new RectangleShape2D();
-        _shape.UpdateShape(_squareSize);
+        _shape.WithUpdatedShape(_squareSize);
     }
 
 
     private void CreatePhysicsPiece()
     {
         _physics = new GodotPhysics();
-        _physics.UpdatePhysics(_shape);
+        _physics?.WithUpdatedPhysics(_shape);
         AddChild(_physics);
         _sprite.GetParent()?.RemoveChild(_sprite);
         _physics.AddChild(_sprite);
@@ -232,7 +230,7 @@ public partial class GodotPiece : Node2D
     private void CreateArea()
     {
         _area = new GodotArea();
-        _area.UpdateArea(_shape);
+        _area?.WithUpdatedArea(_shape);
         AddChild(_area);
     }
     private void CreateHoldPoint()
@@ -251,7 +249,7 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint2D = new PinJoint2D();
         AddChild(_pinJoint2D);
-        _pinJoint2D.UpdateSoftness(_squareSize);
+        _pinJoint2D?.UpdateSoftness(_squareSize);
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
         _pinJoint2D.Position = _holdPoint.Position;
