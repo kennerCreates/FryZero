@@ -1,0 +1,21 @@
+select
+    BookFenBeforeMove,
+    VariationNumber,
+    Move,
+    NumberOfVisitsToThisNode,
+    NodesSearched,
+    Quality,
+    ProbabilityHumanWouldPlayMove,
+    WinProbability,
+    DrawProbability,
+    LossProbability,
+    CentipawnScore,
+    PreSearchMoveProbabilityEstimate,
+    PreSearchEvaluationEstimate,
+    MovesLeftEstimate,
+    PrincipalVariation,
+    BookFenAfterMove
+from
+    Lc0xMaiaSearchMove
+where
+    BookFenBeforeMove = @bookFenBeforeMove

@@ -1,4 +1,4 @@
-namespace FryZeroGodot.GodotInterface.Models;
+﻿namespace FryZeroGodot.GodotInterface.Models;
 
 public record Area
 {

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Records;
+using FryZeroGodot.GodotInterface.Extensions;
 using Godot;
 using Color = Godot.Color;
 using GodotPieceManager = FryZeroGodot.GodotNodes.Game.Pieces.GodotPieceManager;
@@ -23,6 +22,7 @@ public partial class GodotBoard : Node2D
     private Texture2D _darkSquareTexture;
     private Sprite2D _lightSquares;
     private Sprite2D _darkSquares;
+    private SubViewportContainer _window;
 
     [Export]
     public Color LightSquareColor
@@ -114,25 +114,42 @@ public partial class GodotBoard : Node2D
         _lightSquares.Texture = _lightSquareTexture;
         AddChild(_lightSquares);
     }
-    private void UpdateScreenSize()
+
+    private void GetWindowContainer()
     {
-        var viewportSize = DisplayServer.WindowGetSize();
-        var size = viewportSize.Y / 9;
-        _squareSize = Math.Max(size, 32);
+        _window = GetParent().GetParent<SubViewportContainer>();
     }
+
+    private void UpdateSquareSize()
+    {
+        var windowSize = _window.Size;
+        _squareSize = (int)windowSize.Y / 8;
+    }
+    private void UpdateWindowSize()
+    {
+        if (_window == null)
+        {
+            GetWindowContainer();
+            UpdateSquareSize();
+        }
+        else
+        {
+            UpdateSquareSize();
+        }
+
+    }
+
     private void SetSquareScale()
     {
         _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
         _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
     }
-    private void UpdateSquareSize()
+    private void UpdateSquare()
     {
-        UpdateScreenSize();
+        UpdateWindowSize();
         SetSquareScale();
         UpdatePieceManager();
     }
-
-
 
     [ExportCategory("Pieces")]
     private PieceStyle _pieceStyle = PieceStyle.Tiny;
@@ -228,8 +245,8 @@ public partial class GodotBoard : Node2D
     }
     private void GameOnReady()
     {
-        UpdateSquareSize();
-        GetViewport().Connect("size_changed", Callable.From(UpdateSquareSize));
+        UpdateSquare();
+        GetViewport().Connect("size_changed", Callable.From(UpdateSquare));
     }
 
 

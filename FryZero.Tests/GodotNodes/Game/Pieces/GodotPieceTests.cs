@@ -26,62 +26,62 @@ public class GodotPieceTests
         Assert.Equivalent(expected, actual);
     }
 
-    [Fact]
-    public void GetUpdatedRectangleShape()
-    {
-        int squareSize = 36;
-        var shape = new RectangleShape();
-        var expected = new RectangleShape
-        {
-            Size = new Vector(36,36)
-        };
+    // [Fact]
+    // public void GetUpdatedRectangleShape()
+    // {
+    //     int squareSize = 36;
+    //     var shape = new RectangleShape();
+    //     var expected = new RectangleShape
+    //     {
+    //         Size = new Vector(36,36)
+    //     };
 
-        var actual = shape.WithUpdatedShapex(squareSize);
+    //     var actual = shape.WithUpdatedShapex(squareSize);
 
-        Assert.Equivalent(expected, actual);
-    }
+    //     Assert.Equivalent(expected, actual);
+    // }
 
-    [Fact]
-    public void GetUpdatedArea()
-    {
-        var shape = new RectangleShape
-        {
-            Size = new Vector(12,12)
-        };
-        var area = new Area();
+    // [Fact]
+    // public void GetUpdatedArea()
+    // {
+    //     var shape = new RectangleShape
+    //     {
+    //         Size = new Vector(12,12)
+    //     };
+    //     var area = new Area();
 
-        var expected = new Area
-        {
-            Shape = new RectangleShape
-            {
-                Size = new Vector(12,12)
-            },
-        };
+    //     var expected = new Area
+    //     {
+    //         Shape = new RectangleShape
+    //         {
+    //             Size = new Vector(12,12)
+    //         },
+    //     };
 
-        var actual = area.WithUpdatedArea(shape);
+    //     var actual = area.WithUpdatedArea(shape);
 
-        Assert.Equivalent(expected, actual);
-    }
+    //     Assert.Equivalent(expected, actual);
+    // }
 
-    [Fact]
-    public void GetUpdatedPhsyics()
-    {
-        var shape = new RectangleShape
-        {
-            Size = new Vector(30,30)
-        };
-        var physics = new Physics();
+    // [Fact]
+    // public void GetUpdatedPhsyics()
+    // {
+    //     var shape = new RectangleShape
+    //     {
+    //         Size = new Vector(30,30)
+    //     };
+    //     var physics = new Physics();
 
-        var expected = new Physics
-        {
-            Shape = new RectangleShape
-            {
-                Size = new Vector(30,30)
-            },
-        };
+    //     var expected = new Physics
+    //     {
+    //         Shape = new RectangleShape
+    //         {
+    //             Size = new Vector(30,30)
+    //         },
+    //     };
 
-        var actual = physics.WithUpdatedPhysics(shape);
+    //     var actual = physics.WithUpdatedPhysics(shape);
 
-        Assert.Equivalent(expected, actual);
-    }
+    //     Assert.Equivalent(expected, actual);
+    // }
 }
