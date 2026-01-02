@@ -7,7 +7,7 @@ using Godot;
 
 namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
-[Tool]
+//[Tool]
 
 [GlobalClass]
 

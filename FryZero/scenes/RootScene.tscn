@@ -13,48 +13,21 @@ limit_enabled = false
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.280551, 0.38062772, 0.6137525, 1)
+BackgroundColor = Color(0.5764706, 0.16078432, 0.22745098, 1)
 BackgroundTexture = ExtResource("1_20q55")
-PatternColor = Color(0.3849373, 0.47530228, 0.7135614, 1)
+PatternColor = Color(0.627451, 0.25882354, 0.49019608, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
 [node name="GodotBoard" type="Node2D" parent="."]
-visible = false
 script = ExtResource("3_ltheh")
-LightSquareColor = Color(0.51407826, 0.607699, 0.7925002, 1)
+LightSquareColor = Color(0.764606, 0.6625981, 0.90235966, 1)
 LightSquareTexture = ExtResource("3_ib006")
-DarkSquareColor = Color(0.46552247, 0.17941901, 0.11747486, 1)
+DarkSquareColor = Color(0.26645753, 0.1702973, 0.4341165, 1)
 DarkSquareTexture = ExtResource("2_20q55")
-PieceStyle = 1
-LightPieceColor = Color(0.8832488, 0.67676467, 0.70318985, 1)
-LightPieceOutlineColor = Color(0.30908078, 0.15379646, 0.1783455, 1)
-DarkPieceColor = Color(0.1852077, 0.2182855, 0.6009942, 1)
-DarkPieceOutlineColor = Color(0.7976818, 0.838222, 0.9820145, 1)
-metadata/_custom_type_script = "uid://cm31dysjcy4q7"
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = -669.0
-offset_top = -699.0
-offset_right = -80.0
-offset_bottom = -30.0
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-canvas_item_default_texture_filter = 0
-size = Vector2i(589, 669)
-render_target_update_mode = 4
-
-[node name="GodotBoard" type="Node2D" parent="SubViewportContainer/SubViewport"]
-position = Vector2(640, 640)
-script = ExtResource("3_ltheh")
-LightSquareColor = Color(0.51407826, 0.607699, 0.7925002, 1)
-LightSquareTexture = ExtResource("3_ib006")
-DarkSquareColor = Color(0.46552247, 0.17941901, 0.11747486, 1)
-DarkSquareTexture = ExtResource("2_20q55")
-PieceStyle = 1
-LightPieceColor = Color(0.8832488, 0.67676467, 0.70318985, 1)
-LightPieceOutlineColor = Color(0.30908078, 0.15379646, 0.1783455, 1)
-DarkPieceColor = Color(0.1852077, 0.2182855, 0.6009942, 1)
-DarkPieceOutlineColor = Color(0.7976818, 0.838222, 0.9820145, 1)
+LightPieceColor = Color(0.40494868, 0.9023477, 0.87833244, 1)
+LightPieceOutlineColor = Color(0.07545648, 0.20904875, 0.22355223, 1)
+DarkPieceColor = Color(0.32125005, 0.22179043, 0.084208466, 1)
+DarkPieceOutlineColor = Color(0.96481556, 0.5900512, 0.37082556, 1)
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"

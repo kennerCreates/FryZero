@@ -1,6 +1,4 @@
-﻿using System;
-using FryZeroGodot.Config.Enums;
-using FryZeroGodot.GodotInterface.Extensions;
+﻿using FryZeroGodot.Config.Enums;
 using Godot;
 using Color = Godot.Color;
 using GodotPieceManager = FryZeroGodot.GodotNodes.Game.Pieces.GodotPieceManager;
@@ -15,7 +13,7 @@ namespace FryZeroGodot.GodotNodes.Game.Board;
 public partial class GodotBoard : Node2D
 {
     [ExportCategory("Board")]
-    private int _squareSize = 160;
+    private int _squareSize = 64;
     private Color _lightSquareColor = Colors.White;
     private Color _darkSquareColor = Colors.Black;
     private Texture2D _lightSquareTexture;
@@ -115,38 +113,13 @@ public partial class GodotBoard : Node2D
         AddChild(_lightSquares);
     }
 
-    private void GetWindowContainer()
-    {
-        _window = GetParent().GetParent<SubViewportContainer>();
-    }
-
-    private void UpdateSquareSize()
-    {
-        var windowSize = _window.Size;
-        _squareSize = (int)windowSize.Y / 8;
-    }
-    private void UpdateWindowSize()
-    {
-        if (_window == null)
-        {
-            GetWindowContainer();
-            UpdateSquareSize();
-        }
-        else
-        {
-            UpdateSquareSize();
-        }
-
-    }
-
     private void SetSquareScale()
     {
-        _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
-        _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
+        if (_lightSquares != null) _lightSquares.Scale = new Vector2(_squareSize, _squareSize);
+        if (_darkSquares != null) _darkSquares.Scale = new Vector2(_squareSize, _squareSize);
     }
     private void UpdateSquare()
     {
-        UpdateWindowSize();
         SetSquareScale();
         UpdatePieceManager();
     }
@@ -250,19 +223,10 @@ public partial class GodotBoard : Node2D
     }
 
 
-    public override void _EnterTree()
-    {
-    }
     public override void _Ready()
     {
-        if (Engine.IsEditorHint())
-        {
-            EditorOnReady();
-        }
-        else
-        {
-            EditorOnReady();
-            GameOnReady();
-        }
+        EditorOnReady();
     }
+
+
 }
