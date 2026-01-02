@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
@@ -93,22 +94,23 @@ public partial class GodotPieceManager : Node2D
         foreach (var child in children)
         {
             if (child is not GodotPiece piece) continue;
-            piece.Style = _style;
-            piece.DarkPieceColor = _darkPieceColor;
-            piece.LightPieceColor = _lightPieceColor;
-            piece.DarkPieceOutlineColor = _darkPieceOutlineColor;
-            piece.LightPieceOutlineColor = _lightPieceOutlineColor;
-            piece.SquareSize = _size;
+            SetPieceVisuals(piece);
         }
     }
 
-    private void UpdateChessPosition()
+    private void SetPieceVisuals(GodotPiece piece)
     {
-        
+        piece.Style = _style;
+        piece.DarkPieceColor = _darkPieceColor;
+        piece.LightPieceColor = _lightPieceColor;
+        piece.DarkPieceOutlineColor = _darkPieceOutlineColor;
+        piece.LightPieceOutlineColor = _lightPieceOutlineColor;
+        piece.SquareSize = _size;
     }
+
     private void DestroyExistingPieces()
     {
-        var children = GetChildren();
+        var children = GetChildren().OfType<GodotPiece>();
         foreach (var child in children)
         {
             child.QueueFree();
@@ -119,36 +121,69 @@ public partial class GodotPieceManager : Node2D
     {
         foreach (var piece in position.Squares.Select(square => square.Piece).Where(piece => piece is not null))
         {
-            piece.SquareSize = _size;
-            piece.Style = _style;
-            piece.ZIndex = 9;
-            piece.MovementDelay = PieceMovementDelay;
+            ConfigurePieceProperties(piece);
             AddChild(piece);
         }
     }
 
-    private void EditorOnReady()
+    private void ConfigurePieceProperties(GodotPiece piece)
     {
+        piece.SquareSize = _size;
+        piece.Style = _style;
+        piece.ZIndex = 9;
+        piece.MovementDelay = PieceMovementDelay;
+    }
+
+    private void SpawnNewPieceButtonNodes()
+    {
+        foreach (var color in Enum.GetValues<PieceColor>())
+        {
+            foreach (var type in Enum.GetValues<PieceType>())
+            {
+                var button = NewPieceButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: _size);
+                button.Style = _style;
+                button.LightPieceColor = _lightPieceColor;
+                button.DarkPieceColor = _darkPieceColor;
+                button.LightPieceOutlineColor = _lightPieceOutlineColor;
+                button.DarkPieceOutlineColor = _darkPieceOutlineColor;
+                AddChild(button);
+            }
+        }
+    }
+    private Square FindClosestSquareLocation() =>
+        GetGlobalMousePosition().GetSquare(_size);
+
+    private GodotPiece _pieceBeingSpawned;
+    public void SpawnActualGodotPiece(PieceType type, PieceColor color)
+    {
+        _pieceBeingSpawned = PositionManagement.CreateOneHeldPiece(type, color);
+        _pieceBeingSpawned.Position = GetGlobalMousePosition();
+        SetPieceVisuals(_pieceBeingSpawned);
+        ConfigurePieceProperties(_pieceBeingSpawned);
+        _pieceBeingSpawned.SetToPickedUp();
+        AddChild(_pieceBeingSpawned);
+    }
+
+    public void UpdatePieceBeingSpawned()
+    {
+        _pieceBeingSpawned.HandlePieceOnBoardOrNot();
+    }
+
+
+
+    private void GameOnReady()
+    {
+        //CreateHueShiftShader();
         PositionManagement.InitializeEmptyBoard(ChessPosition);
         PositionManagement.CreatePiecesInStartingPosition(ChessPosition);
         DestroyExistingPieces();
         SpawnPieceNodes(ChessPosition);
+        SpawnNewPieceButtonNodes();
     }
-    private void GameOnReady()
-    {
 
-    }
     public override void _Ready()
     {
-        if (Engine.IsEditorHint())
-        {
-            EditorOnReady();
-        }
-        else
-        {
-            EditorOnReady();
-            GameOnReady();
-        }
+        GameOnReady();
     }
 
     private void PickUpOrDropPiece(InputEvent @event)
@@ -158,7 +193,7 @@ public partial class GodotPieceManager : Node2D
         var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
         if (!isLeftMouseButtonEvent) return;
 
-        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.PickUpPiece) : nameof(GodotPiece.DropPiece);
+        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.LeftClickDown) : nameof(GodotPiece.LeftClickReleased);
         GetTree().CallGroup(CallGroups.LeftClick, method);
     }
 

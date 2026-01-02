@@ -53,19 +53,26 @@ public static class PositionManagement
         }
     }
 
-    private static void SetPiece(GodotPiece piece,ChessPosition position)
+    public static void SetPiece(GodotPiece piece,ChessPosition position)
     {
         var square = position.Squares.Single(s => s.File == piece.File && s.Rank == piece.Rank);
         square.Piece = piece;
     }
 
-    private static GodotPiece CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
+    public static GodotPiece CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
     {
         var piece = new GodotPiece();
         piece.Type = type;
         piece.Color = color;
         piece.Rank = rank;
         piece.File = file;
+        return piece;
+    }
+    public static GodotPiece CreateOneHeldPiece(PieceType type, PieceColor color)
+    {
+        var piece = new GodotPiece();
+        piece.Type = type;
+        piece.Color = color;
         return piece;
     }
     public static void UpdatePieceNodes(ChessPosition position)
@@ -91,5 +98,41 @@ public static class PositionManagement
         GD.Print(oldSquare.File, oldSquare.Rank," - ", newSquare.File, newSquare.Rank);
     }
 
+    public static void RemovePieceFromBoard(this GodotPiece piece, ChessPosition position)
+    {
+        var square = position.Squares.SingleOrDefault(s => s.Piece == piece);
+        if (square != null) square.Piece = null;
+        GD.Print("Piece dropped off board");
+    }
 
+    private static bool IsValidFile(this File file) =>
+        file switch
+        {
+            File.A => true,
+            File.B => true,
+            File.C => true,
+            File.D => true,
+            File.E => true,
+            File.F => true,
+            File.G => true,
+            File.H => true,
+            _ => false
+        };
+
+    private static bool IsValidRank(this Rank rank) =>
+        rank switch
+        {
+            Rank.One => true,
+            Rank.Two => true,
+            Rank.Three => true,
+            Rank.Four => true,
+            Rank.Five => true,
+            Rank.Six => true,
+            Rank.Seven => true,
+            Rank.Eight => true,
+            _ => false
+        };
+
+    public static bool IsValidSquare(this Square square) =>
+        square.File.IsValidFile() && square.Rank.IsValidRank();
 }

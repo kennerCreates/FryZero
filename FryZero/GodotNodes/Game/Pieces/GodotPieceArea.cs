@@ -4,7 +4,7 @@ namespace FryZeroGodot.GodotNodes.Game.Pieces;
 
 [GlobalClass]
 
-public partial class GodotArea : Area2D
+public partial class GodotPieceArea : Area2D
 {
     private RectangleShape2D _shape;
     private CollisionShape2D _collision;
@@ -20,7 +20,7 @@ public partial class GodotArea : Area2D
         }
     }
 
-    private GodotNodes.Game.Pieces.GodotPiece _parentPiece;
+    private GodotPiece _parentPiece;
 
     public override void _Ready()
     {
@@ -50,7 +50,7 @@ public partial class GodotArea : Area2D
 
     private void GetPieceParent()
     {
-        var parent = GetParent<GodotNodes.Game.Pieces.GodotPiece>();
+        var parent = GetParent<GodotPiece>();
         if (parent != null) _parentPiece = parent;
     }
 

@@ -25,16 +25,16 @@ public static class GodotUntestableMapper
         };
 
 // note if you want to add more properties than shape this will create more node copies -- i think
-    public static GodotArea ToGodotArea(this Area ourArea, GodotArea godotArea) =>
+    public static GodotPieceArea ToGodotArea(this Area ourArea, GodotPieceArea godotPieceArea) =>
         new()
         {
-            Shape = ourArea.Shape.ToRectangleShape2D(godotArea.Shape)
+            Shape = ourArea.Shape.ToRectangleShape2D(godotPieceArea.Shape)
         };
 
-    public static Area ToArea (this GodotArea godotArea) =>
+    public static Area ToArea (this GodotPieceArea godotPieceArea) =>
         new()
         {
-            Shape = godotArea.Shape.ToRectangleShape()
+            Shape = godotPieceArea.Shape.ToRectangleShape()
         };
 
 // note if you want to add more properties than shape this will create more node copies -- i think

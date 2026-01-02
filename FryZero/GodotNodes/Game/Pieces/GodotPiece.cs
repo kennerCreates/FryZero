@@ -23,6 +23,7 @@ public partial class GodotPiece : Node2D
     private Color _lightPieceOutlineColor = Colors.Black;
     private Color _darkPieceColor = Colors.Black;
     private Color _darkPieceOutlineColor = Colors.White;
+    private bool _isOnBoard = false;
 
     [Export] public int MovementDelay { get; set; } = 10;
 
@@ -153,6 +154,10 @@ public partial class GodotPiece : Node2D
     private void UpdateLocation(Square square)
     {
         Position = square.LocationVector(_squareSize);
+        if (!_isOnBoard)
+        {
+            _isOnBoard = true;
+        }
     }
 
     private void CreateSprite()
@@ -170,14 +175,14 @@ public partial class GodotPiece : Node2D
         if (Engine.IsEditorHint()) return;
         _shape?.WithUpdatedShape(_squareSize);
         _physics?.WithUpdatedPhysics(_shape);
-        _area?.WithUpdatedArea(_shape);
+        _pieceArea?.WithUpdatedPieceArea(_shape);
         _pinJoint2D?.UpdateSoftness(_squareSize);
     }
 
     private RectangleShape2D _shape;
     private GodotPhysics _physics;
     private GodotHoldPoint _holdPoint;
-    private GodotArea _area;
+    private GodotPieceArea _pieceArea;
     private PinJoint2D _pinJoint2D;
     private bool _isMouseEntered;
     private bool _isBeingMoved;
@@ -195,7 +200,7 @@ public partial class GodotPiece : Node2D
             CreatePhysicsPiece();
         }
 
-        if (_area is null)
+        if (_pieceArea is null)
         {
             CreateArea();
         }
@@ -224,18 +229,18 @@ public partial class GodotPiece : Node2D
         _physics?.WithUpdatedPhysics(_shape);
         AddChild(_physics);
         _sprite.GetParent()?.RemoveChild(_sprite);
-        _physics.AddChild(_sprite);
+        _physics?.AddChild(_sprite);
     }
 
     private void CreateArea()
     {
-        _area = new GodotArea();
-        _area?.WithUpdatedArea(_shape);
-        AddChild(_area);
+        _pieceArea = new GodotPieceArea();
+        _pieceArea?.WithUpdatedPieceArea(_shape);
+        AddChild(_pieceArea);
     }
     private void CreateHoldPoint()
     {
-        _holdPoint = new GodotNodes.Game.Pieces.GodotHoldPoint();
+        _holdPoint = new GodotHoldPoint();
         var circle = new CircleShape2D();
         circle.Radius = 5;
         _holdPoint.Shape = circle;
@@ -244,12 +249,13 @@ public partial class GodotPiece : Node2D
         AddChild(_holdPoint);
     }
 
-    public void CreatePinJoint()
+    private void CreatePinJoint()
     {
         if (_holdPoint == null || _physics == null) return;
         _pinJoint2D = new PinJoint2D();
         AddChild(_pinJoint2D);
         _pinJoint2D?.UpdateSoftness(_squareSize);
+        if (_pinJoint2D == null) return;
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
         _pinJoint2D.Position = _holdPoint.Position;
@@ -257,11 +263,10 @@ public partial class GodotPiece : Node2D
         if (_pinJoint2D.NodeB == null) GD.Print("NodeB missing");
     }
 
-    public void PickUpPiece()
+    public void LeftClickDown()
     {
         if (!_isMouseEntered) return;
-        _isBeingMoved = true;
-        _isOnASquare = false;
+        SetToPickedUp();
         _physics.PickedUpPiece();
     }
 
@@ -271,25 +276,44 @@ public partial class GodotPiece : Node2D
     {
         _pieceManager = GetParent<GodotPieceManager>();
     }
-    public void DropPiece()
+    public void LeftClickReleased()
     {
         if (_isOnASquare) return;
         _isBeingMoved = false;
         _physics.DroppedPiece();
-        _file = FindClosestSquare().File;
-        _rank = FindClosestSquare().Rank;
-        this.UpdateChessPosition(_pieceManager.ChessPosition);
+        HandlePieceOnBoardOrNot();
     }
 
-    private Square FindClosestSquare() =>
+    private Square FindClosestSquareLocation() =>
         GetGlobalMousePosition().GetSquare(_squareSize);
 
+    public void HandlePieceOnBoardOrNot()
+    {
+        var closestSquare = FindClosestSquareLocation();
+        var isValidSquare = closestSquare.IsValidSquare();
+        if (isValidSquare)
+        {
+            _file = closestSquare.File;
+            _rank = closestSquare.Rank;
+            this.UpdateChessPosition(_pieceManager.ChessPosition);
+        }
+        else
+        {
+            this.RemovePieceFromBoard(_pieceManager.ChessPosition);
+            QueueFree();
+        }
 
+    }
     public void SetMouseEntered(bool isEntered)
     {
         _isMouseEntered = isEntered;
     }
 
+    public void SetToPickedUp()
+    {
+        _isBeingMoved = true;
+        _isOnASquare = false;
+    }
     private void EditorOnReady()
     {
         GetPieceManager();

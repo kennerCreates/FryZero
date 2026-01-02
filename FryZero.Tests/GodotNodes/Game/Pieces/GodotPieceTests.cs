@@ -58,7 +58,7 @@ public class GodotPieceTests
     //         },
     //     };
 
-    //     var actual = area.WithUpdatedArea(shape);
+    //     var actual = area.WithUpdatedPieceArea(shape);
 
     //     Assert.Equivalent(expected, actual);
     // }
