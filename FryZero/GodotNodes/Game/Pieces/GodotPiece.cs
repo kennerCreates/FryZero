@@ -23,7 +23,6 @@ public partial class GodotPiece : Node2D
     private Color _lightPieceOutlineColor = Colors.Black;
     private Color _darkPieceColor = Colors.Black;
     private Color _darkPieceOutlineColor = Colors.White;
-    private bool _isOnBoard = false;
 
     [Export] public int MovementDelay { get; set; } = 10;
 
@@ -153,10 +152,9 @@ public partial class GodotPiece : Node2D
 
     private void UpdateLocation(Square square)
     {
-        Position = square.LocationVector(_squareSize);
-        if (!_isOnBoard)
+        if (_isOnASquare)
         {
-            _isOnBoard = true;
+            Position = square.LocationVector(_squareSize);
         }
     }
 
@@ -167,7 +165,7 @@ public partial class GodotPiece : Node2D
         CreateHueShiftShader();
     }
 
-    public void UpdatePiece()
+    private void UpdatePiece()
     {
         if (_sprite is null) CreateSprite();
         UpdateSprite();

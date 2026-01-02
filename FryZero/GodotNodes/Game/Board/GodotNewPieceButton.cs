@@ -190,21 +190,17 @@ public partial class GodotNewPieceButton : Node2D
     private bool _leftClickDown = false;
     public void LeftClickDown()
     {
-        if (_isMouseEntered)
-        {
-            _isBeingMoved = true;
-            _pieceManager.SpawnActualGodotPiece(_type,_color);
-            _leftClickDown = true;
-        }
+        if (!_isMouseEntered) return;
+        _isBeingMoved = true;
+        _pieceManager.SpawnActualGodotPiece(_type,_color,Position);
+        _leftClickDown = true;
     }
 
     public void LeftClickReleased()
     {
-        if (_leftClickDown)
-        {
-            _pieceManager.UpdatePieceBeingSpawned();
-            _leftClickDown = false;
-        }
+        if (!_leftClickDown) return;
+        _pieceManager.UpdatePieceBeingSpawned();
+        _leftClickDown = false;
 
     }
     public void SetMouseEntered(bool isEntered)

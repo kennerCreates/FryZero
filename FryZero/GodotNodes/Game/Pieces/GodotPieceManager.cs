@@ -154,13 +154,13 @@ public partial class GodotPieceManager : Node2D
         GetGlobalMousePosition().GetSquare(_size);
 
     private GodotPiece _pieceBeingSpawned;
-    public void SpawnActualGodotPiece(PieceType type, PieceColor color)
+    public void SpawnActualGodotPiece(PieceType type, PieceColor color, Vector2 location)
     {
         _pieceBeingSpawned = PositionManagement.CreateOneHeldPiece(type, color);
-        _pieceBeingSpawned.Position = GetGlobalMousePosition();
         SetPieceVisuals(_pieceBeingSpawned);
         ConfigurePieceProperties(_pieceBeingSpawned);
         _pieceBeingSpawned.SetToPickedUp();
+        _pieceBeingSpawned.Position = location;
         AddChild(_pieceBeingSpawned);
     }
 

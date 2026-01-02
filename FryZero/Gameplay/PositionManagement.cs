@@ -91,11 +91,21 @@ public static class PositionManagement
 
     public static void UpdateChessPosition(this GodotPiece piece, ChessPosition position)
     {
-        var newSquare = position.Squares.Single(s => s.File == piece.File && s.Rank == piece.Rank);
-        var oldSquare = position.Squares.Single(s => s.Piece == piece);
-        oldSquare.Piece = null;
-        newSquare.Piece = piece;
-        GD.Print(oldSquare.File, oldSquare.Rank," - ", newSquare.File, newSquare.Rank);
+        var newSquare = position.Squares.SingleOrDefault(s => s.File == piece.File && s.Rank == piece.Rank);
+        var oldSquare = position.Squares.SingleOrDefault(s => s.Piece == piece);
+        if (oldSquare != null) oldSquare.Piece = null;
+        if (newSquare != null)
+        {
+            var currentPiece = newSquare.Piece;
+            if (currentPiece != null)
+            {
+                currentPiece.QueueFree();
+            }
+            newSquare.Piece = piece;
+        }
+        // if (oldSquare == null) return;
+        // if (newSquare != null)
+        //     GD.Print(oldSquare.File, oldSquare.Rank, " - ", newSquare.File, newSquare.Rank);
     }
 
     public static void RemovePieceFromBoard(this GodotPiece piece, ChessPosition position)
