@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://djkkabff2382b"]
 
-[ext_resource type="Texture2D" uid="uid://dfp2xpm5bftw6" path="res://assets/Backgrounds/Diamond1.png" id="1_20q55"]
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotNodes/UI/Background/GodotBackground.cs" id="1_ib006"]
 [ext_resource type="Texture2D" uid="uid://dbm3j3mgxidnj" path="res://assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
 [ext_resource type="Texture2D" uid="uid://dftmx0p8ucrsp" path="res://assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotNodes/Game/Board/GodotBoard.cs" id="3_ltheh"]
+[ext_resource type="Script" uid="uid://cwcqrqt1bny4u" path="res://GodotNodes/UI/ColorScheme/GodotColorScheme.cs" id="5_ib006"]
 
 [node name="Root" type="Node"]
 
@@ -13,9 +13,6 @@ limit_enabled = false
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.5764706, 0.16078432, 0.22745098, 1)
-BackgroundTexture = ExtResource("1_20q55")
-PatternColor = Color(0.627451, 0.25882354, 0.49019608, 1)
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,7 +21,7 @@ metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 script = ExtResource("3_ltheh")
 LightSquareColor = Color(0.764606, 0.6625981, 0.90235966, 1)
 LightSquareTexture = ExtResource("3_ib006")
-DarkSquareColor = Color(0.26645753, 0.1702973, 0.4341165, 1)
+DarkSquareColor = Color(0.17753428, 0.2575095, 0.21377555, 1)
 DarkSquareTexture = ExtResource("2_20q55")
 PieceStyle = 1
 LightPieceColor = Color(0.40494868, 0.9023477, 0.87833244, 1)
@@ -32,3 +29,7 @@ LightPieceOutlineColor = Color(0.07545648, 0.20904875, 0.22355223, 1)
 DarkPieceColor = Color(0.29999715, 0.089583136, 0.5477568, 1)
 DarkPieceOutlineColor = Color(0.96481556, 0.5900512, 0.37082556, 1)
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"
+
+[node name="GodotColorScheme" type="Node2D" parent="."]
+script = ExtResource("5_ib006")
+metadata/_custom_type_script = "uid://cwcqrqt1bny4u"

@@ -1,8 +1,8 @@
-﻿using Godot;
+﻿using FryZeroGodot.Config.Enums;
+using Godot;
+using Color = Godot.Color;
 
 namespace FryZeroGodot.GodotNodes.UI.Background;
-
-[Tool]
 
 [GlobalClass]
 

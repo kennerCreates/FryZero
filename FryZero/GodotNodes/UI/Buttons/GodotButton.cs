@@ -15,10 +15,6 @@ public partial class GodotButton : Node2D
     private PieceStyle _style;
     private PieceType _type;
     private PieceColor _color;
-    private Color _lightPieceColor = Colors.White;
-    private Color _lightPieceOutlineColor = Colors.Black;
-    private Color _darkPieceColor = Colors.Black;
-    private Color _darkPieceOutlineColor = Colors.White;
     [Export] public int SquareSize
     {
         get => _squareSize;
@@ -56,44 +52,7 @@ public partial class GodotButton : Node2D
             UpdateButton();
         }
     }
-    [Export] public Color LightPieceColor
-    {
-        get => _lightPieceColor;
-        set
-        {
-            _lightPieceColor = value;
-            UpdateButton();
-        }
-    }
-    [Export]
-    public Color LightPieceOutlineColor
-    {
-        get => _lightPieceOutlineColor;
-        set
-        {
-            _lightPieceOutlineColor = value;
-            UpdateButton();
-        }
-    }
-    [Export] public Color DarkPieceColor
-    {
-        get => _darkPieceColor;
-        set
-        {
-            _darkPieceColor = value;
-            UpdateButton();
-        }
-    }
-    [Export]
-    public Color DarkPieceOutlineColor
-    {
-        get => _darkPieceOutlineColor;
-        set
-        {
-            _darkPieceOutlineColor = value;
-            UpdateButton();
-        }
-    }
+
     private Sprite2D _sprite;
     private ShaderMaterial _material;
 
@@ -114,16 +73,9 @@ public partial class GodotButton : Node2D
         _sprite.Material = _material;
         var spriteSize = _sprite.Texture.GetSize();
         _sprite.Scale = new Vector2(SquareSize, SquareSize) / spriteSize;
-        SetSpriteColor();
     }
 
-    private void SetSpriteColor()
-    {
-        var spriteColor = new Color(_color == PieceColor.White ? _lightPieceColor : _darkPieceColor);
-        var outlineColor = new Color(_color == PieceColor.White ? _lightPieceOutlineColor : _darkPieceOutlineColor);
-        _material.SetShaderParameter("main_color", spriteColor);
-        _material.SetShaderParameter("outline_color", outlineColor);
-    }
+
 
     private void UpdateLocation()
     {
@@ -149,7 +101,7 @@ public partial class GodotButton : Node2D
 
     private RectangleShape2D _shape;
 
-    private UI.Buttons.GodotButtonArea _pieceArea;
+    private GodotButtonArea _pieceArea;
 
     private bool _isMouseEntered;
     private bool _isBeingMoved;

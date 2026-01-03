@@ -122,11 +122,11 @@ public partial class GodotPiece : Node2D
     private Sprite2D _sprite;
     private ShaderMaterial _material;
 
-    private void CreateHueShiftShader()
-    {
-        _material = new ShaderMaterial();
-        _material.Shader = GD.Load<Shader>("res://GodotNodes/Visuals/HueShift.gdshader");
-    }
+    // private void CreateHueShiftShader()
+    // {
+    //     _material = new ShaderMaterial();
+    //     _material.Shader = GD.Load<Shader>("res://GodotNodes/Visuals/HueShift.gdshader");
+    // }
 
     private void SetSpriteImage()
     {
@@ -161,8 +161,8 @@ public partial class GodotPiece : Node2D
     private void CreateSprite()
     {
         _sprite = new Sprite2D();
+        _material = ColorScheme.CreateHueShiftShader();
         AddChild(_sprite);
-        CreateHueShiftShader();
     }
 
     private void UpdatePiece()
@@ -315,6 +315,7 @@ public partial class GodotPiece : Node2D
     private void EditorOnReady()
     {
         GetPieceManager();
+        _material = ColorScheme.CreateHueShiftShader();
         UpdatePiece();
     }
     private void GameOnReady()

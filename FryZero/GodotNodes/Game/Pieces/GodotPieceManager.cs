@@ -142,10 +142,6 @@ public partial class GodotPieceManager : Node2D
             {
                 var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: _size);
                 button.Style = _style;
-                button.LightPieceColor = _lightPieceColor;
-                button.DarkPieceColor = _darkPieceColor;
-                button.LightPieceOutlineColor = _lightPieceOutlineColor;
-                button.DarkPieceOutlineColor = _darkPieceOutlineColor;
                 AddChild(button);
             }
         }
