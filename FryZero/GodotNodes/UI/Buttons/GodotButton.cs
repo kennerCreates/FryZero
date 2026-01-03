@@ -5,11 +5,11 @@ using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.Game.Pieces;
 using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Board;
+namespace FryZeroGodot.GodotNodes.UI.Buttons;
 
 [GlobalClass]
 
-public partial class GodotNewPieceButton : Node2D
+public partial class GodotButton : Node2D
 {
     private int _squareSize = 160;
     private PieceStyle _style;
@@ -128,7 +128,7 @@ public partial class GodotNewPieceButton : Node2D
     private void UpdateLocation()
     {
 
-        Position = NewPieceButtonLocations.GetNewPieceButtonLocation(_color, _type, _squareSize);
+        Position = ButtonLocations.GetNewPieceButtonLocation(_color, _type, _squareSize);
     }
 
     private void CreateSprite()
@@ -149,7 +149,7 @@ public partial class GodotNewPieceButton : Node2D
 
     private RectangleShape2D _shape;
 
-    private GodotNewPieceButtonArea _pieceArea;
+    private UI.Buttons.GodotButtonArea _pieceArea;
 
     private bool _isMouseEntered;
     private bool _isBeingMoved;
@@ -175,7 +175,7 @@ public partial class GodotNewPieceButton : Node2D
 
     private void CreateArea()
     {
-        _pieceArea = new GodotNewPieceButtonArea();
+        _pieceArea = new UI.Buttons.GodotButtonArea();
         _pieceArea?.WithUpdatedNewPieceButtonArea(_shape);
         AddChild(_pieceArea);
     }

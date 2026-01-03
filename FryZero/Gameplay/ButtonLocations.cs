@@ -1,15 +1,16 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.GodotNodes.Game.Board;
+using FryZeroGodot.GodotNodes.UI.Buttons;
 using Godot;
 
 namespace FryZeroGodot.gameplay;
 
-public static class NewPieceButtonLocations
+public static class ButtonLocations
 {
 
-    public static GodotNewPieceButton CreateNewPieceButton(PieceColor color, PieceType type, int squareSize)
+    public static GodotButton CreateNewPieceButton(PieceColor color, PieceType type, int squareSize)
     {
-        var button = new GodotNewPieceButton();
+        var button = new GodotButton();
         button.Type = type;
         button.Color = color;
         button.SquareSize = squareSize;

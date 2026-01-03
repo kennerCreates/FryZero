@@ -1,11 +1,11 @@
-﻿using FryZeroGodot.GodotNodes.Game.Pieces;
+﻿using FryZeroGodot.GodotNodes.Game.Board;
 using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Board;
+namespace FryZeroGodot.GodotNodes.UI.Buttons;
 
 [GlobalClass]
 
-public partial class GodotNewPieceButtonArea : Area2D
+public partial class GodotButtonArea : Area2D
 {
     private RectangleShape2D _shape;
     private CollisionShape2D _collision;
@@ -21,7 +21,7 @@ public partial class GodotNewPieceButtonArea : Area2D
         }
     }
 
-    private GodotNewPieceButton _parentPiece;
+    private GodotButton _parentPiece;
 
     public override void _Ready()
     {
@@ -51,7 +51,7 @@ public partial class GodotNewPieceButtonArea : Area2D
 
     private void GetPieceParent()
     {
-        var parent = GetParent<GodotNewPieceButton>();
+        var parent = GetParent<GodotButton>();
         if (parent != null) _parentPiece = parent;
     }
 

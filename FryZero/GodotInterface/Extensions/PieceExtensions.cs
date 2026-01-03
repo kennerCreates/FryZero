@@ -2,6 +2,7 @@ using System.Drawing;
 using FryZeroGodot.GodotInterface.Models;
 using FryZeroGodot.GodotNodes.Game.Board;
 using FryZeroGodot.GodotNodes.Game.Pieces;
+using FryZeroGodot.GodotNodes.UI.Buttons;
 using Godot;
 
 namespace FryZeroGodot.GodotInterface.Extensions
@@ -30,7 +31,7 @@ namespace FryZeroGodot.GodotInterface.Extensions
             return pieceArea;
         }
 
-        public static GodotNewPieceButtonArea WithUpdatedNewPieceButtonArea(this GodotNewPieceButtonArea area,
+        public static GodotButtonArea WithUpdatedNewPieceButtonArea(this GodotButtonArea area,
             RectangleShape2D shape)
         {
             area.Shape = shape;

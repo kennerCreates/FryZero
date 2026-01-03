@@ -140,7 +140,7 @@ public partial class GodotPieceManager : Node2D
         {
             foreach (var type in Enum.GetValues<PieceType>())
             {
-                var button = NewPieceButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: _size);
+                var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: _size);
                 button.Style = _style;
                 button.LightPieceColor = _lightPieceColor;
                 button.DarkPieceColor = _darkPieceColor;
