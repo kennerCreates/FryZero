@@ -23,7 +23,8 @@ const vec3 dark_accent_marker = vec3(0.0, 1.0, 0.0); //green
 
 void fragment(){
 	vec4 tex = texture(TEXTURE,UV);
-	vec3 tex_rgb = tex.rgb;
+	
+	vec3 tex_rgb = tex.rgb * COLOR.rgb;
 
 	if (tex_rgb == light_marker){
 		COLOR.rgb = light_color;

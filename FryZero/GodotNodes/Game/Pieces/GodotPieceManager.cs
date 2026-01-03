@@ -4,87 +4,21 @@ using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.Godot.EngineFiles;
+using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.Game.Pieces;
-
-[Tool]
 
 [GlobalClass]
 
 public partial class GodotPieceManager : Node2D
 {
-    [Export]public int PieceMovementDelay { get; set; } = 10;
-    [Export]
-    public int SquareSize
-    {
-        get => _size;
-        set
-        {
-            _size = value;
-            UpdateAllPieces();
-        }
-    }
-    private int _size = 160;
-
-    [Export]
-    public PieceStyle Style
-    {
-        get => _style;
-        set
-        {
-            _style = value;
-            UpdateAllPieces();
-        }
-    }
-    private PieceStyle _style;
-
-    [Export]
-    public Color LightPieceColor
-    {
-        get => _lightPieceColor;
-        set
-        {
-            _lightPieceColor = value;
-            UpdateAllPieces();
-        }
-    }
-    private Color _lightPieceColor = Colors.White;
-    private Color _lightPieceOutlineColor = Colors.Black;
-    [Export]
-    public Color LightPieceOutlineColor
-    {
-        get => _lightPieceOutlineColor;
-        set
-        {
-            _lightPieceOutlineColor = value;
-            UpdateAllPieces();
-        }
-    }
-
-    [Export]
-    public Color DarkPieceColor
-    {
-        get => _darkPieceColor;
-        set
-        {
-            _darkPieceColor = value;
-            UpdateAllPieces();
-        }
-    }
-    private Color _darkPieceColor = Colors.White;
-    private Color _darkPieceOutlineColor = Colors.White;
-    [Export]
-    public Color DarkPieceOutlineColor
-    {
-        get => _darkPieceOutlineColor;
-        set
-        {
-            _darkPieceOutlineColor = value;
-            UpdateAllPieces();
-        }
-    }
-
+    [Signal]
+    public delegate void PieceManagerInitializedEventHandler();
+    public bool IsInitialized { get; private set; }
+    [Export] public int PieceMovementDelay { get; set; } = 10;
+    [Export] public int SquareSize { get; set; }= 160;
+    [Export] public PieceStyle Style { get; set; }
     public ChessPosition ChessPosition { get; } = new();
 
     private void UpdateAllPieces()
@@ -100,12 +34,8 @@ public partial class GodotPieceManager : Node2D
 
     private void SetPieceVisuals(GodotPiece piece)
     {
-        piece.Style = _style;
-        piece.DarkPieceColor = _darkPieceColor;
-        piece.LightPieceColor = _lightPieceColor;
-        piece.DarkPieceOutlineColor = _darkPieceOutlineColor;
-        piece.LightPieceOutlineColor = _lightPieceOutlineColor;
-        piece.SquareSize = _size;
+        piece.Style = Style;
+        piece.SquareSize = SquareSize;
     }
 
     private void DestroyExistingPieces()
@@ -128,8 +58,8 @@ public partial class GodotPieceManager : Node2D
 
     private void ConfigurePieceProperties(GodotPiece piece)
     {
-        piece.SquareSize = _size;
-        piece.Style = _style;
+        piece.SquareSize = SquareSize;
+        piece.Style = Style;
         piece.ZIndex = 9;
         piece.MovementDelay = PieceMovementDelay;
     }
@@ -140,14 +70,12 @@ public partial class GodotPieceManager : Node2D
         {
             foreach (var type in Enum.GetValues<PieceType>())
             {
-                var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: _size);
-                button.Style = _style;
+                var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: SquareSize);
+                button.Style = Style;
                 AddChild(button);
             }
         }
     }
-    private Square FindClosestSquareLocation() =>
-        GetGlobalMousePosition().GetSquare(_size);
 
     private GodotPiece _pieceBeingSpawned;
     public void SpawnActualGodotPiece(PieceType type, PieceColor color, Vector2 location)
@@ -164,22 +92,36 @@ public partial class GodotPieceManager : Node2D
     {
         _pieceBeingSpawned.HandlePieceOnBoardOrNot();
     }
+    public GodotColorScheme ColorScheme;
 
 
-
-    private void GameOnReady()
+    public override void _EnterTree()
     {
-        //CreateHueShiftShader();
+        ColorScheme = GetParent<GodotColorScheme>();
+        if (ColorScheme.IsInitialized)
+        {
+            OnColorSchemeReady();
+        }
+        else
+        {
+            ColorScheme.ColorSchemeInitialized += OnColorSchemeReady;
+        }
+    }
+
+    private void OnColorSchemeReady()
+    {
         PositionManagement.InitializeEmptyBoard(ChessPosition);
         PositionManagement.CreatePiecesInStartingPosition(ChessPosition);
         DestroyExistingPieces();
         SpawnPieceNodes(ChessPosition);
         SpawnNewPieceButtonNodes();
+        IsInitialized = true;
+        EmitSignal(SignalName.PieceManagerInitialized);
     }
 
     public override void _Ready()
     {
-        GameOnReady();
+
     }
 
     private void PickUpOrDropPiece(InputEvent @event)

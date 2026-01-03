@@ -2,28 +2,30 @@
 
 namespace FryZeroGodot.GodotNodes.UI.ColorScheme;
 
-[Tool]
 [GlobalClass]
 
 public partial class GodotColorScheme : Node2D
 {
+    [Signal]
+    public delegate void ColorSchemeInitializedEventHandler();
 
+    public bool IsInitialized { get; private set; }
 
-    [Export] public Color LightColor = Colors.White;
+    [Export] public Color LightColor { get; set; } = Colors.White;
 
-    [Export] public Color LightHighlightColor = Colors.Yellow;
+    [Export] public Color LightHighlightColor { get; set; } = Colors.Yellow;
 
-    [Export] public Color LightShadowColor = Colors.Magenta;
+    [Export] public Color LightShadowColor { get; set; } = Colors.Magenta;
 
-    [Export] public Color LightAccentColor = Colors.Red;
+    [Export] public Color LightAccentColor { get; set; }= Colors.Red;
 
-    [Export] public Color DarkColor = Colors.Black;
+    [Export] public Color DarkColor { get; set; }= Colors.Black;
 
-    [Export] public Color DarkHighlightColor = Colors.Cyan;
+    [Export] public Color DarkHighlightColor { get; set; }= Colors.Cyan;
 
-    [Export] public Color DarkShadowColor = Colors.Blue;
+    [Export] public Color DarkShadowColor { get; set; }= Colors.Blue;
 
-    [Export] public Color DarkAccentColor = Colors.Green;
+    [Export] public Color DarkAccentColor { get; set; }= Colors.Green;
 
 
     private ShaderMaterial _material;
@@ -47,11 +49,17 @@ public partial class GodotColorScheme : Node2D
         _material.SetShaderParameter("dark_accent_color", DarkAccentColor);
     }
 
+    public new ShaderMaterial GetMaterial()
+    {
+        return _material;
+    }
 
 
     public override void _Ready()
     {
         CreateHueShiftShader();
+        IsInitialized = true;
+        EmitSignal(SignalName.ColorSchemeInitialized);
     }
 
 }
