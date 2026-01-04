@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=9 format=3 uid="uid://djkkabff2382b"]
 
 [ext_resource type="Texture2D" uid="uid://dfp2xpm5bftw6" path="res://assets/Backgrounds/Diamond1.png" id="1_20q55"]
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotNodes/UI/Background/GodotBackground.cs" id="1_ib006"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotNodes/Game/Board/GodotBoard.cs" id="3_ltheh"]
 [ext_resource type="Script" uid="uid://cwcqrqt1bny4u" path="res://GodotNodes/UI/ColorScheme/GodotColorScheme.cs" id="5_ib006"]
 [ext_resource type="Script" uid="uid://bxfdta5djrgs1" path="res://GodotNodes/Game/Pieces/GodotPieceManager.cs" id="6_ltheh"]
+[ext_resource type="Texture2D" uid="uid://c1q2nebxos07v" path="res://assets/Pieces/LittlePieces.png" id="8_gcwa0"]
 
 [node name="Root" type="Node"]
 
@@ -15,24 +16,32 @@ limit_enabled = false
 
 [node name="GodotColorScheme" type="Node2D" parent="."]
 script = ExtResource("5_ib006")
+LightHighlightColor = Color(0.8169504, 0.5261169, 0.8204145, 1)
+LightShadowColor = Color(0.21335465, 0.49641573, 0.7023568, 1)
+LightAccentColor = Color(0.50874376, 0.1804598, 0.7632508, 1)
+DarkColor = Color(0.20761591, 0.29654866, 0.13660237, 1)
+DarkHighlightColor = Color(0.88271654, 0.91915125, 0.3879916, 1)
+DarkShadowColor = Color(0.041506693, 0.16627061, 0.24707642, 1)
+DarkAccentColor = Color(0.0462967, 0.48503095, 0.45281047, 1)
 metadata/_custom_type_script = "uid://cwcqrqt1bny4u"
 
 [node name="GodotBackground" type="Node2D" parent="GodotColorScheme"]
 script = ExtResource("1_ib006")
-BackgroundColor = Color(0.2509804, 0.42745098, 0.28235295, 1)
+BackgroundColor = 6
 BackgroundTexture = ExtResource("1_20q55")
-PatternColor = Color(0.915182, 0.5924155, 0.5725394, 1)
+PatternColor = 2
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="GodotBoard" type="Node2D" parent="GodotColorScheme"]
 script = ExtResource("3_ltheh")
 LightSquareTexture = ExtResource("3_ib006")
-LightSquareColor = 1
+LightSquareColor = 3
 DarkSquareTexture = ExtResource("2_20q55")
-DarkSquareColor = 4
+DarkSquareColor = 7
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"
 
 [node name="GodotPieceManager" type="Node2D" parent="GodotColorScheme"]
 script = ExtResource("6_ltheh")
 SquareSize = 64
+PieceAtlasTexture = ExtResource("8_gcwa0")
 metadata/_custom_type_script = "uid://bxfdta5djrgs1"

@@ -1,4 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 using Color = Godot.Color;
 
@@ -9,21 +10,10 @@ namespace FryZeroGodot.GodotNodes.UI.Background;
 public partial class GodotBackground : Node2D
 {
     private ColorRect _backgroundRect;
-    private Color _backgroundColor;
-    private Sprite2D _backgroundSprite;
-    private Texture2D _backgroundTexture;
-    private Color _patternColor;
 
-    [Export]
-    public Color BackgroundColor
-    {
-        get => _backgroundColor;
-        set
-        {
-            _backgroundColor = value;
-            if (_backgroundRect != null) UpdateColor();
-        }
-    }
+    private Sprite2D _backgroundSprite;
+
+    [Export] public ThemeColor BackgroundColor { get; set; }
     private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
@@ -33,29 +23,12 @@ public partial class GodotBackground : Node2D
     }
     private void UpdateColor()
     {
-        _backgroundRect.Color = _backgroundColor;
+        _backgroundRect.Color = ColorScheme.ModulateToThemeColor(BackgroundColor);
     }
 
-    [Export]
-    public Texture2D BackgroundTexture
-    {
-        get => _backgroundTexture;
-        set
-        {
-            _backgroundTexture = value;
-            if (_backgroundSprite != null) UpdateSprite();
-        }
-    }
-    [Export]
-    public Color PatternColor
-    {
-        get => _patternColor;
-        set
-        {
-            _patternColor = value;
-            if (_backgroundSprite != null) UpdateSprite();
-        }
-    }
+    [Export] public Texture2D BackgroundTexture { get; set; }
+
+    [Export] public ThemeColor PatternColor { get; set; }
     private void CreateBackgroundSprite()
     {
         _backgroundSprite = new Sprite2D();
@@ -64,39 +37,35 @@ public partial class GodotBackground : Node2D
     }
     private void UpdateSprite()
     {
-        _backgroundSprite.Texture = _backgroundTexture;
+        _backgroundSprite.Texture = BackgroundTexture;
         _backgroundSprite.Scale = new Vector2(5, 5);
         _backgroundSprite.RegionEnabled = true;
         _backgroundSprite.RegionRect = new Rect2(0, 0, 800, 800);
         _backgroundSprite.TextureRepeat = TextureRepeatEnum.Enabled;
-        _backgroundSprite.Modulate = PatternColor;
+        _backgroundSprite.Modulate = ColorScheme.ModulateToThemeColor(PatternColor);
     }
-    private void EditorOnReady()
-    {
-        UpdateColor();
 
-    }
-    private void GameOnReady()
-    {
-        _backgroundRect.MouseFilter = Control.MouseFilterEnum.Ignore;
-    }
+    public GodotColorScheme ColorScheme;
     public override void _EnterTree()
     {
-        CreateBackgroundRect();
-        CreateBackgroundSprite();
-    }
 
-    public override void _Ready()
-    {
-        if (Engine.IsEditorHint())
+        ColorScheme = GetParent<GodotColorScheme>();
+        if (ColorScheme.IsInitialized)
         {
-            EditorOnReady();
+            OnColorSchemeReady();
         }
         else
         {
-            EditorOnReady();
-            GameOnReady();
+            ColorScheme.ColorSchemeInitialized += OnColorSchemeReady;
         }
+    }
+
+    private void OnColorSchemeReady()
+    {
+        CreateBackgroundRect();
+        CreateBackgroundSprite();
+        UpdateColor();
+        _backgroundRect.MouseFilter = Control.MouseFilterEnum.Ignore;
     }
 
 }

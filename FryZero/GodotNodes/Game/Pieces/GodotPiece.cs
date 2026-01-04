@@ -20,6 +20,8 @@ public partial class GodotPiece : Node2D
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }
 
+    private PieceState _pieceState = PieceState.Normal;
+
     [Export] public Rank Rank { get; set; }
     [Export] public File File { get; set; }
 
@@ -27,7 +29,8 @@ public partial class GodotPiece : Node2D
 
     private void SetSpriteImage()
     {
-        _sprite.Texture = GD.Load<Texture2D>($"res://Assets/Pieces/{Style}/{Type}.png");
+        var atlas = _pieceManager.AtlasCache[(Color, Type, _pieceState)];
+        _sprite.Texture = atlas;
     }
 
     private void UpdateSprite()
@@ -192,6 +195,16 @@ public partial class GodotPiece : Node2D
     public void SetMouseEntered(bool isEntered)
     {
         _isMouseEntered = isEntered;
+        if (isEntered)
+        {
+            _pieceState = PieceState.Hovered;
+            SetSpriteImage();
+        }
+        else
+        {
+            _pieceState = PieceState.Normal;
+            SetSpriteImage();
+        }
     }
 
     public void SetToPickedUp()
@@ -215,7 +228,6 @@ public partial class GodotPiece : Node2D
 
     private void OnPieceManagerReady()
     {
-        GetPieceManager();
         UpdatePiece();
         CreateRuntimePiece();
         AddToGroup(CallGroups.LeftClick);

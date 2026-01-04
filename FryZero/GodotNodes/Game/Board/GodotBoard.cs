@@ -12,11 +12,11 @@ public partial class GodotBoard : Node2D
     [Export] public int SquareSize { get; set; } = 64;
     [Export] public Texture2D LightSquareTexture { get; set; }
 
-    [Export] public ThemeColors LightSquareColor { get; set; }
+    [Export] public ThemeColor LightSquareColor { get; set; }
 
     [Export] public Texture2D DarkSquareTexture { get; set; }
 
-    [Export] public ThemeColors DarkSquareColor { get; set; }
+    [Export] public ThemeColor DarkSquareColor { get; set; }
 
     public Sprite2D LightSquares;
     public Sprite2D DarkSquares;
@@ -30,8 +30,7 @@ public partial class GodotBoard : Node2D
     private void UpdateDarkSquares()
     {
         DarkSquares ??= CreateDarkSquares();
-        var modulated = ColorSchemeOperations.ModulateToThemeColor(DarkSquareColor);
-        GD.Print(modulated);
+        var modulated = ColorScheme.ModulateToThemeColor(DarkSquareColor);
         DarkSquares.Modulate = modulated;
     }
 
@@ -40,20 +39,18 @@ public partial class GodotBoard : Node2D
         var darkSquares = new Sprite2D();
         AddChild(darkSquares);
         darkSquares.Texture = DarkSquareTexture;
-        darkSquares.Material = ColorScheme.GetMaterial();
         return darkSquares;
     }
     private void UpdateLightSquares()
     {
         LightSquares ??= CreateLightSquares();
-        LightSquares.Modulate = ColorSchemeOperations.ModulateToThemeColor(LightSquareColor);
+        LightSquares.Modulate = ColorScheme.ModulateToThemeColor(LightSquareColor);
     }
     private Sprite2D CreateLightSquares()
     {
         var lightSquares = new Sprite2D();
         AddChild(lightSquares);
         lightSquares.Texture = LightSquareTexture;
-        lightSquares.Material = ColorScheme.GetMaterial();
         return lightSquares;
     }
     private void SetSquareScale()

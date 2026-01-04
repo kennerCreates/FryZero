@@ -1,6 +1,6 @@
 ﻿namespace FryZeroGodot.Config.Enums;
 
-public enum ThemeColors
+public enum ThemeColor
 {
     Light,
     LightHighlight,

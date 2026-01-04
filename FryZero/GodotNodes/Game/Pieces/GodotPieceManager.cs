@@ -1,4 +1,5 @@
-﻿using System;
+﻿gusing System;
+using System.Collections.Generic;
 using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
@@ -19,6 +20,10 @@ public partial class GodotPieceManager : Node2D
     [Export] public int PieceMovementDelay { get; set; } = 10;
     [Export] public int SquareSize { get; set; }= 160;
     [Export] public PieceStyle Style { get; set; }
+
+    [Export] public Texture2D PieceAtlasTexture { get; set; }
+
+    [Export] public int AtlasSize{ get; set; } = 32;
     public ChessPosition ChessPosition { get; } = new();
 
     private void UpdateAllPieces()
@@ -115,13 +120,44 @@ public partial class GodotPieceManager : Node2D
         DestroyExistingPieces();
         SpawnPieceNodes(ChessPosition);
         SpawnNewPieceButtonNodes();
+        BuildAtlasCache();
         IsInitialized = true;
         EmitSignal(SignalName.PieceManagerInitialized);
     }
 
-    public override void _Ready()
-    {
+    public Dictionary<(PieceColor color, PieceType type, PieceState state), AtlasTexture> AtlasCache;
 
+    private void BuildAtlasCache()
+    {
+        AtlasCache = new();
+        foreach (PieceType type in Enum.GetValues<PieceType>())
+        {
+            foreach (PieceColor color in Enum.GetValues<PieceColor>())
+            {
+                foreach (PieceState state in Enum.GetValues<PieceState>())
+                {
+                    var atlas = CreateAtlasTexture(type, color, state);
+                    AtlasCache[(color, type, state)] = atlas;
+                }
+            }
+        }
+    }
+
+    private AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, PieceState state)
+    {
+        var column = (int)type;
+
+        var row = color switch
+        {
+            PieceColor.White => state == PieceState.Normal ? 0 : 1,
+            PieceColor.Black => state == PieceState.Normal ? 2 : 3,
+            _ => 0
+        };
+
+        var atlas = new AtlasTexture();
+        atlas.Atlas = PieceAtlasTexture;
+        atlas.Region = new Rect2(column * AtlasSize, row * AtlasSize, AtlasSize, AtlasSize);
+        return atlas;
     }
 
     private void PickUpOrDropPiece(InputEvent @event)
