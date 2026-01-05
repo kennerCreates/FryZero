@@ -29,8 +29,7 @@ public partial class GodotPiece : Node2D
 
     private void SetSpriteImage()
     {
-        var atlas = _pieceManager.AtlasCache[(Color, Type, _pieceState)];
-        _sprite.Texture = atlas;
+        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, _pieceState)];
     }
 
     private void UpdateSprite()
@@ -49,15 +48,10 @@ public partial class GodotPiece : Node2D
         }
     }
 
-    private void CreateSprite()
-    {
-        _sprite = new Sprite2D();
-        AddChild(_sprite);
-    }
 
     private void UpdatePiece()
     {
-        if (_sprite is null) CreateSprite();
+        if (_sprite is null) _sprite = _pieceManager.AtlasCache[(Color, Type, _pieceState)].AddSprite2DAsChild(this);
         UpdateSprite();
         UpdateLocation(new Square(File, Rank));
         if (Engine.IsEditorHint()) return;
@@ -195,7 +189,7 @@ public partial class GodotPiece : Node2D
     public void SetMouseEntered(bool isEntered)
     {
         _isMouseEntered = isEntered;
-        if (isEntered)
+        if (isEntered || _isBeingMoved)
         {
             _pieceState = PieceState.Hovered;
             SetSpriteImage();
@@ -203,7 +197,7 @@ public partial class GodotPiece : Node2D
         else
         {
             _pieceState = PieceState.Normal;
-            SetSpriteImage();
+            UpdateSprite();
         }
     }
 

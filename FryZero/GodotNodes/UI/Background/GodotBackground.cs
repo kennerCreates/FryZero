@@ -1,4 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 using Color = Godot.Color;
@@ -7,7 +8,7 @@ namespace FryZeroGodot.GodotNodes.UI.Background;
 
 [GlobalClass]
 
-public partial class GodotBackground : Node2D
+public partial class GodotBackground : BaseNode
 {
     private ColorRect _backgroundRect;
 
@@ -31,8 +32,7 @@ public partial class GodotBackground : Node2D
     [Export] public ThemeColor PatternColor { get; set; }
     private void CreateBackgroundSprite()
     {
-        _backgroundSprite = new Sprite2D();
-        AddChild(_backgroundSprite);
+        _backgroundSprite = BackgroundTexture.AddSprite2DAsChild(this);
         UpdateSprite();
     }
     private void UpdateSprite()
@@ -45,22 +45,8 @@ public partial class GodotBackground : Node2D
         _backgroundSprite.Modulate = ColorScheme.ModulateToThemeColor(PatternColor);
     }
 
-    public GodotColorScheme ColorScheme;
-    public override void _EnterTree()
-    {
 
-        ColorScheme = GetParent<GodotColorScheme>();
-        if (ColorScheme.IsInitialized)
-        {
-            OnColorSchemeReady();
-        }
-        else
-        {
-            ColorScheme.ColorSchemeInitialized += OnColorSchemeReady;
-        }
-    }
-
-    private void OnColorSchemeReady()
+    protected override void OnReady()
     {
         CreateBackgroundRect();
         CreateBackgroundSprite();
