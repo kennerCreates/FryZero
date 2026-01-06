@@ -2,7 +2,7 @@
 
 namespace FryZeroGodot.Config.Enums;
 
-public enum PieceState
+public enum InteractState
 {
     Normal,
     Hovered

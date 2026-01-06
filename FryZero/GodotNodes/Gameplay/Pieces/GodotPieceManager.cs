@@ -4,7 +4,7 @@ using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
-using FryZeroGodot.Godot.EngineFiles;
+using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
@@ -125,7 +125,7 @@ public partial class GodotPieceManager : Node2D
         EmitSignal(SignalName.PieceManagerInitialized);
     }
 
-    public Dictionary<(PieceColor color, PieceType type, PieceState state), AtlasTexture> AtlasCache;
+    public Dictionary<(PieceColor color, PieceType type, InteractState state), AtlasTexture> AtlasCache;
 
     private void BuildAtlasCache()
     {
@@ -134,7 +134,7 @@ public partial class GodotPieceManager : Node2D
         {
             foreach (PieceColor color in Enum.GetValues<PieceColor>())
             {
-                foreach (PieceState state in Enum.GetValues<PieceState>())
+                foreach (InteractState state in Enum.GetValues<InteractState>())
                 {
                     var atlas = CreateAtlasTexture(type, color, state);
                     AtlasCache[(color, type, state)] = atlas;
@@ -143,14 +143,14 @@ public partial class GodotPieceManager : Node2D
         }
     }
 
-    private AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, PieceState state)
+    private AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, InteractState state)
     {
         var column = (int)type;
 
         var row = color switch
         {
-            PieceColor.White => state == PieceState.Normal ? 0 : 1,
-            PieceColor.Black => state == PieceState.Normal ? 2 : 3,
+            PieceColor.White => state == InteractState.Normal ? 0 : 1,
+            PieceColor.Black => state == InteractState.Normal ? 2 : 3,
             _ => 0
         };
 

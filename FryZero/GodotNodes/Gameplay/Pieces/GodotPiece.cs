@@ -1,8 +1,8 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
-using FryZeroGodot.Godot.EngineFiles;
 using FryZeroGodot.GodotInterface.Extensions;
+using FryZeroGodot.GodotNodes.EngineFiles;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.Game.Pieces;
@@ -20,7 +20,7 @@ public partial class GodotPiece : Node2D
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }
 
-    private PieceState _pieceState = PieceState.Normal;
+    private InteractState _interactState = InteractState.Normal;
 
     [Export] public Rank Rank { get; set; }
     [Export] public File File { get; set; }
@@ -29,7 +29,7 @@ public partial class GodotPiece : Node2D
 
     private void SetSpriteImage()
     {
-        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, _pieceState)];
+        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, _interactState)];
     }
 
     private void UpdateSprite()
@@ -51,14 +51,14 @@ public partial class GodotPiece : Node2D
 
     private void UpdatePiece()
     {
-        if (_sprite is null) _sprite = _pieceManager.AtlasCache[(Color, Type, _pieceState)].AddSprite2DAsChild(this);
+        if (_sprite is null) _sprite = _pieceManager.AtlasCache[(Color, Type, _interactState)].AddSprite2DAsChild(this);
         UpdateSprite();
         UpdateLocation(new Square(File, Rank));
         if (Engine.IsEditorHint()) return;
         _shape?.WithUpdatedShape(SquareSize);
         _physics?.WithUpdatedPhysics(_shape);
         _pieceArea?.WithUpdatedPieceArea(_shape);
-        _pinJoint2D?.UpdateSoftness(SquareSize);
+        _pinJoint2D?.WithUpdatedSoftness(SquareSize);
     }
 
     private RectangleShape2D _shape;
@@ -136,7 +136,7 @@ public partial class GodotPiece : Node2D
         if (_holdPoint == null || _physics == null) return;
         _pinJoint2D = new PinJoint2D();
         AddChild(_pinJoint2D);
-        _pinJoint2D?.UpdateSoftness(SquareSize);
+        _pinJoint2D?.WithUpdatedSoftness(SquareSize);
         if (_pinJoint2D == null) return;
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
@@ -191,12 +191,12 @@ public partial class GodotPiece : Node2D
         _isMouseEntered = isEntered;
         if (isEntered || _isBeingMoved)
         {
-            _pieceState = PieceState.Hovered;
+            _interactState = InteractState.Hovered;
             SetSpriteImage();
         }
         else
         {
-            _pieceState = PieceState.Normal;
+            _interactState = InteractState.Normal;
             UpdateSprite();
         }
     }

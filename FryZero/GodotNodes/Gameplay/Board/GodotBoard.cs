@@ -1,6 +1,5 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.GodotInterface.Extensions;
-using FryZeroGodot.GodotInterface.Models;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 using Vector2 = Godot.Vector2;

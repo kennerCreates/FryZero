@@ -1,7 +1,7 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.gameplay;
-using FryZeroGodot.Godot.EngineFiles;
 using FryZeroGodot.GodotInterface.Extensions;
+using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.Game.Pieces;
 using Godot;
 
@@ -21,7 +21,7 @@ public partial class GodotButton : Node2D
 
     private void SetSpriteImage()
     {
-        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, PieceState.Normal)];
+        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, InteractState.Normal)];
     }
 
     private void UpdateSprite()
