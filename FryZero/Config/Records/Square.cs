@@ -2,6 +2,7 @@
 
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.GodotNodes.Game.Pieces;
+using GodotPiece = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPiece;
 
 namespace FryZeroGodot.Config.Records;
 

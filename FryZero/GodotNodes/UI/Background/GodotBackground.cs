@@ -1,20 +1,26 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.Config.Enums.Visuals;
 using FryZeroGodot.GodotInterface.Extensions;
+using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
-using Color = Godot.Color;
 
 namespace FryZeroGodot.GodotNodes.UI.Background;
 
 [GlobalClass]
 
-public partial class GodotBackground : BaseNode
+public partial class GodotBackground : RootNode
 {
     private ColorRect _backgroundRect;
 
     private Sprite2D _backgroundSprite;
 
     [Export] public ThemeColor BackgroundColor { get; set; }
+
+    [Export] public Texture2D BackgroundTexture { get; set; }
+
+    [Export] public ThemeColor PatternColor { get; set; }
+
     private void CreateBackgroundRect()
     {
         _backgroundRect = new ColorRect();
@@ -24,12 +30,9 @@ public partial class GodotBackground : BaseNode
     }
     private void UpdateColor()
     {
-        _backgroundRect.Color = ColorScheme.ModulateToThemeColor(BackgroundColor);
+        _backgroundRect.Color = GameTheme.GetThemeColor(BackgroundColor);
     }
 
-    [Export] public Texture2D BackgroundTexture { get; set; }
-
-    [Export] public ThemeColor PatternColor { get; set; }
     private void CreateBackgroundSprite()
     {
         _backgroundSprite = BackgroundTexture.AddSprite2DAsChild(this);
@@ -42,12 +45,12 @@ public partial class GodotBackground : BaseNode
         _backgroundSprite.RegionEnabled = true;
         _backgroundSprite.RegionRect = new Rect2(0, 0, 800, 800);
         _backgroundSprite.TextureRepeat = TextureRepeatEnum.Enabled;
-        _backgroundSprite.Modulate = ColorScheme.ModulateToThemeColor(PatternColor);
+        _backgroundSprite.Modulate = GameTheme.GetThemeColor(PatternColor);
     }
-
 
     protected override void OnReady()
     {
+
         CreateBackgroundRect();
         CreateBackgroundSprite();
         UpdateColor();

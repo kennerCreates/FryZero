@@ -1,5 +1,4 @@
 ﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.GodotNodes.Game.Board;
 using FryZeroGodot.GodotNodes.UI.Buttons;
 using Godot;
 

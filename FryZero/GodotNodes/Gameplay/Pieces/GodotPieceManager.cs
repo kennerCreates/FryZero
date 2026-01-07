@@ -5,18 +5,15 @@ using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotNodes.EngineFiles;
-using FryZeroGodot.GodotNodes.UI.ColorScheme;
+using FryZeroGodot.GodotNodes.NodeModels;
 using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 [GlobalClass]
 
-public partial class GodotPieceManager : Node2D
+public partial class GodotPieceManager : RootNode
 {
-    [Signal]
-    public delegate void PieceManagerInitializedEventHandler();
-    public bool IsInitialized { get; private set; }
     [Export] public int PieceMovementDelay { get; set; } = 10;
     [Export] public int SquareSize { get; set; }= 160;
     [Export] public PieceStyle Style { get; set; }
@@ -97,23 +94,8 @@ public partial class GodotPieceManager : Node2D
     {
         _pieceBeingSpawned.HandlePieceOnBoardOrNot();
     }
-    public GodotColorScheme ColorScheme;
 
-
-    public override void _EnterTree()
-    {
-        ColorScheme = GetParent<GodotColorScheme>();
-        if (ColorScheme.IsInitialized)
-        {
-            OnColorSchemeReady();
-        }
-        else
-        {
-            ColorScheme.ColorSchemeInitialized += OnColorSchemeReady;
-        }
-    }
-
-    private void OnColorSchemeReady()
+    protected override void OnReady()
     {
         PositionManagement.InitializeEmptyBoard(ChessPosition);
         PositionManagement.CreatePiecesInStartingPosition(ChessPosition);
@@ -121,8 +103,6 @@ public partial class GodotPieceManager : Node2D
         SpawnPieceNodes(ChessPosition);
         SpawnNewPieceButtonNodes();
         BuildAtlasCache();
-        IsInitialized = true;
-        EmitSignal(SignalName.PieceManagerInitialized);
     }
 
     public Dictionary<(PieceColor color, PieceType type, InteractState state), AtlasTexture> AtlasCache;

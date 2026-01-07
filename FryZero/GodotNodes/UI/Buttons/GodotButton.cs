@@ -4,6 +4,7 @@ using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.Game.Pieces;
 using Godot;
+using GodotPieceManager = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPieceManager;
 
 namespace FryZeroGodot.GodotNodes.UI.Buttons;
 
@@ -27,7 +28,7 @@ public partial class GodotButton : Node2D
     private void UpdateSprite()
     {
         SetSpriteImage();
-        _sprite.Material = _pieceManager.ColorScheme.GetMaterial();
+        // _sprite.Material = _pieceManager.ColorScheme.GetThemeMaterial();
         var spriteSize = _sprite.Texture.GetSize();
         _sprite.Scale = new Vector2(SquareSize, SquareSize) / spriteSize;
     }
@@ -108,19 +109,6 @@ public partial class GodotButton : Node2D
     public void SetMouseEntered(bool isEntered)
     {
         _isMouseEntered = isEntered;
-    }
-
-    public override void _EnterTree()
-    {
-        _pieceManager = GetParent<GodotPieceManager>();
-        if (_pieceManager.IsInitialized)
-        {
-            OnPieceManagerReady();
-        }
-        else
-        {
-            _pieceManager.PieceManagerInitialized += OnPieceManagerReady;
-        }
     }
 
     private void OnPieceManagerReady()

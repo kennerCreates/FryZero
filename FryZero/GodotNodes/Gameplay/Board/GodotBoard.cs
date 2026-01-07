@@ -1,14 +1,16 @@
 ﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.Config.Enums.Visuals;
 using FryZeroGodot.GodotInterface.Extensions;
+using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 using Vector2 = Godot.Vector2;
 
-namespace FryZeroGodot.GodotNodes.Game.Board;
+namespace FryZeroGodot.GodotNodes.Gameplay.Board;
 
 [GlobalClass]
 
-public partial class GodotBoard : BaseNode
+public partial class GodotBoard : RootNode
 {
     [Export] public int SquareSize { get; set; } = 64;
     [Export] public Texture2D LightSquareTexture { get; set; }
@@ -19,8 +21,8 @@ public partial class GodotBoard : BaseNode
 
     [Export] public ThemeColor DarkSquareColor { get; set; }
 
-    public Sprite2D LightSquares;
-    public Sprite2D DarkSquares;
+    private Sprite2D _lightSquares;
+    private Sprite2D _darkSquares;
     private void UpdateSquares()
     {
         UpdateLightSquares();
@@ -29,21 +31,21 @@ public partial class GodotBoard : BaseNode
     }
     private void UpdateDarkSquares()
     {
-        DarkSquares ??= DarkSquareTexture.AddSprite2DAsChild(this);
-        var modulated = ColorScheme.ModulateToThemeColor(DarkSquareColor);
-        DarkSquares.Modulate = modulated;
+        _darkSquares ??= DarkSquareTexture.AddSprite2DAsChild(this);
+        _darkSquares.Modulate = GameTheme.GetThemeColor(DarkSquareColor);
     }
 
     private void UpdateLightSquares()
     {
-        LightSquares ??= LightSquareTexture.AddSprite2DAsChild(this);
-        LightSquares.Modulate = ColorScheme.ModulateToThemeColor(LightSquareColor);
+        _lightSquares ??= LightSquareTexture.AddSprite2DAsChild(this);
+        _lightSquares.Modulate = GameTheme.GetThemeColor(LightSquareColor);
+
     }
 
     private void SetSquareScale()
     {
-        LightSquares.Scale = new Vector2(SquareSize, SquareSize);
-        DarkSquares.Scale = new Vector2(SquareSize, SquareSize);
+        _lightSquares.Scale = new Vector2(SquareSize, SquareSize);
+        _darkSquares.Scale = new Vector2(SquareSize, SquareSize);
     }
 
     protected override void OnReady()

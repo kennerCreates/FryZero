@@ -9,7 +9,7 @@ public partial class GodotHoldPoint : StaticBody2D
     private Shape2D _shape;
     private int _squareSize;
     private CollisionShape2D _collision;
-    private GodotPiece _piece;
+    private Gameplay.Pieces.GodotPiece _piece;
     private bool _isMoving;
 
     [Export]
@@ -31,7 +31,7 @@ public partial class GodotHoldPoint : StaticBody2D
             return;
         }
         SpawnCollisionShape();
-        _piece = GetParent<GodotPiece>();
+        _piece = GetParent<Gameplay.Pieces.GodotPiece>();
     }
 
     private void SpawnCollisionShape()

@@ -1,5 +1,4 @@
-﻿using FryZeroGodot.GodotNodes.Game.Board;
-using Godot;
+﻿using Godot;
 
 namespace FryZeroGodot.GodotNodes.UI.Buttons;
 

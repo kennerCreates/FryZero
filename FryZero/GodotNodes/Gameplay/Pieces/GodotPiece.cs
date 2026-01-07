@@ -3,16 +3,17 @@ using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.EngineFiles;
+using FryZeroGodot.GodotNodes.Game.Pieces;
+using FryZeroGodot.GodotNodes.NodeModels;
+using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 [GlobalClass]
 
-public partial class GodotPiece : Node2D
+public partial class GodotPiece : LevelOneNode
 {
-
-
     [Export] public int MovementDelay { get; set; } = 10;
 
     [Export] public int SquareSize { get; set; } = 160;
@@ -35,7 +36,7 @@ public partial class GodotPiece : Node2D
     private void UpdateSprite()
     {
         SetSpriteImage();
-        _sprite.Material = _pieceManager.ColorScheme.GetMaterial();
+        _sprite.Material = GameTheme.GetThemeMaterial();
         var spriteSize = _sprite.Texture.GetSize();
         _sprite.Scale = new Vector2(SquareSize, SquareSize) / spriteSize;
     }
@@ -207,21 +208,10 @@ public partial class GodotPiece : Node2D
         _isOnASquare = false;
     }
 
-    public override void _EnterTree()
-    {
-        _pieceManager = GetParent<GodotPieceManager>();
-        if (_pieceManager.IsInitialized)
-        {
-            OnPieceManagerReady();
-        }
-        else
-        {
-           _pieceManager.PieceManagerInitialized += OnPieceManagerReady;
-        }
-    }
 
-    private void OnPieceManagerReady()
+    protected override void OnReady()
     {
+        GetPieceManager();
         UpdatePiece();
         CreateRuntimePiece();
         AddToGroup(CallGroups.LeftClick);

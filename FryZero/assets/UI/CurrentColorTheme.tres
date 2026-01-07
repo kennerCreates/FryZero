@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="GameThemeData" load_steps=2 format=3 uid="uid://dq1jcpgk6kcj0"]
+
+[ext_resource type="Script" uid="uid://hhbml767rk5m" path="res://GodotNodes/UI/ColorScheme/GameThemeData.cs" id="1_m3jiv"]
+
+[resource]
+script = ExtResource("1_m3jiv")
+LightColor = Color(1, 0.7, 0, 1)
+LightHighlightColor = Color(1, 0.9254902, 0.5882353, 1)
+LightShadowColor = Color(0.7019608, 0.39215687, 0.1254902, 1)
+LightAccentColor = Color(0.28380647, 0.6125572, 0.5709304, 1)
+DarkColor = Color(0.13475014, 0.077000014, 0.77, 1)
+DarkHighlightColor = Color(0.39215687, 0.5294118, 0.81960785, 1)
+DarkShadowColor = Color(0.20392157, 0.16470589, 0.38039216, 1)
+DarkAccentColor = Color(0.6627451, 0.30980393, 0.76862746, 1)
+metadata/_custom_type_script = "uid://hhbml767rk5m"

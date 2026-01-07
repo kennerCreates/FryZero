@@ -20,7 +20,7 @@ public partial class GodotPieceArea : Area2D
         }
     }
 
-    private GodotPiece _parentPiece;
+    private Gameplay.Pieces.GodotPiece _parentPiece;
 
     public override void _Ready()
     {
@@ -50,7 +50,7 @@ public partial class GodotPieceArea : Area2D
 
     private void GetPieceParent()
     {
-        var parent = GetParent<GodotPiece>();
+        var parent = GetParent<Gameplay.Pieces.GodotPiece>();
         if (parent != null) _parentPiece = parent;
     }
 

@@ -1,4 +1,4 @@
-﻿namespace FryZeroGodot.Config.Enums;
+﻿namespace FryZeroGodot.Config.Enums.Visuals;
 
 public enum ThemeColor
 {
