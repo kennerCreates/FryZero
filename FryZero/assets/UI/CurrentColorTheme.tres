@@ -1,6 +1,10 @@
-[gd_resource type="Resource" script_class="GameThemeData" load_steps=2 format=3 uid="uid://dq1jcpgk6kcj0"]
+[gd_resource type="Resource" script_class="GameThemeData" load_steps=6 format=3 uid="uid://dq1jcpgk6kcj0"]
 
+[ext_resource type="Texture2D" uid="uid://dfp2xpm5bftw6" path="res://assets/Backgrounds/Diamond1.png" id="1_3q3n8"]
 [ext_resource type="Script" uid="uid://hhbml767rk5m" path="res://GodotNodes/UI/ColorScheme/GameThemeData.cs" id="1_m3jiv"]
+[ext_resource type="Texture2D" uid="uid://dbm3j3mgxidnj" path="res://assets/Boards/ChessboardBlackSquares.png" id="2_4y3jt"]
+[ext_resource type="Texture2D" uid="uid://dftmx0p8ucrsp" path="res://assets/Boards/ChessboardWhiteSquares.png" id="3_1ch8d"]
+[ext_resource type="Texture2D" uid="uid://c1q2nebxos07v" path="res://assets/Pieces/LittlePieces.png" id="4_1ch8d"]
 
 [resource]
 script = ExtResource("1_m3jiv")
@@ -8,8 +12,17 @@ LightColor = Color(1, 0.7, 0, 1)
 LightHighlightColor = Color(1, 0.9254902, 0.5882353, 1)
 LightShadowColor = Color(0.7019608, 0.39215687, 0.1254902, 1)
 LightAccentColor = Color(0.28380647, 0.6125572, 0.5709304, 1)
-DarkColor = Color(0.13475014, 0.077000014, 0.77, 1)
-DarkHighlightColor = Color(0.39215687, 0.5294118, 0.81960785, 1)
-DarkShadowColor = Color(0.20392157, 0.16470589, 0.38039216, 1)
+DarkColor = Color(0.31631103, 0.11255995, 0.12912321, 1)
+DarkHighlightColor = Color(0.53291184, 0.22385845, 0.1741175, 1)
+DarkShadowColor = Color(0.0735609, 0.23885727, 0.20291892, 1)
 DarkAccentColor = Color(0.6627451, 0.30980393, 0.76862746, 1)
+BackgroundTexture = ExtResource("1_3q3n8")
+BackgroundColor = 5
+BackgroundPatternColor = 6
+BackgroundPatternScale = 3
+LightSquareTexture = ExtResource("3_1ch8d")
+LightSquareColor = 2
+DarkSquareTexture = ExtResource("2_4y3jt")
+DarkSquareColor = 5
+PieceAtlasTexture = ExtResource("4_1ch8d")
 metadata/_custom_type_script = "uid://hhbml767rk5m"

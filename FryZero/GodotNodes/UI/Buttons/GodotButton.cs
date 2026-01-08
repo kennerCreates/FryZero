@@ -22,7 +22,7 @@ public partial class GodotButton : Node2D
 
     private void SetSpriteImage()
     {
-        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, InteractState.Normal)];
+        _sprite.Texture = GodotPieceManager.GetPieceTexture(Type, Color, InteractState.Normal);
     }
 
     private void UpdateSprite()
@@ -95,14 +95,14 @@ public partial class GodotButton : Node2D
     {
         if (!_isMouseEntered) return;
         _isBeingMoved = true;
-        _pieceManager.SpawnActualGodotPiece(Type,Color,Position);
+        // _pieceManager.SpawnActualGodotPiece(Type,Color,Position);
         _leftClickDown = true;
     }
 
     public void LeftClickReleased()
     {
         if (!_leftClickDown) return;
-        _pieceManager.UpdatePieceBeingSpawned();
+        // _pieceManager.UpdatePieceBeingSpawned();
         _leftClickDown = false;
 
     }

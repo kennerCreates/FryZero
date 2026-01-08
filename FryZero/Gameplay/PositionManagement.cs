@@ -22,7 +22,7 @@ public static class PositionManagement
         }
     }
 
-    public static void CreatePiecesInStartingPosition(ChessPosition position)
+    public static void CreateStartingChessPosition(ChessPosition position)
     {
         // White Back Rank
         SetPiece(CreateOnePiece(PieceType.Rook, PieceColor.White, Rank.One, File.A), position);
@@ -54,13 +54,13 @@ public static class PositionManagement
         }
     }
 
-    public static void SetPiece(GodotPiece piece,ChessPosition position)
+    private static void SetPiece(GodotPiece piece,ChessPosition position)
     {
         var square = position.Squares.Single(s => s.File == piece.File && s.Rank == piece.Rank);
         square.Piece = piece;
     }
 
-    public static GodotPiece CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
+    private static GodotPiece CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file)
     {
         var piece = new GodotPiece();
         piece.Type = type;
@@ -76,7 +76,7 @@ public static class PositionManagement
         piece.Color = color;
         return piece;
     }
-    public static void UpdatePieceNodes(ChessPosition position)
+    public static void UpdatePiecesFileAndRankToCurrentPosition(ChessPosition position)
     {
 
         // https://github.com/listenheremoose/lc0backend/blob/main/Lc0Backend/Chess/MoveUpdater.cs#L31-L40
@@ -95,18 +95,10 @@ public static class PositionManagement
         var newSquare = position.Squares.SingleOrDefault(s => s.File == piece.File && s.Rank == piece.Rank);
         var oldSquare = position.Squares.SingleOrDefault(s => s.Piece == piece);
         if (oldSquare != null) oldSquare.Piece = null;
-        if (newSquare != null)
-        {
-            var currentPiece = newSquare.Piece;
-            if (currentPiece != null)
-            {
-                currentPiece.QueueFree();
-            }
-            newSquare.Piece = piece;
-        }
-        // if (oldSquare == null) return;
-        // if (newSquare != null)
-        //     GD.Print(oldSquare.File, oldSquare.Rank, " - ", newSquare.File, newSquare.Rank);
+        if (newSquare == null) return;
+        var currentPiece = newSquare.Piece;
+        currentPiece?.QueueFree();
+        newSquare.Piece = piece;
     }
 
     public static void RemovePieceFromBoard(this GodotPiece piece, ChessPosition position)

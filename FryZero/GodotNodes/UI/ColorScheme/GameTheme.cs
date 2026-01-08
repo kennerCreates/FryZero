@@ -4,50 +4,38 @@ using FryZeroGodot.Config.Enums.Visuals;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.UI.ColorScheme;
-public static class GameTheme
+public partial class GameTheme : Node2D
 {
     private static GameThemeData _themeData;
 
     private static ShaderMaterial _themedMaterial;
 
-    private static void UpdateShader()
+    public override void _Ready()
     {
-        // foreach (var color in Enum.GetValues<ThemeColor>())
-        // {
-        //     SetShaderColor(color);
-        // }
-        //GetThemeMaterial().SetShaderParameter(GetParameterString(ThemeColor.Light), GetThemeData().LightColor);
-        // GetThemeMaterial().SetShaderParameter("light_highlight_color", GetThemeData().LightHighlightColor);
-        // GetThemeMaterial().SetShaderParameter("light_shadow_color", GetThemeData().LightShadowColor);
-        // GetThemeMaterial().SetShaderParameter("light_accent_color", GetThemeData().LightAccentColor);
-        // GetThemeMaterial().SetShaderParameter("dark_color", GetThemeData().DarkColor);
-        // GetThemeMaterial().SetShaderParameter("dark_highlight_color", GetThemeData().DarkHighlightColor);
-        // GetThemeMaterial().SetShaderParameter("dark_shadow_color", GetThemeData().DarkShadowColor);
-        // GetThemeMaterial().SetShaderParameter("dark_accent_color", GetThemeData().DarkAccentColor);
+        UpdateAllThemeColors();
     }
 
-    private static string GetParameterString(ThemeColor color) => color.ToString();
+    private static void UpdateAllThemeColors()
+    {
+        foreach (var color in Enum.GetValues<ThemeColor>()) SetShaderColor(color);
+    }
 
     private static void SetShaderColor(ThemeColor color) =>
         GetThemeMaterial().SetShaderParameter(GetParameterString(color), GetThemeColor(color));
 
-    public static ShaderMaterial GetThemeMaterial()
-    {
-        if (_themedMaterial is not null) return _themedMaterial;
-        var material = new ShaderMaterial();
-        material.Shader = GD.Load<Shader>("res://GodotNodes/Visuals/HueShift.gdshader");
-        UpdateShader();
-        _themedMaterial = material;
-        return _themedMaterial;
-    }
-
-    private static GameThemeData GetThemeData()
-    {
-        if (_themeData is not null) return _themeData;
-        var themeData = ResourceLoader.Load<GameThemeData>("res://assets/UI/CurrentColorTheme.tres");
-        _themeData = themeData;
-        return _themeData;
-    }
+    private static string GetParameterString(ThemeColor color) =>
+        color switch
+        {
+            ThemeColor.Light => "light_color",
+            ThemeColor.LightHighlight => "light_highlight_color",
+            ThemeColor.LightShadow => "light_shadow_color",
+            ThemeColor.LightAccent => "light_accent_color",
+            ThemeColor.Dark => "dark_color",
+            ThemeColor.DarkHighlight => "dark_highlight_color",
+            ThemeColor.DarkShadow => "dark_shadow_color",
+            ThemeColor.DarkAccent => "dark_accent_color",
+            _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
+        };
 
     public static Color GetThemeColor(ThemeColor color) =>
         color switch
@@ -60,8 +48,49 @@ public static class GameTheme
             ThemeColor.DarkHighlight => GetThemeData().DarkHighlightColor,
             ThemeColor.DarkShadow => GetThemeData().DarkShadowColor,
             ThemeColor.DarkAccent => GetThemeData().DarkAccentColor,
-            _ => Colors.White
+            _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
         };
 
+    private static Color GetModulateColor(ThemeColor color) =>
+        color switch
+        {
+            ThemeColor.Light => Colors.White,
+            ThemeColor.LightHighlight => Colors.Yellow,
+            ThemeColor.LightShadow => Colors.Magenta,
+            ThemeColor.LightAccent => Colors.Red,
+            ThemeColor.Dark => Colors.Black,
+            ThemeColor.DarkHighlight => Colors.Cyan,
+            ThemeColor.DarkShadow => Colors.Blue,
+            ThemeColor.DarkAccent => Colors.Green,
+            _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
+        };
+
+    public static ShaderMaterial GetThemeMaterial()
+    {
+        _themedMaterial ??= new ShaderMaterial
+        {
+            Shader = GD.Load<Shader>("res://GodotNodes/Visuals/HueShift.gdshader")
+        };
+        return _themedMaterial;
+    }
+
+    public static GameThemeData GetThemeData()
+    {
+        _themeData ??= ResourceLoader.Load<GameThemeData>("res://assets/UI/CurrentColorTheme.tres");
+        return _themeData;
+    }
+
+    public static Color GetBackgroundColor() => GetModulateColor(GetThemeData().BackgroundColor);
+    public static Color GetPatternColor() => GetModulateColor(GetThemeData().BackgroundPatternColor);
+    public static int GetPatternScale() => GetThemeData().BackgroundPatternScale;
+    public static Color GetDarkSquareColor() => GetModulateColor(GetThemeData().DarkSquareColor);
+    public static Color GetLightSquareColor() => GetModulateColor(GetThemeData().LightSquareColor);
+    public static Texture2D GetLightSquareTexture() => GetThemeData().LightSquareTexture;
+    public static Texture2D GetDarkSquareTexture() => GetThemeData().DarkSquareTexture;
+    public static int GetPieceDelay() => GetThemeData().PieceMovementDelay;
+    public static PieceStyle GetPieceStyle() => GetThemeData().PieceStyle;
+    public static Texture2D GetPieceAtlasTexture() => GetThemeData().PieceAtlasTexture;
+    public static int GetPieceSize() => GetThemeData().PieceSize;
+    public static int GetSquareSize() => GetThemeData().SquareSize;
 
 }

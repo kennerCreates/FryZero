@@ -6,6 +6,7 @@ using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.NodeModels;
+using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
@@ -14,33 +15,9 @@ namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 public partial class GodotPieceManager : RootNode
 {
-    [Export] public int PieceMovementDelay { get; set; } = 10;
-    [Export] public int SquareSize { get; set; }= 160;
-    [Export] public PieceStyle Style { get; set; }
-
-    [Export] public Texture2D PieceAtlasTexture { get; set; }
-
-    [Export] public int AtlasSize{ get; set; } = 32;
     public ChessPosition ChessPosition { get; } = new();
 
-    private void UpdateAllPieces()
-    {
-        PositionManagement.UpdatePieceNodes(ChessPosition);
-        var children = GetChildren();
-        foreach (var child in children)
-        {
-            if (child is not GodotPiece piece) continue;
-            SetPieceVisuals(piece);
-        }
-    }
-
-    private void SetPieceVisuals(GodotPiece piece)
-    {
-        piece.Style = Style;
-        piece.SquareSize = SquareSize;
-    }
-
-    private void DestroyExistingPieces()
+    private void DestroyExistingPieceNodes()
     {
         var children = GetChildren().OfType<GodotPiece>();
         foreach (var child in children)
@@ -53,90 +30,81 @@ public partial class GodotPieceManager : RootNode
     {
         foreach (var piece in position.Squares.Select(square => square.Piece).Where(piece => piece is not null))
         {
-            ConfigurePieceProperties(piece);
             AddChild(piece);
         }
     }
 
-    private void ConfigurePieceProperties(GodotPiece piece)
-    {
-        piece.SquareSize = SquareSize;
-        piece.Style = Style;
-        piece.ZIndex = 9;
-        piece.MovementDelay = PieceMovementDelay;
-    }
-
-    private void SpawnNewPieceButtonNodes()
-    {
-        foreach (var color in Enum.GetValues<PieceColor>())
-        {
-            foreach (var type in Enum.GetValues<PieceType>())
-            {
-                var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: SquareSize);
-                button.Style = Style;
-                AddChild(button);
-            }
-        }
-    }
-
-    private GodotPiece _pieceBeingSpawned;
-    public void SpawnActualGodotPiece(PieceType type, PieceColor color, Vector2 location)
-    {
-        _pieceBeingSpawned = PositionManagement.CreateOneHeldPiece(type, color);
-        SetPieceVisuals(_pieceBeingSpawned);
-        ConfigurePieceProperties(_pieceBeingSpawned);
-        _pieceBeingSpawned.SetToPickedUp();
-        _pieceBeingSpawned.Position = location;
-        AddChild(_pieceBeingSpawned);
-    }
-
-    public void UpdatePieceBeingSpawned()
-    {
-        _pieceBeingSpawned.HandlePieceOnBoardOrNot();
-    }
+    // private void SpawnNewPieceButtonNodes()
+    // {
+    //     foreach (var color in Enum.GetValues<PieceColor>())
+    //     {
+    //         foreach (var type in Enum.GetValues<PieceType>())
+    //         {
+    //             var button = ButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: SquareSize);
+    //             button.Style = Style;
+    //             AddChild(button);
+    //         }
+    //     }
+    // }
+    //
+    // private GodotPiece _pieceBeingSpawned;
+    // public void SpawnActualGodotPiece(PieceType type, PieceColor color, Vector2 location)
+    // {
+    //     _pieceBeingSpawned = PositionManagement.CreateOneHeldPiece(type, color);
+    //     SetPieceVisuals(_pieceBeingSpawned);
+    //     ConfigurePieceProperties(_pieceBeingSpawned);
+    //     _pieceBeingSpawned.SetToPickedUp();
+    //     _pieceBeingSpawned.Position = location;
+    //     AddChild(_pieceBeingSpawned);
+    // }
+    //
+    // public void UpdatePieceBeingSpawned()
+    // {
+    //     _pieceBeingSpawned.HandlePieceOnBoardOrNot();
+    // }
 
     protected override void OnReady()
     {
         PositionManagement.InitializeEmptyBoard(ChessPosition);
-        PositionManagement.CreatePiecesInStartingPosition(ChessPosition);
-        DestroyExistingPieces();
+        PositionManagement.CreateStartingChessPosition(ChessPosition);
+        DestroyExistingPieceNodes();
         SpawnPieceNodes(ChessPosition);
-        SpawnNewPieceButtonNodes();
+        PositionManagement.UpdatePiecesFileAndRankToCurrentPosition(ChessPosition);
         BuildAtlasCache();
     }
 
-    public Dictionary<(PieceColor color, PieceType type, InteractState state), AtlasTexture> AtlasCache;
+    private static Dictionary<(PieceType type, PieceColor color, InteractState state), AtlasTexture> _atlasCache;
 
-    private void BuildAtlasCache()
+    private static void BuildAtlasCache()
     {
-        AtlasCache = new();
-        foreach (PieceType type in Enum.GetValues<PieceType>())
+        _atlasCache = new Dictionary<(PieceType type, PieceColor color, InteractState state), AtlasTexture>();
+        foreach (var type in Enum.GetValues<PieceType>())
         {
-            foreach (PieceColor color in Enum.GetValues<PieceColor>())
+            foreach (var color in Enum.GetValues<PieceColor>())
             {
-                foreach (InteractState state in Enum.GetValues<InteractState>())
+                foreach (var state in Enum.GetValues<InteractState>())
                 {
                     var atlas = CreateAtlasTexture(type, color, state);
-                    AtlasCache[(color, type, state)] = atlas;
+                    _atlasCache[(type, color, state)] = atlas;
                 }
             }
         }
     }
 
-    private AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, InteractState state)
+    public static AtlasTexture GetPieceTexture(PieceType type, PieceColor color, InteractState state) => _atlasCache[( type, color, state)];
+
+    private static AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, InteractState state)
     {
         var column = (int)type;
-
         var row = color switch
         {
             PieceColor.White => state == InteractState.Normal ? 0 : 1,
             PieceColor.Black => state == InteractState.Normal ? 2 : 3,
             _ => 0
         };
-
         var atlas = new AtlasTexture();
-        atlas.Atlas = PieceAtlasTexture;
-        atlas.Region = new Rect2(column * AtlasSize, row * AtlasSize, AtlasSize, AtlasSize);
+        atlas.Atlas = GameTheme.GetPieceAtlasTexture();
+        atlas.Region = new Rect2(column * GameTheme.GetPieceSize(), row * GameTheme.GetPieceSize(), GameTheme.GetPieceSize(), GameTheme.GetPieceSize());
         return atlas;
     }
 

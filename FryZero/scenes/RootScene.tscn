@@ -1,9 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://djkkabff2382b"]
+[gd_scene load_steps=5 format=3 uid="uid://djkkabff2382b"]
 
-[ext_resource type="Texture2D" uid="uid://dfp2xpm5bftw6" path="res://assets/Backgrounds/Diamond1.png" id="1_20q55"]
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotNodes/UI/Background/GodotBackground.cs" id="1_ib006"]
-[ext_resource type="Texture2D" uid="uid://dbm3j3mgxidnj" path="res://assets/Boards/ChessboardBlackSquares.png" id="2_20q55"]
-[ext_resource type="Texture2D" uid="uid://dftmx0p8ucrsp" path="res://assets/Boards/ChessboardWhiteSquares.png" id="3_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotNodes/Gameplay/Board/GodotBoard.cs" id="3_ltheh"]
 [ext_resource type="Script" uid="uid://bxfdta5djrgs1" path="res://GodotNodes/Gameplay/Pieces/GodotPieceManager.cs" id="6_ltheh"]
 [ext_resource type="Texture2D" uid="uid://c1q2nebxos07v" path="res://assets/Pieces/LittlePieces.png" id="8_gcwa0"]
@@ -15,16 +12,10 @@ limit_enabled = false
 
 [node name="GodotBackground" type="Node2D" parent="."]
 script = ExtResource("1_ib006")
-BackgroundColor = 2
-BackgroundTexture = ExtResource("1_20q55")
-PatternColor = 4
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
 [node name="GodotBoard" type="Node2D" parent="."]
 script = ExtResource("3_ltheh")
-LightSquareTexture = ExtResource("3_ib006")
-LightSquareColor = 1
-DarkSquareTexture = ExtResource("2_20q55")
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"
 
 [node name="GodotPieceManager" type="Node2D" parent="."]

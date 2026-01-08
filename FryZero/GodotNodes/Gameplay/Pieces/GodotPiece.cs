@@ -14,10 +14,6 @@ namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 public partial class GodotPiece : LevelOneNode
 {
-    [Export] public int MovementDelay { get; set; } = 10;
-
-    [Export] public int SquareSize { get; set; } = 160;
-    [Export] public PieceStyle Style { get; set;} = PieceStyle.Tiny;
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }
 
@@ -27,43 +23,9 @@ public partial class GodotPiece : LevelOneNode
     [Export] public File File { get; set; }
 
     private Sprite2D _sprite;
-
-    private void SetSpriteImage()
-    {
-        _sprite.Texture = _pieceManager.AtlasCache[(Color, Type, _interactState)];
-    }
-
-    private void UpdateSprite()
-    {
-        SetSpriteImage();
-        _sprite.Material = GameTheme.GetThemeMaterial();
-        var spriteSize = _sprite.Texture.GetSize();
-        _sprite.Scale = new Vector2(SquareSize, SquareSize) / spriteSize;
-    }
-
-    private void UpdateLocation(Square square)
-    {
-        if (_isOnASquare)
-        {
-            Position = square.LocationVector(SquareSize);
-        }
-    }
-
-
-    private void UpdatePiece()
-    {
-        if (_sprite is null) _sprite = _pieceManager.AtlasCache[(Color, Type, _interactState)].AddSprite2DAsChild(this);
-        UpdateSprite();
-        UpdateLocation(new Square(File, Rank));
-        if (Engine.IsEditorHint()) return;
-        _shape?.WithUpdatedShape(SquareSize);
-        _physics?.WithUpdatedPhysics(_shape);
-        _pieceArea?.WithUpdatedPieceArea(_shape);
-        _pinJoint2D?.WithUpdatedSoftness(SquareSize);
-    }
-
-    private RectangleShape2D _shape;
+    private RectangleShape2D _collisionShape;
     private GodotPhysics _physics;
+    private CircleShape2D _circleShape;
     private GodotHoldPoint _holdPoint;
     private GodotPieceArea _pieceArea;
     private PinJoint2D _pinJoint2D;
@@ -71,106 +33,99 @@ public partial class GodotPiece : LevelOneNode
     private bool _isBeingMoved;
     private bool _isOnASquare = true;
 
-    private void CreateRuntimePiece()
+    protected override void OnReady()
     {
-        if (_shape is null)
-        {
-            CreateShape();
-        }
-
-        if (_physics is null)
-        {
-            CreatePhysicsPiece();
-        }
-
-        if (_pieceArea is null)
-        {
-            CreateArea();
-        }
-
-        if (_holdPoint is null)
-        {
-            CreateHoldPoint();
-        }
-
-        if (_pinJoint2D is null)
-        {
-            CreatePinJoint();
-        }
+        ZIndex = 9;
+        CreatePiece();
+        AddToGroup(CallGroups.LeftClick);
     }
 
-    private void CreateShape()
+    private Sprite2D GetPieceSprite()
     {
-        _shape = new RectangleShape2D();
-        _shape.WithUpdatedShape(SquareSize);
+        _sprite ??= new Sprite2D();
+        _sprite.Texture = GodotPieceManager.GetPieceTexture(Type, Color, _interactState);
+        _sprite.Material = GameTheme.GetThemeMaterial();
+        _sprite.Scale = new Vector2(GameTheme.GetSquareSize(), GameTheme.GetSquareSize()) / _sprite.Texture.GetSize();
+        return _sprite;
     }
 
-
-    private void CreatePhysicsPiece()
+    private RectangleShape2D GetCollisionShape()
     {
-        _physics = new GodotPhysics();
-        _physics?.WithUpdatedPhysics(_shape);
-        AddChild(_physics);
-        _sprite.GetParent()?.RemoveChild(_sprite);
-        _physics?.AddChild(_sprite);
+        _collisionShape ??= new RectangleShape2D();
+        _collisionShape.WithUpdatedShape(GameTheme.GetSquareSize());
+        return _collisionShape;
     }
 
-    private void CreateArea()
+    private CircleShape2D GetCircleShape()
     {
-        _pieceArea = new GodotPieceArea();
-        _pieceArea?.WithUpdatedPieceArea(_shape);
-        AddChild(_pieceArea);
-    }
-    private void CreateHoldPoint()
-    {
-        _holdPoint = new GodotHoldPoint();
-        var circle = new CircleShape2D();
-        circle.Radius = 5;
-        _holdPoint.Shape = circle;
-        _holdPoint.CollisionLayer = 0;
-        _holdPoint.CollisionMask = 0;
-        AddChild(_holdPoint);
+        _circleShape ??= new CircleShape2D
+        {
+            Radius = 5
+        };
+        return _circleShape;
     }
 
-    private void CreatePinJoint()
+    private GodotPhysics GetPhysicsPiece()
     {
-        if (_holdPoint == null || _physics == null) return;
-        _pinJoint2D = new PinJoint2D();
-        AddChild(_pinJoint2D);
-        _pinJoint2D?.WithUpdatedSoftness(SquareSize);
-        if (_pinJoint2D == null) return;
+        _physics ??= new GodotPhysics();
+        _physics.WithUpdatedPhysics(GetCollisionShape());
+        return _physics;
+    }
+
+    private GodotPieceArea GetPieceArea()
+    {
+        _pieceArea ??= new GodotPieceArea();
+        _pieceArea?.WithUpdatedPieceArea(GetCollisionShape());
+        return _pieceArea;
+    }
+
+    private GodotHoldPoint GetHoldPoint()
+    {
+        _holdPoint ??= new GodotHoldPoint
+        {
+            CollisionLayer = 0,
+            CollisionMask = 0
+        };
+        _holdPoint.Shape = GetCircleShape();
+        return _holdPoint;
+    }
+
+    private PinJoint2D GetPinJoint()
+    {
+        _pinJoint2D ??= new PinJoint2D();
+        _pinJoint2D.WithUpdatedSoftness(GameTheme.GetSquareSize());
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
         _pinJoint2D.Position = _holdPoint.Position;
-        if (_pinJoint2D.NodeA == null) GD.Print("NodeA missing");
-        if (_pinJoint2D.NodeB == null) GD.Print("NodeB missing");
+        return _pinJoint2D;
     }
 
-    public void LeftClickDown()
+    private void CreatePiece()
     {
-        if (!_isMouseEntered) return;
-        SetToPickedUp();
-        _physics.PickedUpPiece();
+        GetCollisionShape();
+        AddChild(GetPhysicsPiece());
+        _physics.AddChild(GetPieceSprite());
+        AddChild(GetPieceArea());
+        AddChild(GetHoldPoint());
+        AddChild(GetPinJoint());
     }
 
-    private GodotPieceManager _pieceManager;
-
-    private void GetPieceManager()
+    private void MovePieceToSquare(Square square)
     {
-        _pieceManager = GetParent<GodotPieceManager>();
+        if (_isOnASquare)
+        {
+            Position = square.LocationVector(GameTheme.GetSquareSize());
+        }
     }
-    public void LeftClickReleased()
-    {
-        if (_isOnASquare) return;
-        _isBeingMoved = false;
-        _physics.DroppedPiece();
-        HandlePieceOnBoardOrNot();
-    }
-
     private Square FindClosestSquareLocation() =>
-        GetGlobalMousePosition().GetSquare(SquareSize);
+        GetGlobalMousePosition().GetSquare(GameTheme.GetSquareSize());
 
-    public void HandlePieceOnBoardOrNot()
+    private GodotPieceManager GetPieceManager()
+    {
+        return GetParent<GodotPieceManager>();
+    }
+
+    private void HandlePieceOnBoardOrNot()
     {
         var closestSquare = FindClosestSquareLocation();
         var isValidSquare = closestSquare.IsValidSquare();
@@ -178,11 +133,11 @@ public partial class GodotPiece : LevelOneNode
         {
             File = closestSquare.File;
             Rank = closestSquare.Rank;
-            this.UpdateChessPosition(_pieceManager.ChessPosition);
+            this.UpdateChessPosition(GetPieceManager().ChessPosition);
         }
         else
         {
-            this.RemovePieceFromBoard(_pieceManager.ChessPosition);
+            this.RemovePieceFromBoard(GetPieceManager().ChessPosition);
             QueueFree();
         }
 
@@ -193,28 +148,33 @@ public partial class GodotPiece : LevelOneNode
         if (isEntered || _isBeingMoved)
         {
             _interactState = InteractState.Hovered;
-            SetSpriteImage();
         }
         else
         {
             _interactState = InteractState.Normal;
-            UpdateSprite();
         }
+        GetPieceSprite();
+    }
+
+    public void LeftClickDown()
+    {
+        if (!_isMouseEntered) return;
+        SetToPickedUp();
+        _physics.PickedUpPiece();
+    }
+
+    public void LeftClickReleased()
+    {
+        if (_isOnASquare) return;
+        _isBeingMoved = false;
+        _physics.DroppedPiece();
+        HandlePieceOnBoardOrNot();
     }
 
     public void SetToPickedUp()
     {
         _isBeingMoved = true;
         _isOnASquare = false;
-    }
-
-
-    protected override void OnReady()
-    {
-        GetPieceManager();
-        UpdatePiece();
-        CreateRuntimePiece();
-        AddToGroup(CallGroups.LeftClick);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -224,7 +184,7 @@ public partial class GodotPiece : LevelOneNode
             if (_isBeingMoved)
             {
                 var tween = GetTree().CreateTween();
-                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), MovementDelay * delta);
+                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), GameTheme.GetPieceDelay() * delta);
                 tween.Finished += () =>
                 {
                     tween.Dispose();
@@ -234,8 +194,8 @@ public partial class GodotPiece : LevelOneNode
             else
             {
                 var tween = GetTree().CreateTween();
-                var targetLocation = new Square(File, Rank).LocationVector(SquareSize);
-                var tweener = tween.TweenProperty(this, "position", targetLocation, MovementDelay * delta);
+                var targetLocation = new Square(File, Rank).LocationVector(GameTheme.GetSquareSize());
+                var tweener = tween.TweenProperty(this, "position", targetLocation, GameTheme.GetPieceDelay() * delta);
                 tween.Finished += () =>
                 {
                     _isOnASquare = true;

@@ -1,7 +1,4 @@
-﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Enums.Visuals;
-using FryZeroGodot.GodotInterface.Extensions;
-using FryZeroGodot.GodotNodes.NodeModels;
+﻿using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
@@ -15,46 +12,39 @@ public partial class GodotBackground : RootNode
 
     private Sprite2D _backgroundSprite;
 
-    [Export] public ThemeColor BackgroundColor { get; set; }
-
-    [Export] public Texture2D BackgroundTexture { get; set; }
-
-    [Export] public ThemeColor PatternColor { get; set; }
-
-    private void CreateBackgroundRect()
+    private static ColorRect GetBackgroundRect(ColorRect background)
     {
-        _backgroundRect = new ColorRect();
-        _backgroundRect.Size = new Vector2(4000, 4000);
-        _backgroundRect.Position = new Vector2(-2000, -2000);
-        AddChild(_backgroundRect);
-    }
-    private void UpdateColor()
-    {
-        _backgroundRect.Color = GameTheme.GetThemeColor(BackgroundColor);
+        background ??= new ColorRect
+        {
+            Size = new Vector2(4000, 4000),
+            Position = new Vector2(-2000, -2000),
+            Material = GameTheme.GetThemeMaterial(),
+            MouseFilter = Control.MouseFilterEnum.Ignore
+        };
+        background.Color = GameTheme.GetBackgroundColor();
+        return background;
     }
 
-    private void CreateBackgroundSprite()
+    private static Sprite2D GetBackgroundSprite(Sprite2D sprite)
     {
-        _backgroundSprite = BackgroundTexture.AddSprite2DAsChild(this);
-        UpdateSprite();
-    }
-    private void UpdateSprite()
-    {
-        _backgroundSprite.Texture = BackgroundTexture;
-        _backgroundSprite.Scale = new Vector2(5, 5);
-        _backgroundSprite.RegionEnabled = true;
-        _backgroundSprite.RegionRect = new Rect2(0, 0, 800, 800);
-        _backgroundSprite.TextureRepeat = TextureRepeatEnum.Enabled;
-        _backgroundSprite.Modulate = GameTheme.GetThemeColor(PatternColor);
+        sprite ??= new Sprite2D
+        {
+            RegionEnabled = true,
+            RegionRect = new Rect2(0, 0, 2000, 2000),
+            TextureRepeat = TextureRepeatEnum.Enabled,
+            Material = GameTheme.GetThemeMaterial()
+        };
+        sprite.Texture = GameTheme.GetThemeData().BackgroundTexture;
+        sprite.Scale = new Vector2(GameTheme.GetPatternScale(), GameTheme.GetPatternScale());
+        sprite.SelfModulate = GameTheme.GetPatternColor();
+        return sprite;
     }
 
     protected override void OnReady()
     {
 
-        CreateBackgroundRect();
-        CreateBackgroundSprite();
-        UpdateColor();
-        _backgroundRect.MouseFilter = Control.MouseFilterEnum.Ignore;
+        AddChild(GetBackgroundRect(_backgroundRect));
+        AddChild(GetBackgroundSprite(_backgroundSprite));
     }
 
 }
