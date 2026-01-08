@@ -1,5 +1,4 @@
-﻿using FryZeroGodot.GodotNodes.NodeModels;
-using FryZeroGodot.GodotNodes.UI.ColorScheme;
+﻿using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 using Vector2 = Godot.Vector2;
 
@@ -7,7 +6,7 @@ namespace FryZeroGodot.GodotNodes.Gameplay.Board;
 
 [GlobalClass]
 
-public partial class GodotBoard : RootNode
+public partial class GodotBoard : Node2D
 {
     private static Sprite2D _lightSquares;
     private static Sprite2D _darkSquares;
@@ -38,14 +37,14 @@ public partial class GodotBoard : RootNode
         return _lightSquares;
     }
 
-    private void SetSquareScale()
+    private static void SetSquareScale()
     {
         var squareSize = GameTheme.GetSquareSize();
         _lightSquares.Scale = new Vector2(squareSize, squareSize);
         _darkSquares.Scale = new Vector2(squareSize, squareSize);
     }
 
-    protected override void OnReady()
+    public override void _Ready()
     {
         AddChild(GetLightSquares());
         AddChild(GetDarkSquares());

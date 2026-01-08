@@ -1,56 +1,42 @@
-﻿using Godot;
+﻿using FryZeroGodot.GodotNodes.UI.ColorScheme;
+using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 [GlobalClass]
 
 public partial class GodotPieceArea : Area2D
 {
-    private RectangleShape2D _shape;
-    private CollisionShape2D _collision;
-
-    [Export]
-    public RectangleShape2D Shape
-    {
-        get => _shape;
-        set
-        {
-            _shape = value;
-            UpdateCollisionShape();
-        }
-    }
-
-    private Gameplay.Pieces.GodotPiece _parentPiece;
+    private static RectangleShape2D _collisionShape;
+    private  CollisionShape2D _collision;
+    private GodotPiece _parentPiece;
 
     public override void _Ready()
     {
-        if (_shape == null)
-        {
-            GD.Print("Shape is null");
-            return;
-        }
-
         InputPickable = true;
-        SpawnCollisionShape();
+        AddChild(GetCollision());
         GetPieceParent();
     }
 
-    private void SpawnCollisionShape()
+    private static RectangleShape2D GetCollisionShape()
     {
-        _collision = new CollisionShape2D();
-        _collision.Shape = _shape;
-        AddChild(_collision);
+        _collisionShape ??= new RectangleShape2D
+        {
+            Size = new Vector2(GameTheme.GetSquareSize(), GameTheme.GetSquareSize())
+        };
+        return _collisionShape;
     }
 
-    private void UpdateCollisionShape()
+    private CollisionShape2D GetCollision()
     {
-        if (_collision == null) return;
-        _collision.Shape = _shape;
+        _collision ??= new CollisionShape2D();
+        _collision.Shape = GetCollisionShape();
+        return _collision;
     }
 
     private void GetPieceParent()
     {
-        var parent = GetParent<Gameplay.Pieces.GodotPiece>();
+        var parent = GetParent<GodotPiece>();
         if (parent != null) _parentPiece = parent;
     }
 

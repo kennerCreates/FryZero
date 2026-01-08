@@ -1,11 +1,8 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.gameplay;
-using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.EngineFiles;
-using FryZeroGodot.GodotNodes.Game.Pieces;
 using FryZeroGodot.GodotNodes.Gameplay.Board;
-using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
@@ -13,7 +10,7 @@ namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 [GlobalClass]
 
-public partial class GodotPiece : LevelOneNode
+public partial class GodotPiece : Node2D
 {
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }
@@ -24,9 +21,7 @@ public partial class GodotPiece : LevelOneNode
     [Export] public File File { get; set; }
 
     private Sprite2D _sprite;
-    private RectangleShape2D _collisionShape;
     private GodotPhysics _physics;
-    private CircleShape2D _circleShape;
     private GodotHoldPoint _holdPoint;
     private GodotPieceArea _pieceArea;
     private PinJoint2D _pinJoint2D;
@@ -34,11 +29,10 @@ public partial class GodotPiece : LevelOneNode
     private bool _isBeingMoved;
     private bool _isOnASquare = true;
 
-    protected override void OnReady()
+    public override void _Ready()
     {
         ZIndex = 9;
         UpdateLocation(new Square(File, Rank));
-        GetCollisionShape();
         AddChild(GetPhysicsPiece());
         _physics.AddChild(GetPieceSprite());
         AddChild(GetPieceArea());
@@ -55,34 +49,15 @@ public partial class GodotPiece : LevelOneNode
         _sprite.Scale = new Vector2(GameTheme.GetSquareSize(), GameTheme.GetSquareSize()) / _sprite.Texture.GetSize();
         return _sprite;
     }
-
-    private RectangleShape2D GetCollisionShape()
-    {
-        _collisionShape ??= new RectangleShape2D();
-        _collisionShape.WithUpdatedShape(GameTheme.GetSquareSize());
-        return _collisionShape;
-    }
-
-    private CircleShape2D GetCircleShape()
-    {
-        _circleShape ??= new CircleShape2D
-        {
-            Radius = 5
-        };
-        return _circleShape;
-    }
-
     private GodotPhysics GetPhysicsPiece()
     {
         _physics ??= new GodotPhysics();
-        _physics.WithUpdatedPhysics(GetCollisionShape());
         return _physics;
     }
 
     private GodotPieceArea GetPieceArea()
     {
         _pieceArea ??= new GodotPieceArea();
-        _pieceArea?.WithUpdatedPieceArea(GetCollisionShape());
         return _pieceArea;
     }
 
@@ -93,14 +68,13 @@ public partial class GodotPiece : LevelOneNode
             CollisionLayer = 0,
             CollisionMask = 0
         };
-        _holdPoint.Shape = GetCircleShape();
         return _holdPoint;
     }
 
     private PinJoint2D GetPinJoint()
     {
         _pinJoint2D ??= new PinJoint2D();
-        _pinJoint2D.WithUpdatedSoftness(GameTheme.GetSquareSize());
+        _pinJoint2D.Softness = GameTheme.GetSquareSize()/ 100f;
         _pinJoint2D.NodeA = _holdPoint.GetPath();
         _pinJoint2D.NodeB = _physics.GetPath();
         _pinJoint2D.Position = _holdPoint.Position;

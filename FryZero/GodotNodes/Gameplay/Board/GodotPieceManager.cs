@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
-using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.Gameplay.Pieces;
-using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
@@ -14,12 +12,10 @@ namespace FryZeroGodot.GodotNodes.Gameplay.Board;
 
 [GlobalClass]
 
-public partial class GodotPieceManager : RootNode
+public partial class GodotPieceManager : Node2D
 {
     private static ChessPosition _position;
-
-    public ChessPosition ChessPosition { get; } = new();
-
+    
     // private void SpawnNewPieceButtonNodes()
     // {
     //     foreach (var color in Enum.GetValues<PieceColor>())
@@ -49,7 +45,7 @@ public partial class GodotPieceManager : RootNode
     //     _pieceBeingSpawned.HandlePieceOnBoardOrNot();
     // }
 
-    protected override void OnReady()
+    public override void _Ready()
     {
         DestroyExistingPieceNodes();
         SetupPositionWithEmptyBoard();
@@ -154,7 +150,14 @@ public partial class GodotPieceManager : RootNode
         }
     }
 
-    public static AtlasTexture GetPieceTexture(PieceType type, PieceColor color, InteractState state) => _atlasCache[( type, color, state)];
+    public static AtlasTexture GetPieceTexture(PieceType type, PieceColor color, InteractState state)
+    {
+        if (_atlasCache is null)
+        {
+            BuildAtlasCache();
+        }
+        return _atlasCache?[(type, color, state)];
+    }
 
     private static AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, InteractState state)
     {

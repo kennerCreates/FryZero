@@ -1,12 +1,11 @@
-﻿using FryZeroGodot.GodotNodes.NodeModels;
-using FryZeroGodot.GodotNodes.UI.ColorScheme;
+﻿using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
 
 namespace FryZeroGodot.GodotNodes.UI.Background;
 
 [GlobalClass]
 
-public partial class GodotBackground : RootNode
+public partial class GodotBackground : Node2D
 {
     private ColorRect _backgroundRect;
 
@@ -40,7 +39,7 @@ public partial class GodotBackground : RootNode
         return sprite;
     }
 
-    protected override void OnReady()
+    public override void _Ready()
     {
 
         AddChild(GetBackgroundRect(_backgroundRect));

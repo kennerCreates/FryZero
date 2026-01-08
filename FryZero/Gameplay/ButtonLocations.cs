@@ -7,12 +7,11 @@ namespace FryZeroGodot.gameplay;
 public static class ButtonLocations
 {
 
-    public static GodotButton CreateNewPieceButton(PieceColor color, PieceType type, int squareSize)
+    public static GodotCreatePieceButton CreateNewPieceButton(PieceColor color, PieceType type, int squareSize)
     {
-        var button = new GodotButton();
+        var button = new GodotCreatePieceButton();
         button.Type = type;
         button.Color = color;
-        button.SquareSize = squareSize;
         button.Position = GetNewPieceButtonLocation(color, type, squareSize);
         return button;
     }

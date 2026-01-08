@@ -1,49 +1,33 @@
 ﻿using Godot;
 
-namespace FryZeroGodot.GodotNodes.Game.Pieces;
+namespace FryZeroGodot.GodotNodes.Gameplay.Pieces;
 
 [GlobalClass]
 
 public partial class GodotHoldPoint : StaticBody2D
 {
-    private Shape2D _shape;
-    private int _squareSize;
-    private CollisionShape2D _collision;
-    private Gameplay.Pieces.GodotPiece _piece;
-    private bool _isMoving;
-
-    [Export]
-    public Shape2D Shape
-    {
-        get => _shape;
-        set
-        {
-            _shape = value;
-            UpdateCollisionShape();
-        }
-    }
+    private static CircleShape2D _collisionShape;
+    private  CollisionShape2D _collision;
 
     public override void _Ready()
     {
-        if (_shape == null)
+        AddChild(GetCollision());
+    }
+
+    private static CircleShape2D GetCollisionShape()
+    {
+        _collisionShape ??= new CircleShape2D()
         {
-            GD.Print("Shape is null");
-            return;
-        }
-        SpawnCollisionShape();
-        _piece = GetParent<Gameplay.Pieces.GodotPiece>();
+            Radius = 5
+        };
+        return _collisionShape;
     }
 
-    private void SpawnCollisionShape()
+    private CollisionShape2D GetCollision()
     {
-        _collision = new CollisionShape2D();
-        _collision.Shape = _shape;
-        AddChild(_collision);
+        _collision ??= new CollisionShape2D();
+        _collision.Shape = GetCollisionShape();
+        return _collision;
     }
 
-    private void UpdateCollisionShape()
-    {
-        if (_collision == null) return;
-        _collision.Shape = _shape;
-    }
 }

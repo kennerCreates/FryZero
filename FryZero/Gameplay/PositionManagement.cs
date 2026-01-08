@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using FryZeroGodot.Config.Enums;
+﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
-using FryZeroGodot.GodotNodes.Game.Pieces;
-using Godot;
 using GodotPiece = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPiece;
 
 namespace FryZeroGodot.gameplay;
