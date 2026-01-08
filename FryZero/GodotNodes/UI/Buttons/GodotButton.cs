@@ -4,7 +4,7 @@ using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.Game.Pieces;
 using Godot;
-using GodotPieceManager = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPieceManager;
+using GodotPieceManager = FryZeroGodot.GodotNodes.Gameplay.Board.GodotPieceManager;
 
 namespace FryZeroGodot.GodotNodes.UI.Buttons;
 

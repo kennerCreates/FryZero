@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotNodes/UI/Background/GodotBackground.cs" id="1_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotNodes/Gameplay/Board/GodotBoard.cs" id="3_ltheh"]
-[ext_resource type="Script" uid="uid://bxfdta5djrgs1" path="res://GodotNodes/Gameplay/Pieces/GodotPieceManager.cs" id="6_ltheh"]
+[ext_resource type="Script" path="res://GodotNodes/Gameplay/Board/GodotPieceManager.cs" id="6_ltheh"]
 [ext_resource type="Texture2D" uid="uid://c1q2nebxos07v" path="res://assets/Pieces/LittlePieces.png" id="8_gcwa0"]
 
 [node name="Root" type="Node"]

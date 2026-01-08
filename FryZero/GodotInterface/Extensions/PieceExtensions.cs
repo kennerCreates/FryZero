@@ -1,6 +1,7 @@
 using FryZeroGodot.GodotNodes.Game.Pieces;
 using FryZeroGodot.GodotNodes.UI.Buttons;
 using Godot;
+using GodotPhysics = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPhysics;
 
 namespace FryZeroGodot.GodotInterface.Extensions
 {

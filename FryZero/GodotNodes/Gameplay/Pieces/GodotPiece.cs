@@ -4,6 +4,7 @@ using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotInterface.Extensions;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.GodotNodes.Game.Pieces;
+using FryZeroGodot.GodotNodes.Gameplay.Board;
 using FryZeroGodot.GodotNodes.NodeModels;
 using FryZeroGodot.GodotNodes.UI.ColorScheme;
 using Godot;
@@ -121,10 +122,6 @@ public partial class GodotPiece : LevelOneNode
         _physics.PickedUpPiece();
     }
 
-    private GodotPieceManager GetPieceManager()
-    {
-        return GetParent<GodotPieceManager>();
-    }
     public void LeftClickReleased()
     {
         if (_isOnASquare) return;
@@ -133,22 +130,19 @@ public partial class GodotPiece : LevelOneNode
         HandlePieceOnBoardOrNot();
     }
 
-    private Square FindClosestSquareLocation() =>
-        GetGlobalMousePosition().GetSquare(GameTheme.GetSquareSize());
-
     private void HandlePieceOnBoardOrNot()
     {
-        var closestSquare = FindClosestSquareLocation();
+        var closestSquare = GetGlobalMousePosition().GetSquare(GameTheme.GetSquareSize());
         var isValidSquare = closestSquare.IsValidSquare();
         if (isValidSquare)
         {
             File = closestSquare.File;
             Rank = closestSquare.Rank;
-            this.UpdateChessPosition(GetPieceManager().ChessPosition);
+            GodotPieceManager.UpdateChessPosition(this);
         }
         else
         {
-            this.RemovePieceFromBoard(GetPieceManager().ChessPosition);
+            GodotPieceManager.RemovePieceFromBoard(this);
             QueueFree();
         }
 
