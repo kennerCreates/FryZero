@@ -36,7 +36,13 @@ public partial class GodotPiece : LevelOneNode
     protected override void OnReady()
     {
         ZIndex = 9;
-        CreatePiece();
+        UpdateLocation(new Square(File, Rank));
+        GetCollisionShape();
+        AddChild(GetPhysicsPiece());
+        _physics.AddChild(GetPieceSprite());
+        AddChild(GetPieceArea());
+        AddChild(GetHoldPoint());
+        AddChild(GetPinJoint());
         AddToGroup(CallGroups.LeftClick);
     }
 
@@ -100,30 +106,35 @@ public partial class GodotPiece : LevelOneNode
         return _pinJoint2D;
     }
 
-    private void CreatePiece()
-    {
-        GetCollisionShape();
-        AddChild(GetPhysicsPiece());
-        _physics.AddChild(GetPieceSprite());
-        AddChild(GetPieceArea());
-        AddChild(GetHoldPoint());
-        AddChild(GetPinJoint());
-    }
-
-    private void MovePieceToSquare(Square square)
+    private void UpdateLocation(Square square)
     {
         if (_isOnASquare)
         {
             Position = square.LocationVector(GameTheme.GetSquareSize());
         }
     }
-    private Square FindClosestSquareLocation() =>
-        GetGlobalMousePosition().GetSquare(GameTheme.GetSquareSize());
+
+    public void LeftClickDown()
+    {
+        if (!_isMouseEntered) return;
+        SetToPickedUp();
+        _physics.PickedUpPiece();
+    }
 
     private GodotPieceManager GetPieceManager()
     {
         return GetParent<GodotPieceManager>();
     }
+    public void LeftClickReleased()
+    {
+        if (_isOnASquare) return;
+        _isBeingMoved = false;
+        _physics.DroppedPiece();
+        HandlePieceOnBoardOrNot();
+    }
+
+    private Square FindClosestSquareLocation() =>
+        GetGlobalMousePosition().GetSquare(GameTheme.GetSquareSize());
 
     private void HandlePieceOnBoardOrNot()
     {
@@ -154,21 +165,6 @@ public partial class GodotPiece : LevelOneNode
             _interactState = InteractState.Normal;
         }
         GetPieceSprite();
-    }
-
-    public void LeftClickDown()
-    {
-        if (!_isMouseEntered) return;
-        SetToPickedUp();
-        _physics.PickedUpPiece();
-    }
-
-    public void LeftClickReleased()
-    {
-        if (_isOnASquare) return;
-        _isBeingMoved = false;
-        _physics.DroppedPiece();
-        HandlePieceOnBoardOrNot();
     }
 
     public void SetToPickedUp()
