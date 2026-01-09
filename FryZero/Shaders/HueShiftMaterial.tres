@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dglgv74a8gla2"]
+
+[ext_resource type="Shader" uid="uid://cvwsalm84cj8x" path="res://Shaders/HueShift.gdshader" id="1_70s47"]
+
+[resource]
+shader = ExtResource("1_70s47")
+shader_parameter/light_color = Color(1, 1, 1, 1)
+shader_parameter/light_highlight_color = Color(1, 1, 0, 1)
+shader_parameter/light_shadow_color = Color(1, 0, 1, 1)
+shader_parameter/light_accent_color = Color(1, 0, 0, 1)
+shader_parameter/dark_color = Color(0, 0, 0, 1)
+shader_parameter/dark_highlight_color = Color(0, 1, 1, 1)
+shader_parameter/dark_shadow_color = Color(0, 0, 1, 1)
+shader_parameter/dark_accent_color = Color(0, 1, 0, 1)

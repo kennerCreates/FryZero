@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scenes\" />
+    <Folder Include="Shaders\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Lc0Backend" Version="0.1.0" />

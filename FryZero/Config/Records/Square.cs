@@ -1,7 +1,7 @@
 ﻿#nullable enable
 
 using FryZeroGodot.Config.Enums;
-using GodotPiece = FryZeroGodot.GodotNodes.Gameplay.Pieces.GodotPiece;
+using GodotPiece = FryZeroGodot.GodotInterface.Gameplay.Pieces.GodotPiece;
 
 namespace FryZeroGodot.Config.Records;
 

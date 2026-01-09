@@ -17,12 +17,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameTheme="*res://GodotNodes/UI/ColorScheme/GameTheme.cs"
+GameTheme="*res://GodotInterface/UI/GameTheme/GameTheme.cs"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/scale=2.0
 
 [dotnet]
