@@ -1,13 +1,12 @@
-﻿using FryZeroGodot.Config;
-using FryZeroGodot.Config.Enums;
+﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
-using FryZeroGodot.gameplay;
+using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using File = FryZeroGodot.Config.Enums.File;
 
-namespace FryZero.Tests.Gameplay;
+namespace FryZero.Tests.Gameplay.Board;
 
-public class BoardLocationTests
+public class SquareExtensionsTests
 {
     [Theory]
     [InlineData(File.D, Rank.Four, 30, -15)]

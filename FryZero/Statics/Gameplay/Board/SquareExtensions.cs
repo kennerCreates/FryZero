@@ -1,10 +1,9 @@
 ﻿using System;
-using FryZeroGodot.Config;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using Godot;
 
-namespace FryZeroGodot.gameplay;
+namespace FryZeroGodot.Statics.Gameplay.Board;
 
 public static class SquareExtensions
 {

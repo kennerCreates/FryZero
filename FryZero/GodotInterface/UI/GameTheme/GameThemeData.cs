@@ -2,7 +2,7 @@
 using FryZeroGodot.Config.Enums.Visuals;
 using Godot;
 
-namespace FryZeroGodot.GodotInterface.UI.ColorScheme;
+namespace FryZeroGodot.GodotInterface.UI.GameTheme;
 
 [GlobalClass]
 public partial class GameThemeData : Resource

@@ -1,7 +1,7 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
-using FryZeroGodot.gameplay;
 using FryZeroGodot.GodotNodes.EngineFiles;
+using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
 using GodotPieceManager = FryZeroGodot.GodotInterface.Gameplay.Board.GodotPieceManager;

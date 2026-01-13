@@ -1,8 +1,8 @@
 ﻿using System;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Enums.Visuals;
-using FryZeroGodot.GodotInterface.UI.ColorScheme;
 using Godot;
+using GameThemeData = FryZeroGodot.GodotInterface.UI.GameTheme.GameThemeData;
 
 namespace FryZeroGodot.Statics.UI.GameTheme;
 
@@ -55,5 +55,13 @@ public static class ThemeExtensions
             ThemeColor.DarkShadow => Colors.Blue,
             ThemeColor.DarkAccent => Colors.Green,
             _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
+        };
+
+    public static Texture2D GetPieceTextureFromStyle(this PieceStyle style) =>
+        style switch
+        {
+            PieceStyle.Little => GD.Load<Texture2D>("res://assets/Pieces/LittlePieces.png"),
+            PieceStyle.Tiny => GD.Load<Texture2D>("res://assets/Pieces/LittlePieces.png"),
+            _ => throw new ArgumentOutOfRangeException(nameof(style), style, null)
         };
 }

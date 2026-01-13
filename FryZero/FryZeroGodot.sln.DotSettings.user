@@ -11,7 +11,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATween_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003F6ffd43db71ab3a1bf1a8be57c9b5d3b8c2d5a2cf815125fb4ba8298f5a3e472_003FTween_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cc530c05_002D11e4_002D450e_002Db8a7_002D4828fbc43fb6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="BoardLocationTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.BoardLocationTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Board.BoardLocationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
