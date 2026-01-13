@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://hhbml767rk5m" path="res://GodotInterface/UI/GameTheme/GameThemeData.cs" id="1_m3jiv"]
 [ext_resource type="Texture2D" uid="uid://dbm3j3mgxidnj" path="res://assets/Boards/ChessboardBlackSquares.png" id="2_4y3jt"]
 [ext_resource type="Texture2D" uid="uid://dftmx0p8ucrsp" path="res://assets/Boards/ChessboardWhiteSquares.png" id="3_1ch8d"]
-[ext_resource type="Texture2D" uid="uid://c1q2nebxos07v" path="res://assets/Pieces/LittlePieces.png" id="4_1ch8d"]
+[ext_resource type="Texture2D" uid="uid://b6rh0d6otqjee" path="res://assets/Pieces/LittleStyle.png" id="4_1ch8d"]
 
 [resource]
 script = ExtResource("1_m3jiv")

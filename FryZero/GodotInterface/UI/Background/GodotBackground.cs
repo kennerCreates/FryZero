@@ -32,6 +32,7 @@ public partial class GodotBackground : Node2D
             TextureRepeat = TextureRepeatEnum.Enabled,
         };
         sprite.Texture = GameTheme.GameTheme.Instance.GetBackgroundTexture();
+        sprite.Material = GameTheme.GameTheme.Instance.GetThemeMaterial();
         sprite.Scale = new Vector2(GameTheme.GameTheme.Instance.GetPatternScale(), GameTheme.GameTheme.Instance.GetPatternScale());
         sprite.SelfModulate = GameTheme.GameTheme.Instance.GetPatternColor();
         return sprite;

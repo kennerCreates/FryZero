@@ -1,6 +1,7 @@
 ﻿using System;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Enums.Visuals;
+using FryZeroGodot.GodotInterface.UI.GameTheme;
 using Godot;
 using GameThemeData = FryZeroGodot.GodotInterface.UI.GameTheme.GameThemeData;
 
@@ -15,7 +16,7 @@ public static class ThemeExtensions
     private static void SetShaderColor(this ShaderMaterial shaderMaterial, ThemeColor color, GameThemeData themeData) =>
         shaderMaterial.SetShaderParameter(color.GetParameterString(), color.GetThemeColor(themeData));
 
-    private static string GetParameterString(this ThemeColor color) =>
+    public static string GetParameterString(this ThemeColor color) =>
         color switch
         {
             ThemeColor.Light => "light_color",
@@ -29,7 +30,7 @@ public static class ThemeExtensions
             _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
         };
 
-    private static Color GetThemeColor(this ThemeColor color, GameThemeData themeData) =>
+    public static Color GetThemeColor(this ThemeColor color, IGameThemeData themeData) =>
         color switch
         {
             ThemeColor.Light => themeData.LightColor,
@@ -60,8 +61,8 @@ public static class ThemeExtensions
     public static Texture2D GetPieceTextureFromStyle(this PieceStyle style) =>
         style switch
         {
-            PieceStyle.Little => GD.Load<Texture2D>("res://assets/Pieces/LittlePieces.png"),
-            PieceStyle.Tiny => GD.Load<Texture2D>("res://assets/Pieces/LittlePieces.png"),
+            PieceStyle.Little => GD.Load<Texture2D>("res://assets/Pieces/LittleStyle.png"),
+            PieceStyle.Tiny => GD.Load<Texture2D>("res://assets/Pieces/TinyStyle.png"),
             _ => throw new ArgumentOutOfRangeException(nameof(style), style, null)
         };
 }
