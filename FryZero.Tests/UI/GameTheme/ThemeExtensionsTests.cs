@@ -1,9 +1,6 @@
-﻿using FryZeroGodot.Config.Enums;
-using FryZeroGodot.Config.Enums.Visuals;
-using FryZeroGodot.GodotInterface.UI.GameTheme;
+﻿using FryZeroGodot.Config.Enums.Visuals;
 using FryZeroGodot.Statics.UI.GameTheme;
 using Godot;
-using NSubstitute;
 
 namespace FryZero.Tests.UI.GameTheme;
 
@@ -113,11 +110,88 @@ public class ThemeExtensionsTests
     }
 
     [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_Dark()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.DarkColor;
+        var actual = ThemeColor.Dark.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_DarkHighlight()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.DarkHighlightColor;
+        var actual = ThemeColor.DarkHighlight.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_DarkShadow()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.DarkShadowColor;
+        var actual = ThemeColor.DarkShadow.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_DarkAccent()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.DarkAccentColor;
+        var actual = ThemeColor.DarkAccent.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
     public void GetThemeColor_Returns_Expected_ThemeColor_Light()
     {
         var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
         var expected = themeColorTestData.LightColor;
         var actual = ThemeColor.Light.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_LightHighlight()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.LightHighlightColor;
+        var actual = ThemeColor.LightHighlight.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_LightShadow()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.LightShadowColor;
+        var actual = ThemeColor.LightShadow.GetThemeColor(themeColorTestData);
+        Assert.Equal(expected.R, actual.R);
+        Assert.Equal(expected.G, actual.G);
+        Assert.Equal(expected.B, actual.B);
+    }
+
+    [Fact]
+    public void GetThemeColor_Returns_Expected_ThemeColor_LightAccent()
+    {
+        var themeColorTestData = GameThemeDataFactory.ThemeColorTestData();
+        var expected = themeColorTestData.LightAccentColor;
+        var actual = ThemeColor.LightAccent.GetThemeColor(themeColorTestData);
         Assert.Equal(expected.R, actual.R);
         Assert.Equal(expected.G, actual.G);
         Assert.Equal(expected.B, actual.B);

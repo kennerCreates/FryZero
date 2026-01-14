@@ -13,8 +13,8 @@ public static class ThemeExtensions
     {
         foreach (var color in Enum.GetValues<ThemeColor>()) shader.SetShaderColor(color, themeData);
     }
-    private static void SetShaderColor(this ShaderMaterial shaderMaterial, ThemeColor color, GameThemeData themeData) =>
-        shaderMaterial.SetShaderParameter(color.GetParameterString(), color.GetThemeColor(themeData));
+    private static void SetShaderColor(this ShaderMaterial shader, ThemeColor color, GameThemeData themeData) =>
+        shader.SetShaderParameter(color.GetParameterString(), color.GetThemeColor(themeData));
 
     public static string GetParameterString(this ThemeColor color) =>
         color switch

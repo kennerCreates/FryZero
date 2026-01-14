@@ -23,6 +23,13 @@
     &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetPieceTexture_Returns_Expected_Texture_Tiny&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetMaterialParameterNameStringTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_Light&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_Dark&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkHighlight&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkShadow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkAccent&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightHighlight&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightShadow&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightAccent&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	
