@@ -1,4 +1,5 @@
-﻿using FryZeroGodot.Statics.UI.GameTheme;
+﻿using FryZeroGodot.Config.Enums;
+using FryZeroGodot.Statics.UI.GameTheme;
 using Godot;
 
 namespace FryZeroGodot.GodotInterface.UI.GameTheme;
@@ -29,5 +30,6 @@ public partial class GameTheme : Node2D
     public int GetPieceSize() => _themeData.PieceSize;
     public int GetSquareSize() => _themeData.SquareSize;
     public ShaderMaterial GetThemeMaterial() => _themedMaterial;
+    public PieceStyle GetPieceStyle() => _themeData.PieceStyle;
 
 }

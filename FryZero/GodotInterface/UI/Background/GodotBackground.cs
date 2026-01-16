@@ -14,8 +14,8 @@ public partial class GodotBackground : Node2D
     {
         background ??= new ColorRect
         {
-            Size = new Vector2(4000, 4000),
-            Position = new Vector2(-2000, -2000),
+            Size = new Vector2(8000, 8000),
+            Position = new Vector2(-4000, -4000),
             Material = GameTheme.GameTheme.Instance.GetThemeMaterial(),
             MouseFilter = Control.MouseFilterEnum.Ignore
         };

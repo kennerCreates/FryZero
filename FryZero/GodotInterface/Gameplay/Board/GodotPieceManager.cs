@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
-using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
@@ -17,22 +16,11 @@ public partial class GodotPieceManager : Node2D
 {
     private ChessPosition _position = new();
 
-    public override void _UnhandledInput(InputEvent @event)
-    {
-        if (@event is not InputEventMouseButton mouseButtonEvent) return;
-
-        var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
-        if (!isLeftMouseButtonEvent) return;
-
-        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.LeftClickDown) : nameof(GodotPiece.LeftClickReleased);
-        GetTree().CallGroup(CallGroups.LeftClick, method);
-    }
-
     public override void _Ready()
     {
         DestroyExistingPieceNodes();
-        _position.SetupPositionWithEmptyBoard();
-        _position.SetupPiecesInStartingChessPosition();
+        _position = _position.SetupPositionWithEmptyBoard();
+        _position = _position.SetupPiecesInStartingChessPosition();
         SpawnPieceNodes();
         BuildAtlasCache();
     }
@@ -55,12 +43,12 @@ public partial class GodotPieceManager : Node2D
 
     public void UpdateChessPosition(GodotPiece piece)
     {
-        _position.UpdateChessPosition(piece);
+        _position = _position.UpdateChessPosition(piece);
     }
 
     public void RemovePieceFromBoard(GodotPiece piece)
     {
-        _position.RemovePieceFromBoard(piece);
+        _position = _position.RemovePieceFromBoard(piece);
     }
 
     private Dictionary<(PieceType type, PieceColor color, InteractState state), AtlasTexture> _atlasCache;

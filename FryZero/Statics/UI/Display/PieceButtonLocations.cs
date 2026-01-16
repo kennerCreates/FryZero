@@ -2,9 +2,9 @@
 using Godot;
 using GodotCreatePieceButton = FryZeroGodot.GodotInterface.UI.Buttons.GodotCreatePieceButton;
 
-namespace FryZeroGodot.Statics.UI.HUD;
+namespace FryZeroGodot.Statics.UI.Display;
 
-public static class ButtonLocations
+public static class PieceButtonLocations
 {
 
     public static GodotCreatePieceButton CreateNewPieceButton(PieceColor color, PieceType type, int squareSize)
@@ -15,7 +15,8 @@ public static class ButtonLocations
         button.Position = GetNewPieceButtonLocation(color, type, squareSize);
         return button;
     }
-    public static Vector2 GetNewPieceButtonLocation(PieceColor color, PieceType type, int squareSize) =>
+
+    private static Vector2 GetNewPieceButtonLocation(PieceColor color, PieceType type, int squareSize) =>
         new(GetXLocationCoordinate(squareSize, GetIsLeftPiece(type)),
             GetYLocationCoordinate(squareSize, GetPieceRow(color, type)));
     private static int GetXLocationCoordinate(int squareSize, bool isLeftPiece) =>

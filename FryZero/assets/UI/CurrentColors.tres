@@ -19,6 +19,7 @@ DarkAccentColor = Color(0.46970093, 0.2277877, 0.3531518, 1)
 BackgroundTexture = ExtResource("1_dbosv")
 BackgroundColor = 5
 BackgroundPatternColor = 4
+SquareSize = 128
 LightSquareTexture = ExtResource("3_jhx2e")
 LightSquareColor = 1
 DarkSquareTexture = ExtResource("2_7vjxi")

@@ -1,6 +1,9 @@
-﻿using FryZeroGodot.Config.Enums;
+﻿using System;
+using FryZeroGodot.Config.Enums;
+using FryZeroGodot.GodotInterface.Gameplay.Board;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using Godot;
+using Godot.Collections;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
 
 namespace FryZeroGodot.GodotInterface.UI.Buttons;
@@ -16,6 +19,8 @@ public partial class GodotCreatePieceButton : Node2D
     private Sprite2D _sprite;
     private bool _isMouseEntered;
 
+
+
     public override void _Ready()
     {
 
@@ -25,7 +30,6 @@ public partial class GodotCreatePieceButton : Node2D
     private Sprite2D GetButtonSprite()
     {
         _sprite ??= new Sprite2D();
-        //_sprite.Texture = GodotPieceManager.GetPieceTexture(Type, Color, _interactState);
         _sprite.Material = GameTheme.GameTheme.Instance.GetThemeMaterial();
         _sprite.Scale = new Vector2(GameTheme.GameTheme.Instance.GetSquareSize(), GameTheme.GameTheme.Instance.GetSquareSize()) / _sprite.Texture.GetSize();
         return _sprite;

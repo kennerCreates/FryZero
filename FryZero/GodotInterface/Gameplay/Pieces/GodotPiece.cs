@@ -104,7 +104,7 @@ public partial class GodotPiece : Node2D
         HandlePieceOnBoardOrNot();
     }
 
-    private void HandlePieceOnBoardOrNot()
+    public void HandlePieceOnBoardOrNot()
     {
         var closestSquare = GetGlobalMousePosition().GetSquare(GameTheme.Instance.GetSquareSize());
         var isValidSquare = closestSquare.IsValidSquare();

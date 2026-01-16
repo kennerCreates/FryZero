@@ -58,6 +58,7 @@ public static class ThemeExtensions
             _ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
         };
 
+    //TODO: GetPieceTextureFromStyle is currently untested
     public static Texture2D GetPieceTextureFromStyle(this PieceStyle style) =>
         style switch
         {
