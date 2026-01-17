@@ -14,8 +14,8 @@ public partial class GodotBackground : Node2D
     {
         background ??= new ColorRect
         {
-            Size = new Vector2(8000, 8000),
-            Position = new Vector2(-4000, -4000),
+            Size = new Vector2(5120, 2160),
+            Position = new Vector2(-2560, -1080),
             Material = GameTheme.GameTheme.Instance.GetThemeMaterial(),
             MouseFilter = Control.MouseFilterEnum.Ignore
         };
@@ -28,7 +28,7 @@ public partial class GodotBackground : Node2D
         sprite ??= new Sprite2D
         {
             RegionEnabled = true,
-            RegionRect = new Rect2(0, 0, 2000, 2000),
+            RegionRect = new Rect2(0, 0, 5120, 2160),
             TextureRepeat = TextureRepeatEnum.Enabled,
         };
         sprite.Texture = GameTheme.GameTheme.Instance.GetBackgroundTexture();
