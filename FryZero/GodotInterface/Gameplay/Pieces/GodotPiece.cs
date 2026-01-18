@@ -10,7 +10,7 @@ namespace FryZeroGodot.GodotInterface.Gameplay.Pieces;
 
 [GlobalClass]
 
-public partial class GodotPiece : Node2D
+public partial class GodotPiece : Node2D, IGodotPiece
 {
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }

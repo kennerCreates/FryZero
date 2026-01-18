@@ -37,7 +37,7 @@ public partial class GodotPieceManager : Node2D
     {
         foreach (var piece in _position.Squares.Select(square => square.Piece).Where(piece => piece is not null))
         {
-            AddChild(piece);
+            AddChild((GodotPiece)piece);
         }
     }
 
