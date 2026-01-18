@@ -63,16 +63,17 @@ public static class PositionExtensions
 	{
 		foreach (var file in Enum.GetValues<File>())
 		{
-			var rank = color switch
-			{
-				PieceColor.White => Rank.Two,
-				PieceColor.Black => Rank.Seven,
-				_ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
-			};
-			position.SetPieceInPosition(pieceFactory.CreateOnePiece(PieceType.Pawn, color, rank, file));
+			position.SetPieceInPosition(pieceFactory.CreateOnePiece(PieceType.Pawn, color, color.ToRankForStartingPawns(), file));
 		}
 		return position;
 	}
+
+	public static Rank ToRankForStartingPawns(this PieceColor color) => color switch
+	{
+		PieceColor.White => Rank.Two,
+		PieceColor.Black => Rank.Seven,
+		_ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
+	};
 
 	public static Square SetPieceInPosition(this ChessPosition position, IGodotPiece piece)
 	{

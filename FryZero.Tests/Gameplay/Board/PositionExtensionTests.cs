@@ -71,11 +71,7 @@ public class PositionExtensionTests
     {
         var position = PositionFactory.GetEmptyPosition();
         var pieceFactory = Substitute.For<IGodotPieceFactory>();
-        var piece = Substitute.For<IGodotPiece>();
-        piece.Type = PieceType.Pawn;
-        piece.Color = PieceColor.White;
-        piece.Rank = Rank.Two;
-        pieceFactory.CreateOnePiece(PieceType.Pawn, PieceColor.White, Arg.Any<Rank>(), File.A).Returns(piece);
+        foreach(var file in Enum.GetValues<File>()) PieceFactoryTestHelpers.SetupCreateOnePiece(pieceFactory, PieceType.Pawn, PieceColor.White, Rank.Two, file);
 
         var actual = position.SetupPawnsInStartingPosition(PieceColor.White, pieceFactory);
         var squaresOnRankTwo = actual.Squares.Where(square => square.Rank is Rank.Two);
@@ -83,5 +79,41 @@ public class PositionExtensionTests
         bool allSquaresOnRankTwoHaveWhitePawns = squaresOnRankTwo.All(square =>
             square.Piece is { Type: PieceType.Pawn, Color: PieceColor.White });
         Assert.True(allSquaresOnRankTwoHaveWhitePawns);
+        pieceFactory.Received(8).CreateOnePiece(PieceType.Pawn, PieceColor.White, Rank.Two, Arg.Any<File>());
+    }
+
+    [Fact]
+    public void SetupPawnsInStartingPosition_Sets_Piece_To_Black_Pawn_For_All_Squares_On_Rank_Seven_When_PieceColor_Is_Black()
+    {
+        var position = PositionFactory.GetEmptyPosition();
+        var pieceFactory = Substitute.For<IGodotPieceFactory>();
+        foreach(var file in Enum.GetValues<File>()) PieceFactoryTestHelpers.SetupCreateOnePiece(pieceFactory, PieceType.Pawn, PieceColor.Black, Rank.Seven, file);
+
+        var actual = position.SetupPawnsInStartingPosition(PieceColor.Black, pieceFactory);
+        var squaresOnRankSeven = actual.Squares.Where(square => square.Rank is Rank.Seven);
+
+        bool allSquaresOnRankSevenHaveBlackPawns = squaresOnRankSeven.All(square =>
+            square.Piece is { Type: PieceType.Pawn, Color: PieceColor.Black });
+        Assert.True(allSquaresOnRankSevenHaveBlackPawns);
+        pieceFactory.Received(8).CreateOnePiece(PieceType.Pawn, PieceColor.Black, Rank.Seven, Arg.Any<File>());
+    }
+
+    [Fact]
+    public void GetRankForStartingPawns_Returns_Two_For_White()
+    {
+        Assert.Equal(Rank.Two, PieceColor.White.ToRankForStartingPawns());
+    }
+
+    [Fact]
+    public void GetRankForStartingPawns_Returns_Seven_For_Black()
+    {
+        Assert.Equal(Rank.Seven, PieceColor.Black.ToRankForStartingPawns());
+    }
+
+    [Fact]
+    public void GetRankForStartingPawns_Throws_For_Invalid_Piece_Color()
+    {
+        var invalidPieceColor = (PieceColor)42;
+        Assert.Throws<ArgumentOutOfRangeException>(() => invalidPieceColor.ToRankForStartingPawns());
     }
 }
