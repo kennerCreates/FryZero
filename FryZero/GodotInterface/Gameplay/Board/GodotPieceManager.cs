@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
+using FryZeroGodot.GodotInterface.Gameplay.Pieces;
 using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
@@ -19,8 +20,9 @@ public partial class GodotPieceManager : Node2D
     public override void _Ready()
     {
         DestroyExistingPieceNodes();
+        var pieceFactory = new GodotPieceFactory();
         _position = _position.SetupPositionWithEmptyBoard();
-        _position = _position.SetupPiecesInStartingChessPosition();
+        _position = _position.SetupPiecesInStartingChessPosition(pieceFactory);
         SpawnPieceNodes();
         BuildAtlasCache();
     }

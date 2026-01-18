@@ -4,7 +4,6 @@ using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.GodotInterface.Gameplay.Pieces;
 using Godot;
-using GodotPiece = FryZeroGodot.GodotInterface.Gameplay.Pieces.GodotPiece;
 
 namespace FryZeroGodot.Statics.Gameplay.Board;
 
@@ -24,16 +23,16 @@ public static class PositionExtensions
 		return position;
 	}
 
-	public static ChessPosition SetupPiecesInStartingChessPosition(this ChessPosition position)
+	public static ChessPosition SetupPiecesInStartingChessPosition(this ChessPosition position, IGodotPieceFactory pieceFactory)
 	{
-		position = position.SetupBackrankInStartingPosition(PieceColor.White);
-		position = position.SetupPawnsInStartingPosition(PieceColor.White);
-		position = position.SetupBackrankInStartingPosition(PieceColor.Black);
-		position = position.SetupPawnsInStartingPosition(PieceColor.Black);
+		position = position.SetupBackrankInStartingPosition(PieceColor.White, pieceFactory);
+		position = position.SetupPawnsInStartingPosition(PieceColor.White, pieceFactory);
+		position = position.SetupBackrankInStartingPosition(PieceColor.Black, pieceFactory);
+		position = position.SetupPawnsInStartingPosition(PieceColor.Black, pieceFactory);
 		return position;
 	}
 
-	private static ChessPosition SetupBackrankInStartingPosition(this ChessPosition position, PieceColor color)
+	private static ChessPosition SetupBackrankInStartingPosition(this ChessPosition position, PieceColor color, IGodotPieceFactory pieceFactory)
 	{
 		foreach (var file in Enum.GetValues<File>())
 		{
@@ -55,12 +54,12 @@ public static class PositionExtensions
 				File.H => PieceType.Rook,
 				_ => throw new ArgumentOutOfRangeException(nameof(file), file, null)
 			};
-			position.SetPieceInPosition(CreateOnePiece(type, color, rank, file));
+			position.SetPieceInPosition(pieceFactory.CreateOnePiece(type, color, rank, file));
 		}
 		return position;
 	}
 
-	private static ChessPosition SetupPawnsInStartingPosition(this ChessPosition position, PieceColor color)
+	public static ChessPosition SetupPawnsInStartingPosition(this ChessPosition position, PieceColor color, IGodotPieceFactory pieceFactory)
 	{
 		foreach (var file in Enum.GetValues<File>())
 		{
@@ -70,7 +69,7 @@ public static class PositionExtensions
 				PieceColor.Black => Rank.Seven,
 				_ => throw new ArgumentOutOfRangeException(nameof(color), color, null)
 			};
-			position.SetPieceInPosition(CreateOnePiece(PieceType.Pawn, color, rank, file));
+			position.SetPieceInPosition(pieceFactory.CreateOnePiece(PieceType.Pawn, color, rank, file));
 		}
 		return position;
 	}
@@ -84,14 +83,6 @@ public static class PositionExtensions
 
 	public static Square GetSquare(this ChessPosition position, File file, Rank rank) =>
 		position.Squares.Single(s => s.File == file && s.Rank == rank);
-
-	private static IGodotPiece CreateOnePiece(PieceType type, PieceColor color, Rank rank, File file) => new GodotPiece()
-	{
-		Type = type,
-		Color = color,
-		Rank = rank,
-		File = file
-	};
 
 	public static ChessPosition UpdateChessPosition(this ChessPosition position, IGodotPiece piece)
 	{

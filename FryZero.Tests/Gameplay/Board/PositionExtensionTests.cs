@@ -65,4 +65,23 @@ public class PositionExtensionTests
 
         Assert.Equivalent(expectedPiece, actual.Piece);
     }
+
+    [Fact]
+    public void SetupPawnsInStartingPosition_Sets_Piece_To_White_Pawn_For_All_Squares_On_Rank_Two_When_PieceColor_Is_White()
+    {
+        var position = PositionFactory.GetEmptyPosition();
+        var pieceFactory = Substitute.For<IGodotPieceFactory>();
+        var piece = Substitute.For<IGodotPiece>();
+        piece.Type = PieceType.Pawn;
+        piece.Color = PieceColor.White;
+        piece.Rank = Rank.Two;
+        pieceFactory.CreateOnePiece(PieceType.Pawn, PieceColor.White, Arg.Any<Rank>(), File.A).Returns(piece);
+
+        var actual = position.SetupPawnsInStartingPosition(PieceColor.White, pieceFactory);
+        var squaresOnRankTwo = actual.Squares.Where(square => square.Rank is Rank.Two);
+
+        bool allSquaresOnRankTwoHaveWhitePawns = squaresOnRankTwo.All(square =>
+            square.Piece is { Type: PieceType.Pawn, Color: PieceColor.White });
+        Assert.True(allSquaresOnRankTwoHaveWhitePawns);
+    }
 }
