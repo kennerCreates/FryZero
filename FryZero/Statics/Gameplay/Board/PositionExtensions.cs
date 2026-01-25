@@ -25,14 +25,15 @@ public static class PositionExtensions
 
 	public static ChessPosition SetupPiecesInStartingChessPosition(this ChessPosition position, IGodotPieceFactory pieceFactory)
 	{
-		position = position.SetupBackrankInStartingPosition(PieceColor.White, pieceFactory);
+		position = position.SetupBackRankInStartingPosition(PieceColor.White, pieceFactory);
 		position = position.SetupPawnsInStartingPosition(PieceColor.White, pieceFactory);
-		position = position.SetupBackrankInStartingPosition(PieceColor.Black, pieceFactory);
+		position = position.SetupBackRankInStartingPosition(PieceColor.Black, pieceFactory);
 		position = position.SetupPawnsInStartingPosition(PieceColor.Black, pieceFactory);
 		return position;
 	}
 
-	private static ChessPosition SetupBackrankInStartingPosition(this ChessPosition position, PieceColor color, IGodotPieceFactory pieceFactory)
+
+	public static ChessPosition SetupBackRankInStartingPosition(this ChessPosition position, PieceColor color, IGodotPieceFactory pieceFactory)
 	{
 		foreach (var file in Enum.GetValues<File>())
 		{
@@ -81,22 +82,19 @@ public static class PositionExtensions
 		square.Piece = piece;
 		return square;
 	}
-
 	public static Square GetSquare(this ChessPosition position, File file, Rank rank) =>
 		position.Squares.Single(s => s.File == file && s.Rank == rank);
 
 	public static ChessPosition UpdateChessPosition(this ChessPosition position, IGodotPiece piece)
 	{
-		var newSquare = position.Squares.SingleOrDefault(s => s.File == piece.File && s.Rank == piece.Rank);
+		var newSquare = position.Squares.Single(s => s.File == piece.File && s.Rank == piece.Rank);
 		var oldSquare = position.Squares.SingleOrDefault(s => s.Piece == piece);
 		if (oldSquare != null)
 		{
 			oldSquare.Piece = null;
 		}
-		if (newSquare == null) return position;
 		var currentPiece = newSquare.Piece;
-		GD.Print(piece.Type + ": " + oldSquare?.File + "" + oldSquare?.Rank + " " + newSquare.File + "" +
-				 newSquare.Rank);
+		//GD.Print(piece.Type + ": " + oldSquare?.File + "" + oldSquare?.Rank + " " + newSquare.File + "" + newSquare.Rank);
 		currentPiece?.QueueFree();
 		newSquare.Piece = piece;
 		return position;
@@ -104,9 +102,9 @@ public static class PositionExtensions
 
 	public static ChessPosition RemovePieceFromBoard(this ChessPosition position, IGodotPiece piece)
 	{
-		var square = position.Squares.SingleOrDefault(s => s.Piece == piece);
-		if (square != null) square.Piece = null;
-		GD.Print("Piece dropped off board");
+		var square = position.Squares.Single(s => s.Rank == piece.Rank && s.File == piece.File);
+		square.Piece = null;
+		//GD.Print("Piece dropped off board");
 		return position;
 	}
 

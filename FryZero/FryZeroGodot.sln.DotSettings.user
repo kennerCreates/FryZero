@@ -12,35 +12,19 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ASprite2D_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003F8f85fc7df0a5fd5fcf8ae1e098aef8f4658b132ff59fd694d3ddb132b362c7cf_003FSprite2D_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATestInvoker_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003Fc3ec25c53b94f51fa21da479c513e551efee2b5ae49a79934686d2bb714d46_003FTestInvoker_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATexture2D_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003Fd15c71cc2a955fa1f464ee99cdb2222ffae31fca16327c107fc887fd8843a_003FTexture2D_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003AThrowHelper_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003Fc7da56581ee7b20208f09e80b735961e4d5d7b9e5562bfdec94a75c57b391_003FThrowHelper_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=7020124F_002D9FFC_002D4AC3_002D8F3D_002DAAB8E0240759_002Ff_003ATween_002Ecs_002Fl_003A_002E_002E_003F_002E_002E_003F_002E_002E_003F_002E_002E_003FUsers_003Flaure_003FAppData_003FRoaming_003FJetBrains_003FRider2025_002E1_003Fresharper_002Dhost_003FSourcesCache_003F6ffd43db71ab3a1bf1a8be57c9b5d3b8c2d5a2cf815125fb4ba8298f5a3e472_003FTween_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1687cd41_002D7e00_002D4b31_002Db422_002D3ebbe7f327f2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SetUpPositionWithEmptyBoardTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Board.PositionExtensionTests.SetupPositionWithEmptyBoardTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d1393cf7_002D17e1_002D4e42_002D9958_002D33c5d80cd1b7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from Solution" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=cc530c05_002D11e4_002D450e_002Db8a7_002D4828fbc43fb6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="BoardLocationTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_Dark&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_DarkHighlight&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_LightAccent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_LightShadow&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_LightHighlight&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_Light&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_DarkAccent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetModulateColor_Returns_Expected_Color_DarkShadow&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetPieceTexture_Returns_Expected_Texture_Tiny&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetMaterialParameterNameStringTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_Light&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_Dark&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkHighlight&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkShadow&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_DarkAccent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightHighlight&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightShadow&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.UI.GameTheme.ThemeExtensionsTests.GetThemeColor_Returns_Expected_ThemeColor_LightAccent&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::7196FB8A-6B91-4C84-A302-3353FCCCE10D::net8.0::FryZero.Tests.Gameplay.Board.PositionExtensionTests.SetUpPositionWithEmptyBoardTest&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
-&lt;/SessionState&gt;</s:String>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

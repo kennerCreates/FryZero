@@ -16,4 +16,5 @@ public static class PieceFactoryTestHelpers
 		piece.File = file;
 		pieceFactory.CreateOnePiece(type, color, rank, file).Returns(piece);
 	}
+
 }
