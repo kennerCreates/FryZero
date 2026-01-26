@@ -38,7 +38,7 @@ public partial class GodotDisplay : Node2D
                 var button = PieceButtonLocations.CreateNewPieceButton(color: color, type: type, squareSize: GameTheme.GameTheme.Instance.GetSquareSize());
                 button.ZIndex = 10;
                 AddChild(button);
-                GD.Print("Button Spawned:" + color + " " + type + " " + button.Position);
+                //GD.Print("Button Spawned:" + color + " " + type + " " + button.Position);
             }
         }
     }

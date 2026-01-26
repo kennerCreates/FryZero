@@ -1,5 +1,6 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
+using FryZeroGodot.GodotInterface.UI.Buttons;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
@@ -10,7 +11,7 @@ namespace FryZeroGodot.GodotInterface.Gameplay.Pieces;
 
 [GlobalClass]
 
-public partial class GodotPiece : Node2D, IGodotPiece
+public partial class GodotPiece : GodotButton, IGodotPiece
 {
     [Export] public PieceType Type { get; set; }
     [Export] public PieceColor Color { get; set; }
@@ -18,47 +19,54 @@ public partial class GodotPiece : Node2D, IGodotPiece
     [Export] public File File { get; set; }
 
     private GodotPieceManager _pieceManager;
-    private InteractState _interactState = InteractState.Normal;
-    private Sprite2D _sprite;
     private GodotPhysics _physics;
     private GodotHoldPoint _holdPoint;
-    private GodotPieceArea _pieceArea;
     private PinJoint2D _pinJoint2D;
     private bool _isMouseEntered;
     private bool _isBeingMoved;
     private bool _isOnASquare = true;
 
-    public override void _Ready()
+    public override void OnBeginPlay()
     {
         _pieceManager = GetParent<GodotPieceManager>();
-        ZIndex = 9;
+
         UpdateLocation(new Square(File, Rank));
+        UpdatePieceSprite();
         AddChild(GetPhysicsPiece());
-        _physics.AddChild(GetPieceSprite());
-        AddChild(GetPieceArea());
+        ButtonSprite.Reparent(_physics);
         AddChild(GetHoldPoint());
         AddChild(GetPinJoint());
-        AddToGroup(CallGroups.LeftClick);
     }
 
-    private Sprite2D GetPieceSprite()
+    public override void LeftClickDown()
     {
-        _sprite ??= new Sprite2D();
-        _sprite.Texture = GameTheme.Instance.GetPieceTexture(Type, Color, _interactState);
-        _sprite.Material = GameTheme.Instance.GetThemeMaterial();
-        _sprite.Scale = new Vector2(GameTheme.Instance.GetSquareSize(), GameTheme.Instance.GetSquareSize()) / _sprite.Texture.GetSize();
-        return _sprite;
+        if (!IsMouseEntered) return;
+        SetToPickedUp();
+        _physics.PickedUpPiece();
+    }
+
+    public override void LeftClickReleased()
+    {
+        if (_isOnASquare) return;
+        _isBeingMoved = false;
+        _physics.DroppedPiece();
+        HandlePieceOnBoardOrNot();
+    }
+
+    private void UpdatePieceSprite()
+    {
+        UpdateSpriteTexture(
+            GameTheme.Instance.GetPieceTexture(Type, Color,InteractState.Normal),
+            GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Hovered)
+            );
+        var squareSize = GameTheme.Instance.GetSquareSize();
+        var scale = squareSize / GameTheme.Instance.GetPieceSize();
+        UpdateSpriteScale(new Vector2(scale, scale));
     }
     private GodotPhysics GetPhysicsPiece()
     {
         _physics ??= new GodotPhysics();
         return _physics;
-    }
-
-    private GodotPieceArea GetPieceArea()
-    {
-        _pieceArea ??= new GodotPieceArea();
-        return _pieceArea;
     }
 
     private GodotHoldPoint GetHoldPoint()
@@ -89,21 +97,6 @@ public partial class GodotPiece : Node2D, IGodotPiece
         }
     }
 
-    public void LeftClickDown()
-    {
-        if (!_isMouseEntered) return;
-        SetToPickedUp();
-        _physics.PickedUpPiece();
-    }
-
-    public void LeftClickReleased()
-    {
-        if (_isOnASquare) return;
-        _isBeingMoved = false;
-        _physics.DroppedPiece();
-        HandlePieceOnBoardOrNot();
-    }
-
     public void HandlePieceOnBoardOrNot()
     {
         var closestSquare = GetGlobalMousePosition().GetSquare(GameTheme.Instance.GetSquareSize());
@@ -121,20 +114,6 @@ public partial class GodotPiece : Node2D, IGodotPiece
         }
 
     }
-    public void SetMouseEntered(bool isEntered)
-    {
-        _isMouseEntered = isEntered;
-        if (isEntered || _isBeingMoved)
-        {
-            _interactState = InteractState.Hovered;
-        }
-        else
-        {
-            _interactState = InteractState.Normal;
-        }
-        GetPieceSprite();
-    }
-
     public void SetToPickedUp()
     {
         _isBeingMoved = true;

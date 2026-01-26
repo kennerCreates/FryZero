@@ -30,6 +30,7 @@ public partial class GameTheme : Node2D
     public Texture2D GetDarkSquareTexture() => _themeData.DarkSquareTexture;
     public int GetPieceDelay() => _themeData.PieceMovementDelay;
     public int GetSquareSize() => _themeData.SquareSize;
+    public int GetPieceSize() => _themeData.PieceSize;
     public ShaderMaterial GetThemeMaterial() => _themedMaterial;
     public AtlasTexture GetPieceTexture(PieceType type, PieceColor color, InteractState state)
     {
@@ -65,10 +66,10 @@ public partial class GameTheme : Node2D
         };
         return new Rect2
             (
-            column * _themeData.PieceSize,
-            row * _themeData.PieceSize,
-            _themeData.PieceSize,
-            _themeData.PieceSize
+            column * GetPieceSize(),
+            row * GetPieceSize(),
+            GetPieceSize(),
+            GetPieceSize()
             );
     }
 
