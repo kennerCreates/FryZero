@@ -24,7 +24,7 @@ public partial class GodotPieceManager : Node2D
         _position = _position.SetupPositionWithEmptyBoard();
         _position = _position.SetupPiecesInStartingChessPosition(pieceFactory);
         SpawnPieceNodes();
-        BuildAtlasCache();
+        //BuildAtlasCache();
     }
     private void DestroyExistingPieceNodes()
     {
@@ -52,48 +52,5 @@ public partial class GodotPieceManager : Node2D
     {
         _position = _position.RemovePieceFromBoard(piece);
     }
-
-    private Dictionary<(PieceType type, PieceColor color, InteractState state), AtlasTexture> _atlasCache;
-
-    private void BuildAtlasCache()
-    {
-        _atlasCache = new Dictionary<(PieceType type, PieceColor color, InteractState state), AtlasTexture>();
-        foreach (var type in Enum.GetValues<PieceType>())
-        {
-            foreach (var color in Enum.GetValues<PieceColor>())
-            {
-                foreach (var state in Enum.GetValues<InteractState>())
-                {
-                    var atlas = CreateAtlasTexture(type, color, state);
-                    _atlasCache[(type, color, state)] = atlas;
-                }
-            }
-        }
-    }
-
-    private static AtlasTexture CreateAtlasTexture(PieceType type, PieceColor color, InteractState state)
-    {
-        var column = (int)type;
-        var row = color switch
-        {
-            PieceColor.White => state == InteractState.Normal ? 0 : 1,
-            PieceColor.Black => state == InteractState.Normal ? 2 : 3,
-            _ => 0
-        };
-        var atlas = new AtlasTexture();
-        atlas.Atlas = GameTheme.Instance.GetPieceAtlasTexture();
-        atlas.Region = new Rect2(column * GameTheme.Instance.GetPieceSize(), row * GameTheme.Instance.GetPieceSize(), GameTheme.Instance.GetPieceSize(), GameTheme.Instance.GetPieceSize());
-        return atlas;
-    }
-
-    public AtlasTexture GetPieceTexture(PieceType type, PieceColor color, InteractState state)
-    {
-        if (_atlasCache is null)
-        {
-            BuildAtlasCache();
-        }
-        return _atlasCache?[(type, color, state)];
-    }
-
 
 }

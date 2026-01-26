@@ -68,4 +68,6 @@ public static class PieceButtonLocations
             PieceType.King => 3,
             _ => 0
         };
+
+
 }

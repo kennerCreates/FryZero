@@ -44,7 +44,7 @@ public partial class GodotPiece : Node2D, IGodotPiece
     private Sprite2D GetPieceSprite()
     {
         _sprite ??= new Sprite2D();
-        _sprite.Texture = _pieceManager.GetPieceTexture(Type, Color, _interactState);
+        _sprite.Texture = GameTheme.Instance.GetPieceTexture(Type, Color, _interactState);
         _sprite.Material = GameTheme.Instance.GetThemeMaterial();
         _sprite.Scale = new Vector2(GameTheme.Instance.GetSquareSize(), GameTheme.Instance.GetSquareSize()) / _sprite.Texture.GetSize();
         return _sprite;

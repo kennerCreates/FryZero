@@ -1,9 +1,11 @@
 ﻿using System;
 using FryZeroGodot.Config.Enums;
 using FryZeroGodot.GodotInterface.Gameplay.Pieces;
+using FryZeroGodot.GodotInterface.UI.Buttons;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.Statics.UI.Display;
 using Godot;
+using Godot.Collections;
 
 namespace FryZeroGodot.GodotInterface.UI.Display;
 
@@ -18,13 +20,15 @@ public partial class GodotDisplay : Node2D
         var isLeftMouseButtonEvent = mouseButtonEvent.ButtonIndex is MouseButton.Left;
         if (!isLeftMouseButtonEvent) return;
 
-        var method = mouseButtonEvent.Pressed ? nameof(GodotPiece.LeftClickDown) : nameof(GodotPiece.LeftClickReleased);
+        var method = mouseButtonEvent.Pressed ? nameof(GodotButton.LeftClickDown) : nameof(GodotButton.LeftClickReleased);
         GetTree().CallGroup(CallGroups.LeftClick, method);
     }
     public override void _Ready()
     {
         SpawnNewPieceButtonNodes();
+
     }
+
     private void SpawnNewPieceButtonNodes()
     {
         foreach (var color in Enum.GetValues<PieceColor>())

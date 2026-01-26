@@ -11,4 +11,6 @@ public class GodotPieceFactory : IGodotPieceFactory
 		Rank = rank,
 		File = file
 	};
+
+
 }
