@@ -8,9 +8,10 @@ namespace FryZeroGodot.GodotInterface.UI.Buttons;
 
 public abstract partial class GodotButton : Node2D, IGodotButton
 {
-    [Export] public Vector2 SpriteScale { get; set; }
+    [Export] public Vector2 SpriteSize { get; set; }
     [Export] public Texture2D TextureNormal { get; set; }
     [Export] public Texture2D TextureHovered { get; set; }
+    [Export] public Material SpriteMaterial { get; set; } = GameTheme.GameTheme.Instance.GetThemeMaterial();
 
     public override void _Ready()
     {
@@ -25,41 +26,41 @@ public abstract partial class GodotButton : Node2D, IGodotButton
     public abstract void LeftClickDown();
     public abstract void LeftClickReleased();
 
-    protected Sprite2D ButtonSprite;
-    private Sprite2D GetButtonSprite()
+    private Sprite2D _buttonSprite;
+
+    protected Sprite2D GetButtonSprite()
     {
-        ButtonSprite ??= new Sprite2D();
-        ButtonSprite.Material = GameTheme.GameTheme.Instance.GetThemeMaterial();
-        ButtonSprite.Texture = TextureNormal;
-        ButtonSprite.Scale = SpriteScale;
-        return ButtonSprite;
+        _buttonSprite ??= new Sprite2D();
+        _buttonSprite.Material = SpriteMaterial;
+        UpdateTextureBasedOnInteractState(_interactState);
+
+        return _buttonSprite;
     }
 
     private Area2D _area;
-    private CollisionShape2D _shape;
     private Area2D GetButtonArea()
     {
-        if (_area == null)
-        {
-            _area = new Area2D();
-            _area.MouseEntered += () => SetMouseEntered(true);
-            _area.MouseExited += () => SetMouseEntered(false);
-            _area.InputPickable = true;
-
-        }
+        if (_area != null) return _area;
+        _area = new Area2D();
+        _area.MouseEntered += () => SetMouseEntered(true);
+        _area.MouseExited += () => SetMouseEntered(false);
+        _area.InputPickable = true;
         return _area;
     }
+
+    private CollisionShape2D _collisionShape;
     private CollisionShape2D GetCollisionShape()
     {
-        if (_shape == null)
-        {
-            _shape = new CollisionShape2D();
-            _shape.Shape = new RectangleShape2D
-            {
-                Size = new Vector2(GameTheme.GameTheme.Instance.GetSquareSize(), GameTheme.GameTheme.Instance.GetSquareSize())
-            };
-        }
-        return _shape;
+        _collisionShape ??= new CollisionShape2D();
+        _collisionShape.Shape = GetButtonShape();
+        return _collisionShape;
+    }
+
+    protected RectangleShape2D GetButtonShape()
+    {
+        var shape = new RectangleShape2D();
+        shape.Size = SpriteSize;
+        return shape;
     }
 
     private InteractState _interactState = InteractState.Normal;
@@ -73,7 +74,7 @@ public abstract partial class GodotButton : Node2D, IGodotButton
     }
     private void UpdateTextureBasedOnInteractState(InteractState state)
     {
-        ButtonSprite.Texture = state switch
+        _buttonSprite.Texture = state switch
         {
             InteractState.Normal => TextureNormal,
             InteractState.Hovered => TextureHovered,
@@ -86,10 +87,16 @@ public abstract partial class GodotButton : Node2D, IGodotButton
         TextureHovered = textureHovered;
         UpdateTextureBasedOnInteractState(_interactState);
     }
-    protected void UpdateSpriteScale(Vector2 size)
+    protected void UpdateSpriteSize(Vector2 size)
     {
-        SpriteScale = size;
-        ButtonSprite.Scale = size;
+        SpriteSize = size;
+        GetButtonSprite().Scale = SpriteSize / GetButtonSprite().Texture.GetSize();
+        GetCollisionShape();
+    }
+
+    private void UpdateSpriteMaterial(Material material)
+    {
+        GetButtonSprite().Material = material;
     }
 
 

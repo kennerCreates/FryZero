@@ -13,9 +13,8 @@ public partial class GodotCreatePieceButton : GodotButton
             GameTheme.GameTheme.Instance.GetPieceTexture(Type, Color,InteractState.Normal),
             GameTheme.GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Hovered)
         );
-        var squareSize = GameTheme.GameTheme.Instance.GetSquareSize();
-        var scale = squareSize / GameTheme.GameTheme.Instance.GetPieceSize();
-        UpdateSpriteScale(new Vector2(scale, scale));
+        var squareSize = GameTheme.GameTheme.Instance.GetSquareSize(); ;
+        UpdateSpriteSize(new Vector2(squareSize, squareSize));
     }
     public override void LeftClickDown()
     {

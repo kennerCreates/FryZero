@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="scenes\" />
     <Folder Include="Shaders\" />
+    <Folder Include="Statics\UI\Buttons\" />
   </ItemGroup>
   <!-- <ItemGroup>
     <PackageReference Include="Lc0Backend" Version="0.1.0" />

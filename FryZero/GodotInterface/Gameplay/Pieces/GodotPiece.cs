@@ -1,7 +1,6 @@
 ﻿using FryZeroGodot.Config.Enums;
 using FryZeroGodot.Config.Records;
 using FryZeroGodot.GodotInterface.UI.Buttons;
-using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
@@ -19,7 +18,8 @@ public partial class GodotPiece : GodotButton, IGodotPiece
     [Export] public File File { get; set; }
 
     private GodotPieceManager _pieceManager;
-    private GodotPhysics _physics;
+    private RigidBody2D _physics;
+    private CollisionShape2D _physicsShape;
     private GodotHoldPoint _holdPoint;
     private PinJoint2D _pinJoint2D;
     private bool _isMouseEntered;
@@ -33,24 +33,10 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         UpdateLocation(new Square(File, Rank));
         UpdatePieceSprite();
         AddChild(GetPhysicsPiece());
-        ButtonSprite.Reparent(_physics);
+        _physics.AddChild(GetPhysicsCollision());
+        GetButtonSprite().Reparent(_physics);
         AddChild(GetHoldPoint());
         AddChild(GetPinJoint());
-    }
-
-    public override void LeftClickDown()
-    {
-        if (!IsMouseEntered) return;
-        SetToPickedUp();
-        _physics.PickedUpPiece();
-    }
-
-    public override void LeftClickReleased()
-    {
-        if (_isOnASquare) return;
-        _isBeingMoved = false;
-        _physics.DroppedPiece();
-        HandlePieceOnBoardOrNot();
     }
 
     private void UpdatePieceSprite()
@@ -60,15 +46,27 @@ public partial class GodotPiece : GodotButton, IGodotPiece
             GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Hovered)
             );
         var squareSize = GameTheme.Instance.GetSquareSize();
-        var scale = squareSize / GameTheme.Instance.GetPieceSize();
-        UpdateSpriteScale(new Vector2(scale, scale));
+        UpdateSpriteSize(new Vector2(squareSize, squareSize));
     }
-    private GodotPhysics GetPhysicsPiece()
+    private RigidBody2D GetPhysicsPiece()
     {
-        _physics ??= new GodotPhysics();
+        _physics ??= new RigidBody2D
+        {
+            CollisionLayer = 0,
+            CollisionMask = 0,
+            ZIndex = 10,
+            CanSleep = false,
+            LockRotation = true
+        };
         return _physics;
     }
-
+    private CollisionShape2D _physicsCollision;
+    private CollisionShape2D GetPhysicsCollision()
+    {
+        _physicsCollision ??= new CollisionShape2D();
+        _physicsCollision.Shape = GetButtonShape();
+        return _physicsCollision;
+    }
     private GodotHoldPoint GetHoldPoint()
     {
         _holdPoint ??= new GodotHoldPoint
@@ -78,7 +76,6 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         };
         return _holdPoint;
     }
-
     private PinJoint2D GetPinJoint()
     {
         _pinJoint2D ??= new PinJoint2D();
@@ -88,7 +85,6 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         _pinJoint2D.Position = _holdPoint.Position;
         return _pinJoint2D;
     }
-
     private void UpdateLocation(Square square)
     {
         if (_isOnASquare)
@@ -97,7 +93,26 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         }
     }
 
-    public void HandlePieceOnBoardOrNot()
+    public override void LeftClickDown()
+    {
+        if (!IsMouseEntered) return;
+        SetToPickedUp();
+    }
+
+    public override void LeftClickReleased()
+    {
+        if (_isOnASquare) return;
+        _isBeingMoved = false;
+        HandlePieceOnBoardOrNot();
+    }
+    public void SetToPickedUp()
+    {
+        _isBeingMoved = true;
+        _isOnASquare = false;
+        ZIndex = 20;
+    }
+
+    private void HandlePieceOnBoardOrNot()
     {
         var closestSquare = GetGlobalMousePosition().GetSquare(GameTheme.Instance.GetSquareSize());
         var isValidSquare = closestSquare.IsValidSquare();
@@ -113,11 +128,6 @@ public partial class GodotPiece : GodotButton, IGodotPiece
             QueueFree();
         }
 
-    }
-    public void SetToPickedUp()
-    {
-        _isBeingMoved = true;
-        _isOnASquare = false;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -142,6 +152,7 @@ public partial class GodotPiece : GodotButton, IGodotPiece
                 tween.Finished += () =>
                 {
                     _isOnASquare = true;
+                    ZIndex = 10;
                     tween.Dispose();
                     tweener.Dispose();
                 };

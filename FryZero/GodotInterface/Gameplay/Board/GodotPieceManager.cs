@@ -24,7 +24,6 @@ public partial class GodotPieceManager : Node2D
         _position = _position.SetupPositionWithEmptyBoard();
         _position = _position.SetupPiecesInStartingChessPosition(pieceFactory);
         SpawnPieceNodes();
-        //BuildAtlasCache();
     }
     private void DestroyExistingPieceNodes()
     {

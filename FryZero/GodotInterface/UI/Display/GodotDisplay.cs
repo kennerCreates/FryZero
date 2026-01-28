@@ -1,11 +1,9 @@
 ﻿using System;
 using FryZeroGodot.Config.Enums;
-using FryZeroGodot.GodotInterface.Gameplay.Pieces;
 using FryZeroGodot.GodotInterface.UI.Buttons;
 using FryZeroGodot.GodotNodes.EngineFiles;
 using FryZeroGodot.Statics.UI.Display;
 using Godot;
-using Godot.Collections;
 
 namespace FryZeroGodot.GodotInterface.UI.Display;
 
