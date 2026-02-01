@@ -1,4 +1,4 @@
-<Project Sdk="Godot.NET.Sdk/4.5.0">
+<Project Sdk="Godot.NET.Sdk/4.5.1">
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
@@ -6,8 +6,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="scenes\" />
+    <Folder Include="Shaders\" />
+    <Folder Include="Statics\UI\Buttons\" />
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <PackageReference Include="Lc0Backend" Version="0.1.0" />
-  </ItemGroup>
+  </ItemGroup> -->
 </Project>

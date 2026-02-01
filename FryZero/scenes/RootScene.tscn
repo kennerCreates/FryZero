@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://djkkabff2382b"]
+[gd_scene format=3 uid="uid://djkkabff2382b"]
 
 [ext_resource type="Script" uid="uid://bxyuovcq4hhoq" path="res://GodotInterface/UI/Background/GodotBackground.cs" id="1_ib006"]
 [ext_resource type="Script" uid="uid://cm31dysjcy4q7" path="res://GodotInterface/Gameplay/Board/GodotBoard.cs" id="3_ltheh"]
 [ext_resource type="Script" uid="uid://dw4gcqy0mosiy" path="res://GodotInterface/UI/Display/GodotDisplay.cs" id="4_20q55"]
 [ext_resource type="Script" uid="uid://bxfdta5djrgs1" path="res://GodotInterface/Gameplay/Board/GodotPieceManager.cs" id="6_ltheh"]
 
-[node name="Root" type="Node"]
+[node name="Root" type="Node" unique_id=496265161]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1356389531]
 limit_enabled = false
 
-[node name="GodotBackground" type="Node2D" parent="."]
+[node name="GodotBackground" type="Node2D" parent="." unique_id=481756459]
 script = ExtResource("1_ib006")
 metadata/_custom_type_script = "uid://bxyuovcq4hhoq"
 
-[node name="GodotBoard" type="Node2D" parent="."]
+[node name="GodotBoard" type="Node2D" parent="." unique_id=764106952]
 script = ExtResource("3_ltheh")
 metadata/_custom_type_script = "uid://cm31dysjcy4q7"
 
-[node name="GodotPieceManager" type="Node2D" parent="."]
+[node name="GodotPieceManager" type="Node2D" parent="." unique_id=960170283]
 script = ExtResource("6_ltheh")
 metadata/_custom_type_script = "uid://bxfdta5djrgs1"
 
-[node name="GodotDisplay" type="Node2D" parent="."]
+[node name="GodotDisplay" type="Node2D" parent="." unique_id=506657564]
 script = ExtResource("4_20q55")
 metadata/_custom_type_script = "uid://dw4gcqy0mosiy"

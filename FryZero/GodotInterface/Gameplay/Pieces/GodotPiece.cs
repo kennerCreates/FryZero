@@ -4,7 +4,7 @@ using FryZeroGodot.GodotInterface.UI.Buttons;
 using FryZeroGodot.Statics.Gameplay.Board;
 using Godot;
 using GameTheme = FryZeroGodot.GodotInterface.UI.GameTheme.GameTheme;
-using GodotPieceManager = FryZeroGodot.GodotInterface.Gameplay.Board.GodotPieceManager;
+using PieceManager = FryZeroGodot.GodotInterface.Gameplay.Board.GodotPieceManager;
 
 namespace FryZeroGodot.GodotInterface.Gameplay.Pieces;
 
@@ -17,10 +17,9 @@ public partial class GodotPiece : GodotButton, IGodotPiece
     [Export] public Rank Rank { get; set; }
     [Export] public File File { get; set; }
 
-    private GodotPieceManager _pieceManager;
     private RigidBody2D _physics;
     private CollisionShape2D _physicsShape;
-    private GodotHoldPoint _holdPoint;
+    private StaticBody2D _holdPoint;
     private PinJoint2D _pinJoint2D;
     private bool _isMouseEntered;
     private bool _isBeingMoved;
@@ -28,23 +27,22 @@ public partial class GodotPiece : GodotButton, IGodotPiece
 
     public override void OnBeginPlay()
     {
-        _pieceManager = GetParent<GodotPieceManager>();
-
         UpdateLocation(new Square(File, Rank));
         UpdatePieceSprite();
         AddChild(GetPhysicsPiece());
-        _physics.AddChild(GetPhysicsCollision());
+        _physics.AddChild(GetCollision());
         GetButtonSprite().Reparent(_physics);
         AddChild(GetHoldPoint());
+        _holdPoint.AddChild(GetCollision());
         AddChild(GetPinJoint());
     }
 
     private void UpdatePieceSprite()
     {
-        UpdateSpriteTexture(
-            GameTheme.Instance.GetPieceTexture(Type, Color,InteractState.Normal),
-            GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Hovered)
-            );
+        var normalTexture = GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Normal);
+        var hoveredTexture = GameTheme.Instance.GetPieceTexture(Type, Color, InteractState.Hovered);
+        UpdateSpriteTexture(normalTexture, hoveredTexture);
+
         var squareSize = GameTheme.Instance.GetSquareSize();
         UpdateSpriteSize(new Vector2(squareSize, squareSize));
     }
@@ -60,20 +58,20 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         };
         return _physics;
     }
-    private CollisionShape2D _physicsCollision;
-    private CollisionShape2D GetPhysicsCollision()
+    private CollisionShape2D GetCollision()
     {
-        _physicsCollision ??= new CollisionShape2D();
-        _physicsCollision.Shape = GetButtonShape();
-        return _physicsCollision;
+        var collision = new CollisionShape2D();
+        collision.Shape = GetButtonShape();
+        return collision;
     }
-    private GodotHoldPoint GetHoldPoint()
+    private StaticBody2D GetHoldPoint()
     {
-        _holdPoint ??= new GodotHoldPoint
+        _holdPoint ??= new StaticBody2D()
         {
             CollisionLayer = 0,
             CollisionMask = 0
         };
+
         return _holdPoint;
     }
     private PinJoint2D GetPinJoint()
@@ -105,11 +103,14 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         _isBeingMoved = false;
         HandlePieceOnBoardOrNot();
     }
+
+    private Vector2 _grabOffset;
     public void SetToPickedUp()
     {
         _isBeingMoved = true;
         _isOnASquare = false;
         ZIndex = 20;
+        _grabOffset = GlobalPosition - GetGlobalMousePosition();
     }
 
     private void HandlePieceOnBoardOrNot()
@@ -120,43 +121,44 @@ public partial class GodotPiece : GodotButton, IGodotPiece
         {
             File = closestSquare.File;
             Rank = closestSquare.Rank;
-            _pieceManager.UpdateChessPosition(this);
+            PieceManager.Instance.UpdateChessPosition(this);
+            CreateMoveTween(closestSquare);
         }
         else
         {
-            _pieceManager.RemovePieceFromBoard(this);
+            PieceManager.Instance.RemovePieceFromBoard(this);
             QueueFree();
         }
 
     }
 
-    public override void _PhysicsProcess(double delta)
+    private Tween _moveTween;
+
+    private void CreateMoveTween(Square square)
     {
-        if (_isBeingMoved || !_isOnASquare)
+        _moveTween?.Kill();
+        _moveTween = GetTree().CreateTween();
+        var targetLocation = square.LocationVector(GameTheme.Instance.GetSquareSize());
+        _moveTween.TweenProperty(this, "position", targetLocation, .1);
+        _moveTween.Finished += OnMoveFinished;
+
+    }
+    private void OnMoveFinished()
+    {
+        if (!IsInstanceValid(this) || !IsInsideTree())
+            return;
+        _isOnASquare = true;
+        ZIndex = 10;
+        _moveTween?.Kill();
+    }
+    public override void _Process(double delta)
+    {
+        if (!IsInsideTree())
+            return;
+        if (_isBeingMoved)
         {
-            if (_isBeingMoved)
-            {
-                var tween = GetTree().CreateTween();
-                var tweener = tween.TweenProperty(this, "position", GetGlobalMousePosition(), GameTheme.Instance.GetPieceDelay() * delta);
-                tween.Finished += () =>
-                {
-                    tween.Dispose();
-                    tweener.Dispose();
-                };
-            }
-            else
-            {
-                var tween = GetTree().CreateTween();
-                var targetLocation = new Square(File, Rank).LocationVector(GameTheme.Instance.GetSquareSize());
-                var tweener = tween.TweenProperty(this, "position", targetLocation, GameTheme.Instance.GetPieceDelay() * delta);
-                tween.Finished += () =>
-                {
-                    _isOnASquare = true;
-                    ZIndex = 10;
-                    tween.Dispose();
-                    tweener.Dispose();
-                };
-            }
+            GlobalPosition = GlobalPosition.Lerp(GetGlobalMousePosition() + _grabOffset, 0.25f);
         }
+
     }
 }

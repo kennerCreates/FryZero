@@ -15,10 +15,13 @@ namespace FryZeroGodot.GodotInterface.Gameplay.Board;
 
 public partial class GodotPieceManager : Node2D
 {
+    public static GodotPieceManager Instance { get; private set; }
+
     private ChessPosition _position = new();
 
     public override void _Ready()
     {
+        Instance = this;
         DestroyExistingPieceNodes();
         var pieceFactory = new GodotPieceFactory();
         _position = _position.SetupPositionWithEmptyBoard();
